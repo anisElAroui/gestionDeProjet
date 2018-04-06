@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                  <h1>Stakeholder</h1>
+
+    <div class="table-responsive">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>name</th>
+                <td>{{ stakeholder.name }}</td>
+            </tr>
+            <tr>
+                <th>role</th>
+                <td>{{ stakeholder.role }}</td>
+            </tr>
+            <tr>
+                <th>email</th>
+                <td>{{ stakeholder.email }}</td>
+            </tr>
+            <tr>
+                <th>phoneNumber</th>
+                <td>{{ stakeholder.phoneNumber }}</td>
+            </tr>
+        </tbody>
+    </table>           
+
+    </div>
+            
+            <br>
+            <a class="btn btn-primary" href="{{ path('stakeholder_edit', { 'id': stakeholder.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+            <a class="btn btn-warning" href="{{ path('stakeholder_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+            <br><br>
+                    {{ form_start(delete_form) }}
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                    {{ form_end(delete_form) }}
+                 </div>
+            </div>
+        </div>
+    </div>
+            
+{% endblock %}

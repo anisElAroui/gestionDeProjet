@@ -1,0 +1,8 @@
+fos_user:
+    db_driver: mongodb
+    user_class: App\Document\User
+    firewall_name: main
+    from_email:
+        address: anis.el.aroui@gmail.com
+        sender_name: anis
+

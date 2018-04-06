@@ -1,0 +1,239 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+
+                    <h1>{{ charter.title }}</h1><br>
+
+
+                    <h2>Project and Product Overview</h2><br>
+
+                    <h3> 1- Project Identification</h3>
+
+                    <label>Project Name :</label><p>{{ charter.projectName }}</p>
+                    <label>Project Manager:</label><p>{{ charter.projectManager }}</p>
+                    <label>Project Internal References :</label><p>{{ charter.projectInternalRefrances }}</p>
+                    <label>Final Client :</label><p>{{ charter.finalClient }}</p>
+                    <label>Client :</label><p>{{ charter.client }}</p>
+
+                    <h3> 2- Project Description</h3> <p>{{ charter.projectDescription }}</p>
+
+                    <h3> 3- Project repository</h3> <p>{{ charter.projectRepository }}</p><br>
+
+                    <h2>Project scope</h2><br>
+
+                    <h3>1- Objectives</h3> <p>{{ charter.objectives }}</p>
+
+                    <h3>2- High Level Requirements</h3>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>  High Level Requirements </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for requirement in charter.highLevelRequirement %}
+                            <tr>
+                                <td>{{ requirement.highLevelRequirement }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>3- Major Deliverables</h3>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th> Major Deliverables </th>
+                                <th> Deliverables Description </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {#{% for  in  %}#}
+                                {#<tr>#}
+                                    {#<td>{{ .majorDeliverables }}</td>#}
+                                    {#<td>{{ .deliverablesDescription }}</td>#}
+                                {#</tr>#}
+                            {#{% endfor %}#}
+                            </tbody>
+                        </table>
+                    </div><br>
+
+                    <h2>Project Milestones & Waving</h2><br>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th> Executive Milestones </th>
+                                <th> Estimated duration </th>
+                                <th> Estimated Completion Timeframe </th>
+                                <th> Comments </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {#{% for  in  %}#}
+                                {#<tr>#}
+                                    {#<td>{{ .executiveMilestones }}</td>#}
+                                    {#<td>{{ .estimatedDuration }}</td>#}
+                                    {#<td>{{ .estimatedCompletionTimeframe }}</td>#}
+                                    {#<td>{{ .comments }}</td>#}
+                                {#</tr>#}
+                            {#{% endfor %}#}
+                            </tbody>
+                        </table>
+                    </div><br>
+
+                    <h2>Assumptions, Constraints</h2><br>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th> Assumptions </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {#{% for assumption in charter.assumptions %}#}
+                                {#<tr>#}
+                                    {#<td>{{ assumption.assumptions }}</td>#}
+                                {#</tr>#}
+                            {#{% endfor %}#}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th> Constraints </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {#{% for constraint in charter.constraints %}#}
+                                {#<tr>#}
+                                    {#<td>{{ constraint.constraints }}</td>#}
+                                {#</tr>#}
+                            {#{% endfor %}#}
+                            </tbody>
+                        </table>
+                    </div><br>
+
+                    <h2>Project Budget</h2><br>
+
+                    <h3> 1- Incomes (€)</h3>
+
+                    <label>Proxym-IT Budget</label><p>{{ charter.budget }}</p>
+                    <label>Proxym-IT man/ day affectation </label><p>{{ charter.incomesManDayAffection }}</p>
+
+                    <h3> 2. Expenses (€)</h3>
+
+                    <label>PMO agreed Wage expenses </label><p>{{ charter.agreedWageExpenses }}</p>
+                    <label>Planned expenses budget</label><p>{{ charter.plannedExpensesBudget }}</p>
+                    <label>Target profitability</label><p>{{ charter.targetProfitability }}</p>
+                    <label>Threshold profitability</label><p>{{ charter.thresholdProfitability }}</p>
+                    <label>PMO man day affectation</label><p>{{ charter.expensesManDayAffection }}</p>
+
+                    <label>incomes </label>
+                    <div class="table-responsive">
+                        {% if charter.projectBudgetType == "incomes"  %}
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th> Profile </th>
+                                    <th> Estimated duration </th>
+                                    <th> Estimated Cost </th>
+                                    <th> Comments </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {#{% for  in  %}#}
+                                    {#<tr>#}
+                                        {#<td>{{ .profile }}</td>#}
+                                        {#<td>{{ .estimatedDurationBudget }}</td>#}
+                                        {#<td>{{ .estimatedCost }}</td>#}
+                                        {#<td>{{ .budgetComments }}</td>#}
+                                    {#</tr>#}
+                                {#{% endfor %}#}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+
+                    <label>expenses </label>
+                    <div class="table-responsive">
+                        {% if charter.projectBudgetType == "expenses"  %}
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th> Profile </th>
+                                    <th> Estimated duration </th>
+                                    <th> Estimated Cost </th>
+                                    <th> Comments </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {#{% for  in  %}#}
+                                    {#<tr>#}
+                                        {#<td>{{ .profile }}</td>#}
+                                        {#<td>{{ .estimatedDurationBudget }}</td>#}
+                                        {#<td>{{ .estimatedCost }}</td>#}
+                                        {#<td>{{ .budgetComments }}</td>#}
+                                    {#</tr>#}
+                                {#{% endfor %}#}
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    </div>
+
+                    <h3> 3. Billing</h3>
+
+                    <label> Billing responsible</label> <p>{{ charter.billingResponsible }}</p>
+
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th> description </th>
+                                <th> amount </th>
+                                <th> plannedDate </th>
+                                <th> deliveredDate </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {#{% for  in  %}#}
+                                {#<tr>#}
+                                    {#<td>{{ .billingDescription }}</td>#}
+                                    {#<td>{{ .billingAmount }}</td>#}
+                                    {#<td>{{ .billingPlanedDate }}</td>#}
+                                    {#<td>{{ .billingDeliveredDate }}</td>#}
+                                {#</tr>#}
+                            {#{% endfor %}#}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <br>
+                    <a class="btn btn-warning" href="{{ path('project_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to project list</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

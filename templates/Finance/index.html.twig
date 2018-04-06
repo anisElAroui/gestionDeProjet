@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <h1>Finance list</h1>
+
+                    <div class="table-responsive">
+                        {% if finances is defined and finances is not null  %}
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>  Id </th>
+                                    <th>  budget</th>
+                                    <th>  Selling Price </th>
+                                    <th>  Deadline</th>
+                                    <th>  Expenses Planned</th>
+                                    <th>  Current Expenses </th>
+                                    <th> Actions </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for finance in finances %}
+                                    <tr>
+                                        <td><a href="{{ path('finance_show', { 'id': finance.id }) }}">{{ finance.id }}</a></td>
+                                        <td>{{ finance.budget }}</td>
+                                        <td>{{ finance.sellingPrice }}</td>
+                                        <td>{{ finance.Deadline |date('Y-m-d') }}</td>
+                                        <td>{{ finance.expensesPlanned}}</td>
+                                        <td>{{ finance.currentExpenses}}</td>
+
+
+                                        <td>
+                                            <a class="btn btn-info" href="{{ path('finance_show', { 'id': finance.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
+                                            <a class="btn btn-primary" href="{{ path('finance_edit', { 'id': finance.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {%endif%}
+                    </div>
+
+                    <br>
+                    <a class="btn btn-success" href="{{ path('finance_new') }}"><i class="glyphicon glyphicon-plus"></i> Create a new entry</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

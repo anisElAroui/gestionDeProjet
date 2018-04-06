@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <div class="container">
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                <h1>Project creation</h1>
+            
+                {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
+                {{ form_widget(form._token) }}
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">projectName</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(form.projectName,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(form.projectName) }}
+                        </div>
+                    </div>
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">projectManager</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(form.projectManager,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(form.projectManager) }}
+                        </div>
+                    </div>
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">year</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(form.year,  {'attr': {'required':'required'} }) }}
+                            {{ form_errors(form.year) }}
+                        </div>
+                    </div>
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">realStartDate</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(form.realStartDate,  {'attr': {'required':'required'} }) }}
+                            {{ form_errors(form.realStartDate) }}
+                        </div>
+                    </div>
+
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">plannedEndDate</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(form.plannedEndDate,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(form.plannedEndDate) }}
+                        </div>
+                    </div>
+
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">budget</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(form.budget,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(form.budget) }}
+                        </div>
+                    </div>
+
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">incomes</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(form.incomes,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(form.incomes) }}
+                        </div>
+                    </div>
+
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Expenses</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(form.Expenses,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(form.Expenses) }}
+                        </div>
+                    </div>
+
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">done</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(form.done,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(form.done) }}
+                        </div>
+                    </div>
+
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">endDate</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(form.endDate,  {'attr': {'required':'required'} }) }}
+                            {{ form_errors(form.endDate) }}
+                        </div>
+                    </div>
+
+                    <div  class="form-group">
+                    <label class="col-sm-6 control-label"></label>
+                        <div class="col-sm-4" >
+                            <button class="btn btn-primary" type="submit">Create</button>
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+
+   
+                     <a class="btn btn-warning" href="{{ path('project_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+ 
+                </div>
+            </div>
+        </div>
+    </div>
+                     
+{% endblock %}
