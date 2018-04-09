@@ -7,6 +7,7 @@
  */
 
 namespace App\Form;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,7 +41,14 @@ class CharterType extends AbstractType
             ->add('objectives', TextareaType::class)
             ->add('requirements',CollectionType::class, array(
                 'entry_type' => RequirementType::class,
-                'allow_add' => true,))
+                'allow_add' => true,
+                'entry_options' => array('label' => false),))
+//            ->add('requirements',DocumentType::class,
+//                array(
+//                    'class' => RequirementType::class,
+//                    'choice_label' => 'highLevelRequirement'
+//                )
+//                )
             ->add('majorDeliverables')
             ->add('deliverablesDescription', TextareaType::class)
             ->add('executiveMilestones')

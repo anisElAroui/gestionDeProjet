@@ -54,7 +54,6 @@ class CharterController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $dm = $this->get('doctrine_mongodb')->getManager();
             $dm->persist($charter);
-            $dm->persist($requirement);
             $dm->flush();
 
             return $this->redirectToRoute('charter_show', array('id' => $charter->getId()));

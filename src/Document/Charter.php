@@ -13,7 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document(repositoryClass="App\Repository\CharterRepository")
  *
  */
 class Charter
@@ -69,7 +69,7 @@ class Charter
     protected $objectives;
 
     /**
-     * @MongoDB\ReferenceMany(targetDocument="Requirement", mappedBy="charter")
+     * @MongoDB\EmbedMany(targetDocument="Requirement")
      */
     protected $requirements;
 

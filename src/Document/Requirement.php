@@ -12,7 +12,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document (repositoryClass="App\Repository\RequirementRepository")
  *
  */
 class Requirement
@@ -27,10 +27,6 @@ class Requirement
      */
     protected $highLevelRequirement;
 
-    /**
-     * @MongoDB\ReferenceOne(targetDocument="Charter", inversedBy="requirements")
-     */
-    private $charter;
 
     /**
      * Requirement constructor.
@@ -69,22 +65,6 @@ class Requirement
     public function setHighLevelRequirement($highLevelRequirement): void
     {
         $this->highLevelRequirement = $highLevelRequirement;
-    }
-
-    /**
-     * @return charter $charter
-     */
-    public function getCharter()
-    {
-        return $this->charter;
-    }
-
-    /**
-     * @param mixed $charter
-     */
-    public function setCharter($charter): void
-    {
-        $this->charter = $charter;
     }
 
 }
