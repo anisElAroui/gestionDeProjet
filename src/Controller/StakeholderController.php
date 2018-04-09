@@ -26,7 +26,7 @@ class StakeholderController extends Controller
     {
         $stakeholders = $this->get('doctrine_mongodb')->getRepository('App\Document\Stakeholder')->findAll();
 
-        return $this->render('Stakeholder/index.html.twig', ['stakeholders' => $stakeholders,]);
+        return $this->render('Stakeholder/show.html.twig', ['stakeholders' => $stakeholders,]);
     }
 
 

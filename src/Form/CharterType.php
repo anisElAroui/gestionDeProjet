@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class CharterType extends AbstractType
@@ -37,7 +38,9 @@ class CharterType extends AbstractType
             ->add('projectDescription', TextareaType::class)
             ->add('projectRepository', TextareaType::class)
             ->add('objectives', TextareaType::class)
-            ->add('highLevelRequirement')
+            ->add('requirements',CollectionType::class, array(
+                'entry_type' => RequirementType::class,
+                'allow_add' => true,))
             ->add('majorDeliverables')
             ->add('deliverablesDescription', TextareaType::class)
             ->add('executiveMilestones')

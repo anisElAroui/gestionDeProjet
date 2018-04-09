@@ -25,7 +25,7 @@ class FinanceController extends Controller
     {
         $finances = $this->get('doctrine_mongodb')->getRepository('App\Document\Finance')->findAll();
 
-        return $this->render('Finance/index.html.twig', ['finances' => $finances,]);
+        return $this->render('Finance/show.html.twig', ['finances' => $finances,]);
     }
 
 

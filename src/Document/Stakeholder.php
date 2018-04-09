@@ -11,7 +11,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 
 /**
- * @MongoDB\Document(repositoryClass="App\Repository\StakeholderRepository")
+ * @MongoDB\Document
  *
  */
 class Stakeholder

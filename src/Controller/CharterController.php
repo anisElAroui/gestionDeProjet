@@ -9,8 +9,10 @@
 namespace App\Controller;
 
 use App\Document\Charter;
+use App\Document\Requirement;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Form\CharterType;
+use App\Form\RequirementType;
 use DateTime;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,16 +24,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class CharterController extends Controller
 {
 
-    /**
-     * @Route("/charter", name="charter_index")
-     * @Method({"GET"})
-     */
-    public function indexAction()
-    {
-        $charter = $this->get('doctrine_mongodb')->getRepository('App\Document\Charter')->findOneById("5ac6a28d1ea6e36bfd74dd32");
-
-        return $this->render('Charter/index.html.twig', ['charter' => $charter,]);
-    }
+//    /**
+//     * @Route("/charter", name="charter_index")
+//     * @Method({"GET"})
+//     */
+//    public function indexAction()
+//    {
+//        $charter = $this->get('doctrine_mongodb')->getRepository('App\Document\Charter')->findOneById("5ac7902f1ea6e35172195df5");
+//        $requirements = $this->get('doctrine_mongodb')->getRepository('App\Document\Requirement')->findAll();
+//        return $this->render('Charter/index.html.twig', array(
+//            'charter' => $charter,
+//            'requirements' => $requirements,
+//        ));
+//    }
 
     /**
      * @Route("/charter/new", name="charter_new")
@@ -40,15 +45,19 @@ class CharterController extends Controller
     public function newAction(Request $request)
     {
         $charter = new Charter();
+        $requirement = new Requirement();
+        $charter->addRequirement($requirement);
         $form = $this->createForm('App\Form\CharterType', $charter);
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $dm = $this->get('doctrine_mongodb')->getManager();
             $dm->persist($charter);
+            $dm->persist($requirement);
             $dm->flush();
 
-            return $this->redirectToRoute('charter_index', array('id' => $charter->getId()));
+            return $this->redirectToRoute('charter_show', array('id' => $charter->getId()));
         }
 
         return $this->render('Charter/new.html.twig', array(
@@ -58,33 +67,20 @@ class CharterController extends Controller
     }
 
 
-//    /**
-//     * @Route("/charter/{id}/show", name="charter_show")
-//     * @Method({"GET","DELETE"})
-//     */
-//    public function showAction(Request $request, $id)
-//    {
-//        $dm = $this->get('doctrine_mongodb')->getManager();
-//        $charter = $dm->getRepository('App\Document\Charter')->findOneBy(array('id' => $id));
-//
-//        $deleteForm = $this->createDeleteForm($id);
-//
-//        $deleteForm->handleRequest($request);
-//
-//        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
-//            $dm = $this->get('doctrine_mongodb')->getManager();
-//            $dm->remove($charter);
-//            $dm->flush();
-//
-//            return $this->redirectToRoute('charter_index');
-//        }
-//
-//
-//        return $this->render('Charter/show.html.twig', array(
-//            'charter' => $charter,
-//            'delete_form' => $deleteForm->createView(),
-//        ));
-//    }
+    /**
+     * @Route("/charter/{id}/show", name="charter_show")
+     * @Method({"GET","DELETE"})
+     */
+    public function showAction($id)
+    {
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter')->findOneBy(array('id' => $id));
+
+        return $this->render('Charter/show.html.twig', array(
+            'charter' => $charter,
+        ));
+    }
+
 //
 //
 //    /**

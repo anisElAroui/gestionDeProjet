@@ -7,11 +7,13 @@
  */
 
 namespace App\Document;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
- * @MongoDB\Document(repositoryClass="App\Repository\ProjectRepository")
+ * @MongoDB\Document
  *
  */
 class Charter
@@ -67,13 +69,13 @@ class Charter
     protected $objectives;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\ReferenceMany(targetDocument="Requirement", mappedBy="charter")
      */
-    protected $highLevelRequirement;
+    protected $requirements;
+
     /**
      * @MongoDB\Field(type="string")
      */
-
     protected $majorDeliverables;
 
     /**
@@ -213,6 +215,7 @@ class Charter
      */
     public function __construct()
     {
+        $this->requirements = new ArrayCollection();
     }
 
     /**
@@ -373,22 +376,6 @@ class Charter
     public function setObjectives($objectives): void
     {
         $this->objectives = $objectives;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getHighLevelRequirement()
-    {
-        return $this->highLevelRequirement;
-    }
-
-    /**
-     * @param mixed $highLevelRequirement
-     */
-    public function setHighLevelRequirement($highLevelRequirement): void
-    {
-        $this->highLevelRequirement = $highLevelRequirement;
     }
 
     /**
@@ -821,6 +808,22 @@ class Charter
     public function setBillingDeliveredDate($billingDeliveredDate): void
     {
         $this->billingDeliveredDate = $billingDeliveredDate;
+    }
+
+    /**
+     * @return Collection $requirements
+     */
+    public function getRequirements()
+    {
+        return $this->requirements;
+    }
+
+    /**
+     * @param Requirement $requirement
+     */
+    public function addRequirement(Requirement $requirement)
+    {
+        $this->requirements[] = $requirement;
     }
 
 }

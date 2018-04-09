@@ -9,7 +9,7 @@
                     <h1>Charter creation</h1>
                     <br>
 
-                    {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
+                    {{ form_start(form, {'attr': {'novalidate': 'novalidate','class': 'form-horizontal' }}) }}
                     {{ form_widget(form._token) }}
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Title</span></label>
@@ -89,15 +89,27 @@
                         </div>
                     </div><br>
 
+
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">High Level Requirement</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form.highLevelRequirement,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.highLevelRequirement) }}
+                            {#{{ form_widget(form.requirements.highLevelRequirement,  {'attr': {'required':'required','class':'form-control'} }) }}#}
+                            {#{{ form_errors(form.requirements.highLevelRequirement) }}#}
+                            {#<ul class="requirements"  data-prototype="{{ form_widget(form.tags.vars.prototype)|e('html_attr') }}">#}
+                            {% for requirement in form.requirements %}
+                                <li>
+                                    {{ form_widget(requirement.highLevelRequirement,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(requirement.highLevelRequirement) }}
+                                </li>
+                            {% endfor %}
+                            {#</ul>#}
                         </div>
                     </div>
 
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
+
+
+
 
                     <h4>Major Deliverables</h4><br>
 
@@ -116,7 +128,7 @@
                             {{ form_widget(form.deliverablesDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.deliverablesDescription) }}
                         </div>
-                    </div>
+                    </div><br>
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
 
                     <br>
@@ -151,7 +163,7 @@
                             {{ form_widget(form.comments,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.comments) }}
                         </div>
-                    </div>
+                    </div><br>
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
                     <br>
 

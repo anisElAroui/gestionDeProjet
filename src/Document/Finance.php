@@ -11,7 +11,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 
 /**
- * @MongoDB\Document(repositoryClass="App\Repository\ProjectRepository")
+ * @MongoDB\Document
  *
  */
 class Finance

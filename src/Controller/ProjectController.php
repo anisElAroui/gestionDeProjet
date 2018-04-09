@@ -34,7 +34,7 @@ class ProjectController extends Controller
     {
         $projects = $this->get('doctrine_mongodb')->getRepository('App\Document\Accueil')->findAll();
 
-        return $this->render('Accueil/index.html.twig', ['projects' => $projects,]);
+        return $this->render('Accueil/show.html.twig', ['projects' => $projects,]);
     }
 
     /**
