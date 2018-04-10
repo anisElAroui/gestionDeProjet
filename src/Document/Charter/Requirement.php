@@ -6,7 +6,7 @@
  * Time: 14:56
  */
 
-namespace App\Document;
+namespace App\Document\Charter;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 

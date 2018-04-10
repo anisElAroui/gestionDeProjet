@@ -42,13 +42,8 @@ class CharterType extends AbstractType
             ->add('requirements',CollectionType::class, array(
                 'entry_type' => RequirementType::class,
                 'allow_add' => true,
-                'entry_options' => array('label' => false),))
-//            ->add('requirements',DocumentType::class,
-//                array(
-//                    'class' => RequirementType::class,
-//                    'choice_label' => 'highLevelRequirement'
-//                )
-//                )
+                'by_reference' => false,
+                ))
             ->add('majorDeliverables')
             ->add('deliverablesDescription', TextareaType::class)
             ->add('executiveMilestones')

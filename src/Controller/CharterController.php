@@ -9,7 +9,7 @@
 namespace App\Controller;
 
 use App\Document\Charter;
-use App\Document\Requirement;
+use App\Document\Charter\Requirement;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Form\CharterType;
 use App\Form\RequirementType;

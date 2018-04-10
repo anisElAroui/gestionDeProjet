@@ -7,6 +7,8 @@
  */
 
 namespace App\Document;
+
+use App\Document\Charter\Requirement;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Common\Collections\ArrayCollection;
