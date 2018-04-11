@@ -8,11 +8,18 @@
 
 namespace App\Controller;
 
-use App\Document\Charter;
+use App\Document\Charter\Assumption;
+use App\Document\Charter\Billing;
+use App\Document\Charter\Charter;
+use App\Document\Charter\Constraint;
+use App\Document\Charter\Milestone;
 use App\Document\Charter\Requirement;
+use App\Document\Charter\Deliverables;
+use App\Document\Charter\Stakeholder;
+use App\Document\Charter\Budget;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Form\CharterType;
-use App\Form\RequirementType;
+use App\Form\Charter\CharterType;
+use App\Form\Charter\RequirementType;
 use DateTime;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,8 +53,24 @@ class CharterController extends Controller
     {
         $charter = new Charter();
         $requirement = new Requirement();
+        $deliverables = new Deliverables();
+        $milestone = new Milestone();
+        $constraint = new Constraint();
+        $assumption = new Assumption();
+        $stakeholder = new Stakeholder();
+        $budget = new Budget();
+        $billing = new Billing();
+
         $charter->addRequirement($requirement);
-        $form = $this->createForm('App\Form\CharterType', $charter);
+        $charter->addDeliverables($deliverables);
+        $charter->addMilestones($milestone);
+        $charter->addConstraints($constraint);
+        $charter->addAssumptions($assumption);
+        $charter->addStakeholders($stakeholder);
+        $charter->addBudgets($budget);
+        $charter->addBillings($billing);
+
+        $form = $this->createForm('App\Form\Charter\CharterType', $charter);
         $form->handleRequest($request);
 
 
@@ -73,7 +96,7 @@ class CharterController extends Controller
     public function showAction($id)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $charter = $dm->getRepository('App\Document\Charter')->findOneBy(array('id' => $id));
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
 
         return $this->render('Charter/show.html.twig', array(
             'charter' => $charter,

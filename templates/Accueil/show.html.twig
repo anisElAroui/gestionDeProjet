@@ -52,10 +52,10 @@
                 <td>{{ project.endDate|date('Y-m-d') }}</td>
             </tr>
         </tbody>
-    </table>           
+    </table>
 
     </div>
-            
+
             <br>
             <a class="btn btn-primary" href="{{ path('project_edit', { 'id': project.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
             <a class="btn btn-warning" href="{{ path('project_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
@@ -67,5 +67,5 @@
             </div>
         </div>
     </div>
-            
+
 {% endblock %}

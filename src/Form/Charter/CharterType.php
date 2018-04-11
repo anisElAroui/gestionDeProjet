@@ -6,7 +6,8 @@
  * Time: 11:23
  */
 
-namespace App\Form;
+namespace App\Form\Charter;
+
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -42,18 +43,27 @@ class CharterType extends AbstractType
             ->add('requirements',CollectionType::class, array(
                 'entry_type' => RequirementType::class,
                 'allow_add' => true,
-                'by_reference' => false,
                 ))
-            ->add('majorDeliverables')
-            ->add('deliverablesDescription', TextareaType::class)
-            ->add('executiveMilestones')
-            ->add('estimatedDuration')
-            ->add('estimatedCompletionTimeframe')
-            ->add('comments')
-            ->add('constraints', TextareaType::class)
-            ->add('assumptions', TextareaType::class)
-            ->add('stakeholderName')
-            ->add('stakeholderRole')
+            ->add('deliverables',CollectionType::class, array(
+                'entry_type' => DeliverableType::class,
+                'allow_add' => true,
+            ))
+            ->add('milestones',CollectionType::class, array(
+                'entry_type' => MilestoneType::class,
+                'allow_add' => true,
+            ))
+            ->add('constraints',CollectionType::class, array(
+                'entry_type' => ConstraintType::class,
+                'allow_add' => true,
+            ))
+            ->add('assumptions',CollectionType::class, array(
+                'entry_type' => AssumptionType::class,
+                'allow_add' => true,
+            ))
+            ->add('stakeholders',CollectionType::class, array(
+                'entry_type' => StakeholderType::class,
+                'allow_add' => true,
+            ))
             ->add('budget')
             ->add('incomesManDayAffection')
             ->add('agreedWageExpenses')
@@ -61,20 +71,15 @@ class CharterType extends AbstractType
             ->add('targetProfitability')
             ->add('thresholdProfitability')
             ->add('expensesManDayAffection')
-            ->add('profile')
-            ->add('estimatedDurationBudget')
-            ->add('estimatedCost')
-            ->add('budgetComments')
-            ->add('projectBudgetType',ChoiceType::class, array(
-                'choices'  => array(
-                    'incomes' => null,
-                    'expenses' => null,
-                ),))
+            ->add('budgets',CollectionType::class, array(
+                'entry_type' => BudgetType::class,
+                'allow_add' => true,
+            ))
             ->add('billingResponsible')
-            ->add('billingDescription')
-            ->add('billingAmount')
-            ->add('billingPlanedDate')
-            ->add('billingDeliveredDate')
+            ->add('billings',CollectionType::class, array(
+                'entry_type' => BillingType::class,
+                'allow_add' => true,
+            ))
 
         ;
     }
@@ -85,7 +90,7 @@ class CharterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Document\Charter'
+            'data_class' => 'App\Document\Charter\Charter'
         ));
     }
 

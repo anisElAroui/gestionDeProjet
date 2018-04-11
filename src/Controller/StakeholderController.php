@@ -8,10 +8,9 @@
 
 namespace App\Controller;
 
-use App\Document\Stakeholder;
+use App\Document\Charter\Stakeholder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Document\Skateholder;
-use App\Form\SkateholderType;
+use App\Form\Charter\StakeholderType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -24,9 +23,9 @@ class StakeholderController extends Controller
      */
     public function indexAction()
     {
-        $stakeholders = $this->get('doctrine_mongodb')->getRepository('App\Document\Stakeholder')->findAll();
+        $stakeholders = $this->get('doctrine_mongodb')->getRepository('App\Document\Charter\Stakeholder')->findAll();
 
-        return $this->render('Stakeholder/show.html.twig', ['stakeholders' => $stakeholders,]);
+        return $this->render('Stakeholder/index.html.twig', ['stakeholders' => $stakeholders,]);
     }
 
 
@@ -37,7 +36,7 @@ class StakeholderController extends Controller
     public function newAction(Request $request)
     {
         $stakeholder = new Stakeholder();
-        $form = $this->createForm('App\Form\StakeholderType', $stakeholder);
+        $form = $this->createForm('App\Form\Charter\StakeholderType', $stakeholder);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -62,7 +61,7 @@ class StakeholderController extends Controller
     public function showAction(Request $request, $id)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $stakeholder = $dm->getRepository('App\Document\Stakeholder')->findOneBy(array('id' => $id));
+        $stakeholder = $dm->getRepository('App\Document\Charter\Stakeholder')->findOneBy(array('id' => $id));
 
         $deleteForm = $this->createDeleteForm($stakeholder,$id);
 
@@ -93,9 +92,9 @@ class StakeholderController extends Controller
     {
 
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $stakeholder = $dm->getRepository('App\Document\Stakeholder')->findOneBy(array('id' => $id));
+        $stakeholder = $dm->getRepository('App\Document\Charter\Stakeholder')->findOneBy(array('id' => $id));
 
-        $editForm = $this->createForm('App\Form\StakeholderType', $stakeholder);
+        $editForm = $this->createForm('App\Form\Charter\StakeholderType', $stakeholder);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

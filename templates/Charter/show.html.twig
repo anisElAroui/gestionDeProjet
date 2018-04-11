@@ -59,12 +59,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {#{% for  in  %}#}
-                                {#<tr>#}
-                                    {#<td>{{ .majorDeliverables }}</td>#}
-                                    {#<td>{{ .deliverablesDescription }}</td>#}
-                                {#</tr>#}
-                            {#{% endfor %}#}
+                            {% for deliverable in charter.deliverables %}
+                                <tr>
+                                    <td>{{ deliverable.majorDeliverables }}</td>
+                                    <td>{{ deliverable.deliverablesDescription }}</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div><br>
@@ -83,14 +83,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {#{% for  in  %}#}
-                                {#<tr>#}
-                                    {#<td>{{ .executiveMilestones }}</td>#}
-                                    {#<td>{{ .estimatedDuration }}</td>#}
-                                    {#<td>{{ .estimatedCompletionTimeframe }}</td>#}
-                                    {#<td>{{ .comments }}</td>#}
-                                {#</tr>#}
-                            {#{% endfor %}#}
+                            {% for milestone in charter.milestones %}
+                                <tr>
+                                    <td>{{ milestone.executiveMilestones }}</td>
+                                    <td>{{ milestone.estimatedDuration }}</td>
+                                    <td>{{ milestone.estimatedCompletionTimeframe |date('Y-m-d') }}</td>
+                                    <td>{{ milestone.comments }}</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div><br>
@@ -105,11 +105,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {#{% for assumption in charter.assumptions %}#}
-                                {#<tr>#}
-                                    {#<td>{{ assumption.assumptions }}</td>#}
-                                {#</tr>#}
-                            {#{% endfor %}#}
+                            {% for assumption in charter.assumptions %}
+                                <tr>
+                                    <td>{{ assumption.assumptions }}</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -122,11 +122,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {#{% for constraint in charter.constraints %}#}
-                                {#<tr>#}
-                                    {#<td>{{ constraint.constraints }}</td>#}
-                                {#</tr>#}
-                            {#{% endfor %}#}
+                            {% for constraint in charter.constraints %}
+                                <tr>
+                                    <td>{{ constraint.constraints }}</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div><br>
@@ -146,9 +146,9 @@
                     <label>Threshold profitability</label><p>{{ charter.thresholdProfitability }}</p>
                     <label>PMO man day affectation</label><p>{{ charter.expensesManDayAffection }}</p>
 
-                    <label>incomes </label>
+                    <label>incomes & expenses</label>
+
                     <div class="table-responsive">
-                        {% if charter.projectBudgetType == "incomes"  %}
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -156,48 +156,23 @@
                                     <th> Estimated duration </th>
                                     <th> Estimated Cost </th>
                                     <th> Comments </th>
+                                    <th> Type </th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {#{% for  in  %}#}
-                                    {#<tr>#}
-                                        {#<td>{{ .profile }}</td>#}
-                                        {#<td>{{ .estimatedDurationBudget }}</td>#}
-                                        {#<td>{{ .estimatedCost }}</td>#}
-                                        {#<td>{{ .budgetComments }}</td>#}
-                                    {#</tr>#}
-                                {#{% endfor %}#}
+                                {% for budget in charter.budgets  %}
+                                    <tr>
+                                        <td>{{ budget.profile }}</td>
+                                        <td>{{ budget.estimatedDurationBudget }}</td>
+                                        <td>{{ budget.estimatedCost }}</td>
+                                        <td>{{ budget.budgetComments }}</td>
+                                        <td>{{ budget.projectBudgetType }}</td>
+
+                                    </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
-                        {% endif %}
-                    </div>
-
-                    <label>expenses </label>
-                    <div class="table-responsive">
-                        {% if charter.projectBudgetType == "expenses"  %}
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th> Profile </th>
-                                    <th> Estimated duration </th>
-                                    <th> Estimated Cost </th>
-                                    <th> Comments </th>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {#{% for  in  %}#}
-                                    {#<tr>#}
-                                        {#<td>{{ .profile }}</td>#}
-                                        {#<td>{{ .estimatedDurationBudget }}</td>#}
-                                        {#<td>{{ .estimatedCost }}</td>#}
-                                        {#<td>{{ .budgetComments }}</td>#}
-                                    {#</tr>#}
-                                {#{% endfor %}#}
-                                </tbody>
-                            </table>
-                        {% endif %}
                     </div>
 
                     <h3> 3. Billing</h3>
@@ -216,14 +191,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {#{% for  in  %}#}
-                                {#<tr>#}
-                                    {#<td>{{ .billingDescription }}</td>#}
-                                    {#<td>{{ .billingAmount }}</td>#}
-                                    {#<td>{{ .billingPlanedDate }}</td>#}
-                                    {#<td>{{ .billingDeliveredDate }}</td>#}
-                                {#</tr>#}
-                            {#{% endfor %}#}
+                            {% for billing in charter.billings %}
+                                <tr>
+                                    <td>{{ billing.billingDescription }}</td>
+                                    <td>{{ billing.billingAmount }}</td>
+                                    <td>{{ billing.billingPlanedDate |date('Y-m-d') }}</td>
+                                    <td>{{ billing.billingDeliveredDate |date('Y-m-d') }}</td>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>

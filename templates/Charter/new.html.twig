@@ -139,67 +139,74 @@
                     <h4>Major Deliverables</h4><br>
 
 
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Major Deliverables</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.majorDeliverables,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.majorDeliverables) }}
-                        </div>
-                    </div>
+                            {% for deliverable in form.deliverables %}
+                                <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Major Deliverables</span></label>
+                                <div class="col-sm-7">
+                                    {{ form_widget(deliverable.majorDeliverables,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(deliverable.majorDeliverables) }}
+                                </div>
+                                    <br><br>
+                                <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Deliverables Description</span></label>
+                                <div class="col-sm-7">
+                                    {{ form_widget(deliverable.deliverablesDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(deliverable.deliverablesDescription) }}
+                                </div>
+                            {% endfor %}
 
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Deliverables Description</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.deliverablesDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.deliverablesDescription) }}
-                        </div>
-                    </div><br>
+
+
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
 
-                    <br>
+                    <br><br>
 
                     <h3>Project Milestones & Waving</h3><br>
 
 
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Executive Milestones </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.executiveMilestones,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.executiveMilestones) }}
-                        </div>
-                    </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">estimatedDuration </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.estimatedDuration,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.estimatedDuration) }}
-                        </div>
-                    </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">estimatedCompletionTimeframe</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.estimatedCompletionTimeframe,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.estimatedCompletionTimeframe) }}
-                        </div>
-                    </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">comments </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.comments,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.comments) }}
-                        </div>
-                    </div><br>
-                    <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
-                    <br>
 
-                    <h3>Assumptions, Constraints</h3><br>
+                            {% for milestone in form.milestones %}
+
+                                <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Executive Milestones </span></label>
+                                <div class="col-sm-7">
+                                {{ form_widget(milestone.executiveMilestones,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(milestone.executiveMilestones) }}
+                                </div>
+                                <br>
+                                <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">estimatedDuration </span></label>
+                                <div class="col-sm-7">
+                                {{ form_widget(milestone.estimatedDuration,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(milestone.estimatedDuration) }}
+                                </div>
+                                <br>
+                                <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">estimatedCompletionTimeframe</span></label>
+                                <div class="col-sm-7">
+                                {{ form_widget(milestone.estimatedCompletionTimeframe,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(milestone.estimatedCompletionTimeframe) }}
+                                </div>
+                                <br>
+                                <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">comments </span></label>
+                                <div class="col-sm-7">
+                                {{ form_widget(milestone.comments,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(milestone.comments) }}
+                                </div>
+                            {% endfor %}
+
+
+
+                    <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
+                    <br><br><br>
+
+                    <h3>Constraints, Assumptions</h3><br>
 
 
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">constraints</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form.constraints,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.constraints) }}
+                            {% for constraint in form.constraints %}
+
+                            {{ form_widget(constraint.constraints,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(constraint.constraints) }}
+
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -209,10 +216,15 @@
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">assumptions</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form.assumptions,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.assumptions) }}
-                        </div>
+                            {% for assumption in form.assumptions %}
+
+                                {{ form_widget(assumption.assumptions,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(assumption.assumptions) }}
+
+                            {% endfor %}
+                         </div>
                     </div>
+
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
 
                     <br>
@@ -220,23 +232,37 @@
                     <h3>Stakeholders</h3><br>
 
 
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">stakeholderName</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.stakeholderName,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.stakeholderName) }}
-                        </div>
-                    </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">stakeholderRole </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.stakeholderRole,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.stakeholderRole) }}
-                        </div>
-                    </div>
+                            {% for stakeholder in form.stakeholders %}
+                                <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">stakeholderName</span></label>
+                                <div class="col-sm-7">
+                                {{ form_widget(stakeholder.name,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(stakeholder.name) }}
+                                </div>
+                                <br>
+                                <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">stakeholderRole </span></label>
+                                <div class="col-sm-7">
+                                {{ form_widget(stakeholder.role,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(stakeholder.role) }}
+                                </div>
+                                <br>
+                                <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">email </span></label>
+                                <div class="col-sm-7">
+                                    {{ form_widget(stakeholder.email,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(stakeholder.email) }}
+                                </div>
+                                <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">phoneNumber </span></label>
+                                <div class="col-sm-7">
+                                        {{ form_widget(stakeholder.phoneNumber,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(stakeholder.phoneNumber) }}
+                                </div>
+
+
+                            {% endfor %}
+
+
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
 
-                    <br>
+                    <br><br><br>
 
                     <h3>Project Budget</h3><br>
 
@@ -295,43 +321,42 @@
                         </div>
                     </div><br><br>
 
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">profile </span></label>
+                    {% for budget in form.budgets %}
+
+                    <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">profile </span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form.profile,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.profile) }}
+                            {{ form_widget(budget.profile,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(budget.profile) }}
                         </div>
-                    </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">estimatedDurationBudget </span></label>
+                    <br>
+                    <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">estimatedDurationBudget </span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form.estimatedDurationBudget,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.estimatedDurationBudget) }}
+                            {{ form_widget(budget.estimatedDurationBudget,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(budget.estimatedDurationBudget) }}
                         </div>
-                    </div>
-                    <div  class="form-group">
+                        <br>
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">estimatedCost </span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form.estimatedCost,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.estimatedCost) }}
+                            {{ form_widget(budget.estimatedCost,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(budget.estimatedCost) }}
                         </div>
-                    </div>
-                    <div  class="form-group">
+                        <br>
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">budgetComments </span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form.budgetComments,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.budgetComments) }}
+                            {{ form_widget(budget.budgetComments,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(budget.budgetComments) }}
                         </div>
-                    </div>
-                    <div  class="form-group">
+                        <br>
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">projectBudgetType </span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form.projectBudgetType,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.projectBudgetType) }}
+                            {{ form_widget(budget.projectBudgetType,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(budget.projectBudgetType) }}
                         </div>
-                    </div>
+                        <br>
+                    {% endfor %}
+                    <br>
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
-
+                    <br>
 
                     <h4> 3. Billing</h4>
 
@@ -342,34 +367,31 @@
                             {{ form_errors(form.billingResponsible) }}
                         </div>
                     </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">billingDescription </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.billingDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.billingDescription) }}
-                        </div>
+
+                {% for billing in form.billings %}
+                    <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">billingDescription</span></label>
+                    <div class="col-sm-7">
+                        {{ form_widget(billing.billingDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
+                        {{ form_errors(billing.billingDescription) }}
                     </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">billingAmount </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.billingAmount,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.billingAmount) }}
-                        </div>
+                    <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">billingAmount</span></label>
+                    <div class="col-sm-7">
+                        {{ form_widget(billing.billingAmount,  {'attr': {'required':'required','class':'form-control'} }) }}
+                        {{ form_errors(billing.billingAmount) }}
                     </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">billingPlanedDate </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.billingPlanedDate,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.billingPlanedDate) }}
-                        </div>
+                    <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">billingPlanedDate</span></label>
+                    <div class="col-sm-7">
+                        {{ form_widget(billing.billingPlanedDate,  {'attr': {'required':'required','class':'form-control'} }) }}
+                        {{ form_errors(billing.billingPlanedDate) }}
                     </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">billingDeliveredDate </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.billingDeliveredDate,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.billingDeliveredDate) }}
-                        </div>
+                    <br><br>
+                    <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">billingDeliveredDate</span></label>
+                    <div class="col-sm-7">
+                        {{ form_widget(billing.billingDeliveredDate,  {'attr': {'required':'required','class':'form-control'} }) }}
+                        {{ form_errors(billing.billingDeliveredDate) }}
                     </div>
+                {% endfor %}
+
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
                     <br>
 

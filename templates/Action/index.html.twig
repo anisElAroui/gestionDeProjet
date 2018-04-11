@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <h1>Action list</h1>
+
+                    <div class="table-responsive">
+                        {% if actions is defined and actions is not null  %}
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>  Id </th>
+                                    <th>  actionType</th>
+                                    <th>  priority </th>
+                                    <th>  initialDate</th>
+                                    <th>  Author </th>
+                                    <th>  status  </th>
+                                    <th>  currentDate</th>
+                                    <th>  realDate </th>
+                                    <th>  identificator  </th>
+                                    <th>  Actions </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for action in actions %}
+                                    <tr>
+                                        <td><a href="{{ path('action_show', { 'id': action.id }) }}">{{ action.id }}</a></td>
+                                        <td>{{ action.actionType }}</td>
+                                        <td>{{ action.priority }}</td>
+                                        <td>{{ action.initialDate |date('Y-m-d') }}</td>
+                                        <td>{{ action.author}}</td>
+                                        <td>{{ action.status}}</td>
+                                        <td>{{ action.currentDate |date('Y-m-d') }}</td>
+                                        <td>{{ action.realDate |date('Y-m-d') }}</td>
+                                        <td>{{ action.identificator}}</td>
+
+                                        <td>
+                                            <a class="btn btn-info" href="{{ path('action_show', { 'id': action.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
+                                            <a class="btn btn-primary" href="{{ path('action_edit', { 'id': action.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {%endif%}
+                    </div>
+
+                    <br>
+                    <a class="btn btn-success" href="{{ path('action_new') }}"><i class="glyphicon glyphicon-plus"></i> Create a new entry</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

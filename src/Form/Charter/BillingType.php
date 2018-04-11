@@ -2,17 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: anis
- * Date: 03/04/18
- * Time: 15:39
+ * Date: 10/04/18
+ * Time: 16:16
  */
 
-namespace App\Form;
-
+namespace App\Form\Charter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class StakeholderType extends AbstractType
+class BillingType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -21,13 +21,11 @@ class StakeholderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('role')
-            ->add('email')
-            ->add('phoneNumber')
+            ->add('billingDescription')
+            ->add('billingAmount')
+            ->add('billingPlanedDate')
+            ->add('billingDeliveredDate');
 
-
-        ;
     }
 
     /**
@@ -36,7 +34,7 @@ class StakeholderType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Document\Stakeholder'
+            'data_class' => 'App\Document\Charter\Billing'
         ));
     }
 }

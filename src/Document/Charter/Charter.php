@@ -6,9 +6,8 @@
  * Time: 09:16
  */
 
-namespace App\Document;
+namespace App\Document\Charter;
 
-use App\Document\Charter\Requirement;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -76,54 +75,30 @@ class Charter
     protected $requirements;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\EmbedMany(targetDocument="Deliverables")
      */
-    protected $majorDeliverables;
+    protected $deliverables;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\EmbedMany(targetDocument="Milestone")
      */
-    protected $deliverablesDescription;
+    protected $milestones;
+
 
     /**
-     * @MongoDB\Field(type="string")
-     */
-    protected $executiveMilestones;
-
-    /**
-     * @MongoDB\Field(type="float")
-     */
-    protected $estimatedDuration;
-
-    /**
-     * @MongoDB\Field(type="date")
-     */
-    protected $estimatedCompletionTimeframe;
-
-    /**
-     * @MongoDB\Field(type="string")
-     */
-    protected $comments;
-
-    /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\EmbedMany(targetDocument="Constraint")
      */
     protected $constraints;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\EmbedMany(targetDocument="Assumption")
      */
     protected $assumptions;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\EmbedMany(targetDocument="Stakeholder")
      */
-    protected $stakeholderName;
-
-    /**
-     * @MongoDB\Field(type="string")
-     */
-    protected $stakeholderRole;
+    protected $stakeholders;
 
     /**
      * @MongoDB\Field(type="float")
@@ -161,29 +136,9 @@ class Charter
     protected $expensesManDayAffection;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\EmbedMany(targetDocument="budget")
      */
-    protected $projectBudgetType;
-
-    /**
-     * @MongoDB\Field(type="string")
-     */
-    protected $profile;
-
-    /**
-     * @MongoDB\Field(type="float")
-     */
-    protected $estimatedDurationBudget;
-
-    /**
-     * @MongoDB\Field(type="float")
-     */
-    protected $estimatedCost;
-
-    /**
-     * @MongoDB\Field(type="string")
-     */
-    protected $budgetComments;
+    protected $budgets;
 
     /**
      * @MongoDB\Field(type="string")
@@ -191,26 +146,9 @@ class Charter
     protected $billingResponsible;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\EmbedMany(targetDocument="Billing")
      */
-    protected $billingDescription;
-
-    /**
-     * @MongoDB\Field(type="float")
-     */
-        protected $billingAmount;
-
-    /**
-     * @MongoDB\Field(type="date")
-     */
-    protected $billingPlanedDate;
-
-    /**
-     * @MongoDB\Field(type="date")
-     */
-    protected $billingDeliveredDate;
-
-
+    protected $billings;
 
     /**
      * Charter constructor.
@@ -218,6 +156,15 @@ class Charter
     public function __construct()
     {
         $this->requirements = new ArrayCollection();
+        $this->deliverables = new ArrayCollection();
+        $this->milestones = new ArrayCollection();
+        $this->constraints = new ArrayCollection();
+        $this->assumptions = new ArrayCollection();
+        $this->stakeholders = new ArrayCollection();
+        $this->billings = new ArrayCollection();
+        $this->budgets = new ArrayCollection();
+
+
     }
 
     /**
@@ -381,103 +328,57 @@ class Charter
     }
 
     /**
-     * @return mixed
+     * @return Collection $requirements
      */
-    public function getMajorDeliverables()
+    public function getRequirements()
     {
-        return $this->majorDeliverables;
+        return $this->requirements;
     }
 
     /**
-     * @param mixed $majorDeliverables
+     * @param Requirement $requirement
      */
-    public function setMajorDeliverables($majorDeliverables): void
+    public function addRequirement(Requirement $requirement)
     {
-        $this->majorDeliverables = $majorDeliverables;
+        $this->requirements[] = $requirement;
     }
 
     /**
-     * @return mixed
+     * @return Collection $deliverables
      */
-    public function getDeliverablesDescription()
+    public function getDeliverables()
     {
-        return $this->deliverablesDescription;
+        return $this->deliverables;
     }
 
     /**
-     * @param mixed $deliverablesDescription
+     * @param Deliverables $deliverables
      */
-    public function setDeliverablesDescription($deliverablesDescription): void
+    public function addDeliverables(Deliverables $deliverables): void
     {
-        $this->deliverablesDescription = $deliverablesDescription;
+        $this->deliverables[] = $deliverables;
     }
 
     /**
-     * @return mixed
+     * @return Collection $milestones
      */
-    public function getExecutiveMilestones()
+    public function getMilestones()
     {
-        return $this->executiveMilestones;
+        return $this->milestones;
     }
 
     /**
-     * @param mixed $executiveMilestones
+     * @param Milestone $milestones
      */
-    public function setExecutiveMilestones($executiveMilestones): void
+    public function addMilestones(Milestone $milestones): void
     {
-        $this->executiveMilestones = $executiveMilestones;
+        $this->milestones[] = $milestones;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEstimatedDuration()
-    {
-        return $this->estimatedDuration;
-    }
+
 
     /**
-     * @param mixed $estimatedDuration
-     */
-    public function setEstimatedDuration($estimatedDuration): void
-    {
-        $this->estimatedDuration = $estimatedDuration;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEstimatedCompletionTimeframe()
-    {
-        return $this->estimatedCompletionTimeframe;
-    }
-
-    /**
-     * @param mixed $estimatedCompletionTimeframe
-     */
-    public function setEstimatedCompletionTimeframe($estimatedCompletionTimeframe): void
-    {
-        $this->estimatedCompletionTimeframe = $estimatedCompletionTimeframe;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
-     * @param mixed $comments
-     */
-    public function setComments($comments): void
-    {
-        $this->comments = $comments;
-    }
-
-    /**
-     * @return mixed
+     * @return Collection $constraints
      */
     public function getConstraints()
     {
@@ -485,15 +386,15 @@ class Charter
     }
 
     /**
-     * @param mixed $constraints
+     * @param Constraint $constraints
      */
-    public function setConstraints($constraints): void
+    public function addConstraints(Constraint $constraints): void
     {
-        $this->constraints = $constraints;
+        $this->constraints[] = $constraints;
     }
 
     /**
-     * @return mixed
+     * @return Collection $assumptions
      */
     public function getAssumptions()
     {
@@ -501,44 +402,30 @@ class Charter
     }
 
     /**
-     * @param mixed $assumptions
+     * @param Assumption $assumptions
      */
-    public function setAssumptions($assumptions): void
+    public function addAssumptions(Assumption $assumptions): void
     {
-        $this->assumptions = $assumptions;
+        $this->assumptions[] = $assumptions;
     }
 
     /**
-     * @return mixed
+     * @return Collection $stakeholders
      */
-    public function getStakeholderName()
+    public function getStakeholders()
     {
-        return $this->stakeholderName;
+        return $this->stakeholders;
     }
 
     /**
-     * @param mixed $stakeholderName
+     * @param Stakeholder $stakeholders
      */
-    public function setStakeholderName($stakeholderName): void
+    public function addStakeholders(Stakeholder $stakeholders): void
     {
-        $this->stakeholderName = $stakeholderName;
+        $this->stakeholders[] = $stakeholders;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStakeholderRole()
-    {
-        return $this->stakeholderRole;
-    }
 
-    /**
-     * @param mixed $stakeholderRole
-     */
-    public function setStakeholderRole($stakeholderRole): void
-    {
-        $this->stakeholderRole = $stakeholderRole;
-    }
 
     /**
      * @return mixed
@@ -653,83 +540,19 @@ class Charter
     }
 
     /**
-     * @return mixed
+     * @return Collection $budgets
      */
-    public function getProjectBudgetType()
+    public function getBudgets()
     {
-        return $this->projectBudgetType;
+        return $this->budgets;
     }
 
     /**
-     * @param mixed $projectBudgetType
+     * @param Budget $budgets
      */
-    public function setProjectBudgetType($projectBudgetType): void
+    public function addBudgets(Budget $budgets): void
     {
-        $this->projectBudgetType = $projectBudgetType;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProfile()
-    {
-        return $this->profile;
-    }
-
-    /**
-     * @param mixed $profile
-     */
-    public function setProfile($profile): void
-    {
-        $this->profile = $profile;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEstimatedDurationBudget()
-    {
-        return $this->estimatedDurationBudget;
-    }
-
-    /**
-     * @param mixed $estimatedDurationBudget
-     */
-    public function setEstimatedDurationBudget($estimatedDurationBudget): void
-    {
-        $this->estimatedDurationBudget = $estimatedDurationBudget;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEstimatedCost()
-    {
-        return $this->estimatedCost;
-    }
-
-    /**
-     * @param mixed $estimatedCost
-     */
-    public function setEstimatedCost($estimatedCost): void
-    {
-        $this->estimatedCost = $estimatedCost;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBudgetComments()
-    {
-        return $this->budgetComments;
-    }
-
-    /**
-     * @param mixed $budgetComments
-     */
-    public function setBudgetComments($budgetComments): void
-    {
-        $this->budgetComments = $budgetComments;
+        $this->budgets[] = $budgets;
     }
 
     /**
@@ -749,83 +572,19 @@ class Charter
     }
 
     /**
-     * @return mixed
+     * @return Collection $billings
      */
-    public function getBillingDescription()
+    public function getBillings()
     {
-        return $this->billingDescription;
+        return $this->billings;
     }
 
     /**
-     * @param mixed $billingDescription
+     * @param Billing $billings
      */
-    public function setBillingDescription($billingDescription): void
+    public function addBillings(Billing $billings): void
     {
-        $this->billingDescription = $billingDescription;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBillingAmount()
-    {
-        return $this->billingAmount;
-    }
-
-    /**
-     * @param mixed $billingAmount
-     */
-    public function setBillingAmount($billingAmount): void
-    {
-        $this->billingAmount = $billingAmount;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBillingPlanedDate()
-    {
-        return $this->billingPlanedDate;
-    }
-
-    /**
-     * @param mixed $billingPlanedDate
-     */
-    public function setBillingPlanedDate($billingPlanedDate): void
-    {
-        $this->billingPlanedDate = $billingPlanedDate;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBillingDeliveredDate()
-    {
-        return $this->billingDeliveredDate;
-    }
-
-    /**
-     * @param mixed $billingDeliveredDate
-     */
-    public function setBillingDeliveredDate($billingDeliveredDate): void
-    {
-        $this->billingDeliveredDate = $billingDeliveredDate;
-    }
-
-    /**
-     * @return Collection $requirements
-     */
-    public function getRequirements()
-    {
-        return $this->requirements;
-    }
-
-    /**
-     * @param Requirement $requirement
-     */
-    public function addRequirement(Requirement $requirement)
-    {
-        $this->requirements[] = $requirement;
+        $this->billings[] = $billings;
     }
 
 }
