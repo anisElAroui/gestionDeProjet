@@ -44,6 +44,9 @@
             "ref": "e1ee362a520ff9e3e7c38fb5399499427ed91314"
         }
     },
+    "dol/ldap-bundle": {
+        "version": "v2.0.1"
+    },
     "egulias/email-validator": {
         "version": "2.1.3"
     },
@@ -262,5 +265,8 @@
     },
     "twig/twig": {
         "version": "v2.4.7"
+    },
+    "zendframework/zend-ldap": {
+        "version": "2.8.0"
     }
 }
