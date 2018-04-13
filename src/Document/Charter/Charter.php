@@ -136,7 +136,7 @@ class Charter
     protected $expensesManDayAffection;
 
     /**
-     * @MongoDB\EmbedMany(targetDocument="budget")
+     * @MongoDB\EmbedMany(targetDocument="Budget")
      */
     protected $budgets;
 

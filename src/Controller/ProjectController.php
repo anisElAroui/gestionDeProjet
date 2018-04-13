@@ -32,9 +32,9 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        $projects = $this->get('doctrine_mongodb')->getRepository('App\Document\Accueil')->findAll();
+        $charters = $this->get('doctrine_mongodb')->getRepository('App\Document\Charter\Charter')->findAll();
 
-        return $this->render('Accueil/index.html.twig', ['projects' => $projects,]);
+        return $this->render('Accueil/index.html.twig', ['charters' => $charters,]);
     }
 
     /**
@@ -60,30 +60,6 @@ class ProjectController extends Controller
         ));
     }
 
-    /**
-     * @Route("/project/new", name="project_new")
-     * @Method({"POST","GET"})
-     */
-    public function newAction(Request $request)
-    {
-        $project = new Accueil();
-        $form = $this->createForm('App\Form\AccueilType', $project);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $dm = $this->get('doctrine_mongodb')->getManager();
-            $dm->persist($project);
-            $dm->flush();
-
-            return $this->redirectToRoute('project_show', array('id' => $project->getId()));
-        }
-
-        return $this->render('Accueil/new.html.twig', array(
-            'project' => $project,
-            'form' => $form->createView(),
-        ));
-    }
-
 
     /**
      * @Route("/project/{id}/show", name="project_show")
@@ -92,7 +68,8 @@ class ProjectController extends Controller
     public function showAction(Request $request, $id)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $project = $dm->getRepository('App\Document\Accueil')->findOneBy(array('id' => $id));
+
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
 
         $deleteForm = $this->createDeleteForm($id);
 
@@ -100,7 +77,7 @@ class ProjectController extends Controller
 
         if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
             $dm = $this->get('doctrine_mongodb')->getManager();
-            $dm->remove($project);
+            $dm->remove($charter);
             $dm->flush();
 
             return $this->redirectToRoute('project_index');
@@ -108,7 +85,7 @@ class ProjectController extends Controller
 
 
         return $this->render('Accueil/show.html.twig', array(
-            'project' => $project,
+            'charter' => $charter,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -123,44 +100,25 @@ class ProjectController extends Controller
     {
 
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $project = $dm->getRepository('App\Document\Accueil')->findOneBy(array('id' => $id));
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
 
-        $editForm = $this->createForm('App\Form\AccueilType', $project);
+        $editForm = $this->createForm('App\Form\AccueilType', $charter);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $dm->persist($project);
+            $dm->persist($charter);
             $dm->flush();
 
             return $this->redirectToRoute('project_show', array('id' => $id));
         }
 
         return $this->render('Accueil/edit.html.twig', array(
-            'project' => $project,
+            'charter' => $charter,
             'edit_form' => $editForm->createView(),
         ));
     }
 
-//    /**
-//     * @Route("/project/{id}/delete", name="project_delete")
-//     * @Method({"DELETE"})
-//     */
-//    public function deleteAction(Request $request,Accueil $project)
-//    {
-//
-//        $form = $this->createDeleteForm($project);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $dm = $this->get('doctrine_mongodb')->getManager();
-//            $dm->remove($project);
-//            $dm->flush();
-//        }
-//
-//        return $this->redirectToRoute('project_index');
-//
-//    }
-//
+
     private function createDeleteForm(string $id)
     {
 

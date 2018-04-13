@@ -23,14 +23,10 @@ class AccueilType extends AbstractType
         $builder
             ->add('projectName')
             ->add('projectManager')
-            ->add('year')
-            ->add('realStartDate')
-            ->add('plannedEndDate')
+
             ->add('budget')
-            ->add('incomes')
-            ->add('Expenses')
-            ->add('done')
-            ->add('endDate')
+            ->add('plannedExpensesBudget')
+
 
         ;
     }
@@ -41,7 +37,7 @@ class AccueilType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Document\Accueil'
+            'data_class' => 'App\Document\Charter\Charter'
         ));
     }
 }

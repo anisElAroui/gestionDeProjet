@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block main_content %}
 
     <div class="container">
         <div class="row">
@@ -8,11 +8,12 @@
                 <div class="col-lg-12">
                     <h1>Project list</h1>
 
-                    <a class="btn btn-success " href="{{ path('add_new_project') }}"><i class="glyphicon glyphicon-plus"></i> Add a new project</a>
                     <br>
+                    <a class="btn btn-success " href="{{ path('add_new_project') }}"><i class="glyphicon glyphicon-plus"></i> Add a new project</a>
+                    <br><br>
 
                     <div class="table-responsive">
-                        {% if projects is defined and projects is not null  %}
+                        {% if charters is defined and charters is not null  %}
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -32,24 +33,29 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for project in projects %}
+                                {% for charter in charters %}
                                     <tr>
-                                        <td><a href="{{ path('project_show', { 'id': project.id }) }}">{{ project.id }}</a></td>
-                                        <td>{{ project.projectName }}</td>
-                                        <td>{{ project.projectManager }}</td>
-                                        <td>{{ project.year |date('Y-m-d')}}</td>
-                                        <td>{{ project.realStartDate |date('Y-m-d')}}</td>
-                                        <td>{{ project.plannedEndDate |date('Y-m-d')}}</td>
-                                        <td>{{ project.budget }}</td>
-                                        <td>{{ project.incomes }}</td>
-                                        <td>{{ project.Expenses }}</td>
-                                        <td>{{ project.done }}</td>
-                                        <td>{{ project.endDate |date('Y-m-d') }}</td>
-
+                                        <td><a href="{{ path('charter_show', { 'id': charter.id }) }}">{{ charter.id }}</a></td>
+                                        <td>{{ charter.projectName }}</td>
+                                        <td>{{ charter.projectManager }}</td>
+                                        {#<td>{{ charter.year }}</td>#}
+                                        <td></td>
+                                        {#<td>{{ charter.realStartDate |date('Y-m-d')}}</td>#}
+                                        <td></td>
+                                        {#<td>{{ charter.plannedEndDate |date('Y-m-d')}}</td>#}
+                                        <td></td>
+                                        <td>{{ charter.budget }}</td>
+                                        {#<td>{{ charter.incomes }}</td>#}
+                                        <td></td>
+                                        <td>{{ charter.plannedExpensesBudget }}</td>
+                                        {#<td>{{ charter.done }}</td>#}
+                                        <td></td>
+                                        {#<td>{{ charter.endDate |date('Y-m-d') }}</td>#}
+                                        <td></td>
 
                                         <td>
-                                            <a class="btn btn-info" href="{{ path('project_show', { 'id': project.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
-                                            <a class="btn btn-primary" href="{{ path('project_edit', { 'id': project.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+                                            <a class="btn btn-info" href="{{ path('project_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
+                                            <a class="btn btn-primary" href="{{ path('project_edit', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
 
                                         </td>
                                     </tr>
@@ -59,8 +65,6 @@
                         {%endif%}
                     </div>
 
-                    <br>
-                    <a class="btn btn-success" href="{{ path('project_new') }}"><i class="glyphicon glyphicon-plus"></i> Create a new entry</a>
 
                 </div>
             </div>

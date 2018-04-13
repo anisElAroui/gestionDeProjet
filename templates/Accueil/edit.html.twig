@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block main_content %}
     
     <div class="container">
         <div class="row">
@@ -28,23 +28,23 @@
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">year</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(edit_form.year,  {'attr': {'required':'required'} }) }}
-                            {{ form_errors(edit_form.year) }}
+                            {#{{ form_widget(edit_form.year,  {'attr': {'required':'required'} }) }}#}
+                            {#{{ form_errors(edit_form.year) }}#}
                         </div>
                     </div>
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">realStartDate</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(edit_form.realStartDate,  {'attr': {'required':'required'} }) }}
-                            {{ form_errors(edit_form.realStartDate) }}
+                            {#{{ form_widget(edit_form.realStartDate,  {'attr': {'required':'required'} }) }}#}
+                            {#{{ form_errors(edit_form.realStartDate) }}#}
                         </div>
                     </div>
 
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">plannedEndDate</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(edit_form.plannedEndDate,  {'attr': {'required':'required'} }) }}
-                            {{ form_errors(edit_form.plannedEndDate) }}
+                            {#{{ form_widget(edit_form.plannedEndDate,  {'attr': {'required':'required'} }) }}#}
+                            {#{{ form_errors(edit_form.plannedEndDate) }}#}
                         </div>
                     </div>
 
@@ -59,32 +59,32 @@
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">incomes</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(edit_form.incomes,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(edit_form.incomes) }}
+                            {#{{ form_widget(edit_form.incomes,  {'attr': {'required':'required','class':'form-control'} }) }}#}
+                            {#{{ form_errors(edit_form.incomes) }}#}
                         </div>
                     </div>
 
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Expenses</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(edit_form.Expenses,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(edit_form.Expenses) }}
+                            {{ form_widget(edit_form.plannedExpensesBudget,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(edit_form.plannedExpensesBudget) }}
                         </div>
                     </div>
 
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">done</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(edit_form.done,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(edit_form.done) }}
+                            {#{{ form_widget(edit_form.done,  {'attr': {'required':'required','class':'form-control'} }) }}#}
+                            {#{{ form_errors(edit_form.done) }}#}
                         </div>
                     </div>
 
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">endDate</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(edit_form.endDate,  {'attr': {'required':'required'} }) }}
-                            {{ form_errors(edit_form.endDate) }}
+                            {#{{ form_widget(edit_form.endDate,  {'attr': {'required':'required'} }) }}#}
+                            {#{{ form_errors(edit_form.endDate) }}#}
                         </div>
                     </div>
 

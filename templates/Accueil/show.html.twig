@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block main_content %}
 
     <div class="container">
         <div class="row">
@@ -13,43 +13,49 @@
         <tbody>
             <tr>
                 <th>projectName</th>
-                <td>{{ project.projectName }}</td>
+                <td>{{ charter.projectName }}</td>
             </tr>
             <tr>
                 <th>projectManager</th>
-                <td>{{ project.projectManager }}</td>
+                <td>{{ charter.projectManager }}</td>
             </tr>
             <tr>
                 <th>year</th>
-                <td>{{ project.year|date('Y-m-d') }}</td>
+                <td></td>
+                {#<td>{{ charter.year|date('Y-m-d') }}</td>#}
             </tr>
             <tr>
                 <th>realStartDate</th>
-                <td>{{ project.realStartDate |date('Y-m-d') }}</td>
+                <td></td>
+                {#<td>{{ charter.realStartDate |date('Y-m-d') }}</td>#}
             </tr>
             <tr>
                 <th>plannedEndDate</th>
-                <td>{{ project.plannedEndDate |date('Y-m-d')}}</td>
+                <td></td>
+                {#<td>{{ charter.plannedEndDate |date('Y-m-d')}}</td>#}
             </tr>
             <tr>
                 <th>budget</th>
-                <td>{{ project.budget }}</td>
+                <td>{{ charter.budget }}</td>
             </tr>
             <tr>
                 <th>incomes</th>
-                <td>{{ project.incomes }}</td>
+                <td></td>
+                {#<td>{{ charter.incomes }}</td>#}
             </tr>
             <tr>
                 <th>Expenses</th>
-                <td>{{ project.Expenses }}</td>
+                <td>{{ charter.plannedExpensesBudget }}</td>
             </tr>
             <tr>
                 <th>done</th>
-                <td>{{ project.done }}</td>
+                <td></td>
+                {#<td>{{ charter.done }}</td>#}
             </tr>
             <tr>
                 <th>endDate</th>
-                <td>{{ project.endDate|date('Y-m-d') }}</td>
+                <td></td>
+                {#<td>{{ charter.endDate|date('Y-m-d') }}</td>#}
             </tr>
         </tbody>
     </table>
@@ -57,7 +63,7 @@
     </div>
 
             <br>
-            <a class="btn btn-primary" href="{{ path('project_edit', { 'id': project.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+            <a class="btn btn-primary" href="{{ path('project_edit', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
             <a class="btn btn-warning" href="{{ path('project_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
             <br><br>
                     {{ form_start(delete_form) }}
