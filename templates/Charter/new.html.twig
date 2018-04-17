@@ -1,13 +1,37 @@
 {% extends 'base.html.twig' %}
 
+{% block css %}
+{{ parent() }}
+ <link rel="stylesheet" href="{{ asset('css/steps.css') }}" />
+{% endblock %}
+
 {% block main_content %}
 
     <div class="container">
+
+        <h1>Charter creation</h1>
+
+        <div class="stepwizard col-md-offset-3">
+            <div class="stepwizard-row setup-panel">
+                <div class="stepwizard-step">
+                    <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                    <p>Step 1</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                    <p>Step 2</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                    <p>Step 3</p>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
-                    <h1>Charter creation</h1>
-                    <br>
+
 
                     {{ form_start(form, {'attr': {'novalidate': 'novalidate','class': 'form-horizontal' }}) }}
                     {{ form_widget(form._token) }}

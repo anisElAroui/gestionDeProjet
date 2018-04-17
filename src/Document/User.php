@@ -8,13 +8,14 @@
 
 namespace App\Document;
 
+use DoL\LdapBundle\Model\LdapUserInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
  * @MongoDB\Document
  */
-class User extends BaseUser
+class User extends BaseUser implements LdapUserInterface
 {
     /**
      * @MongoDB\Id(strategy="auto")
@@ -25,6 +26,11 @@ class User extends BaseUser
      * @MongoDB\Field(type="string")
      */
     protected $lastName;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    protected $dn;
 
     /**
      * @MongoDB\Field(type="string")
@@ -88,5 +94,25 @@ class User extends BaseUser
     public function setRole($role): void
     {
         $this->role = $role;
+    }
+
+    /**
+     * Set Ldap Distinguished Name.
+     *
+     * @param string $dn Distinguished Name
+     */
+    public function setDn($dn)
+    {
+        $this->dn = $dn;
+    }
+
+    /**
+     * Get Ldap Distinguished Name.
+     *
+     * @return string Distinguished Name
+     */
+    public function getDn()
+    {
+        return $this->dn;
     }
 }

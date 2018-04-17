@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homepage</title>
+    <title>GestionDeProjet</title>
+
+    {% block css %}
 
     <!-- Bootstrap framework -->
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}" />
@@ -47,7 +49,11 @@
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="css/ie.css" />
 
+
+
     <![endif]-->
+    {% endblock %}
+
     <!--[if lt IE 9]>
     <script src="js/ie/html5.js"></script>
     <script src="js/ie/respond.min.js"></script>
@@ -116,6 +122,8 @@
     <script src="{{ asset('js/pages/gebo_dashboard.js') }}"></script>
 
     <![endif]-->
+
+
 </head>
 {% block body %}
 <body class="full_width">
@@ -185,7 +193,7 @@
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li><a href="user_profile.html">My Profile</a></li>
                                 <li class="divider"></li>
-                                <li><a href="login.html">Log Out</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>

@@ -10,65 +10,85 @@ namespace App\Controller;
 
 use App\Document\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Security\Core\Security;
 
 class UserController extends Controller
 {
     /**
-     * @Route("/Accueil/new", name="app_homepage")
+     * @Route ("/login", name="login_page")
+     * @Method({"GET","POST"})
      */
-    public function createAction()
+    public function loginAction(Request $request)
     {
-        $user = new User();
-        $user->setLastName('aroui');
-        $user->setRole('PM');
+        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $session = $request->getSession();
 
-        $dm = $this->get('doctrine_mongodb')->getManager();
-        $dm->persist($user);
-        $dm->flush();
-
-        return new Response('Created user id '.$user->getId());
-    }
-
-    public function showAction($id)
-    {
-        $user = $this->get('doctrine_mongodb')
-            ->getRepository('App\Document:User')
-            ->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException('No product found for id '.$id);
+        if (class_exists('\Symfony\Component\Security\Core\Security')) {
+            $authErrorKey = Security::AUTHENTICATION_ERROR;
+            $lastUsernameKey = Security::LAST_USERNAME;
+        } else {
+            // BC for SF < 2.6
+            $authErrorKey = SecurityContextInterface::AUTHENTICATION_ERROR;
+            $lastUsernameKey = SecurityContextInterface::LAST_USERNAME;
         }
 
-        $repository = $this->get('doctrine_mongodb')
-            ->getManager()
-            ->getRepository('App\Document:User');
-
-        $user = $repository->find($id);
-    }
-
-    public function updateAction($id)
-    {
-        $dm = $this->get('doctrine_mongodb')->getManager();
-        $user = $dm->getRepository('App\Document:User')->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException('No product found for id '.$id);
+        // get the error if any (works with forward and redirect -- see below)
+        if ($request->attributes->has($authErrorKey)) {
+            $error = $request->attributes->get($authErrorKey);
+        } elseif (null !== $session && $session->has($authErrorKey)) {
+            $error = $session->get($authErrorKey);
+            $session->remove($authErrorKey);
+        } else {
+            $error = null;
         }
 
-        $user->setName('New user name!');
-        $dm->flush();
+        if (!$error instanceof AuthenticationException) {
+            $error = null; // The value does not come from the security component.
+        }
 
-        return $this->redirectToRoute('homepage');
+        // last username entered by the user
+        $lastUsername = (null === $session) ? '' : $session->get($lastUsernameKey);
+
+        if ($this->has('security.csrf.token_manager')) {
+            $csrfToken = $this->get('security.csrf.token_manager')->getToken('authenticate')->getValue();
+        } else {
+            // BC for SF < 2.4
+            $csrfToken = $this->has('form.csrf_provider')
+                ? $this->get('form.csrf_provider')->generateCsrfToken('authenticate')
+                : null;
+        }
+
+        return $this->renderLogin(array(
+            'last_username' => $lastUsername,
+            'error' => $error,
+            'csrf_token' => $csrfToken,
+        ));
     }
 
-    public function deleteAction($user)
+    /**
+     * Renders the login template with the given parameters. Overwrite this function in
+     * an extended controller to provide additional data for the login template.
+     *
+     * @param array $data
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function renderLogin(array $data)
     {
-        $dm = $this->get('doctrine_mongodb')->getManager();
+        return $this->render('Login/index.html.twig', $data);
+    }
 
-        $dm->remove($user);
-        $dm->flush();
+    public function checkAction()
+    {
+        throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
+    }
+
+    public function logoutAction()
+    {
+        throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
     }
 }
