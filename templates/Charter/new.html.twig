@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block css %}
-{{ parent() }}
- <link rel="stylesheet" href="{{ asset('css/steps.css') }}" />
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/steps.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/steps/steps.js') }}"></script>
+    {#console.log("test");#}
 {% endblock %}
 
 {% block main_content %}
@@ -25,6 +29,30 @@
                     <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
                     <p>Step 3</p>
                 </div>
+                <div class="stepwizard-step">
+                    <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                    <p>Step 4</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
+                    <p>Step 5</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+                    <p>Step 6</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-7" type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
+                    <p>Step 7</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-8" type="button" class="btn btn-default btn-circle" disabled="disabled">8</a>
+                    <p>Step 8</p>
+                </div>
+                <div class="stepwizard-step">
+                    <a href="#step-9" type="button" class="btn btn-default btn-circle" disabled="disabled">9</a>
+                    <p>Step 9</p>
+                </div>
             </div>
         </div>
 
@@ -35,6 +63,9 @@
 
                     {{ form_start(form, {'attr': {'novalidate': 'novalidate','class': 'form-horizontal' }}) }}
                     {{ form_widget(form._token) }}
+
+                    <div class="row setup-content" id="step-1">
+
                     <div  class="form-group">
                         <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Title</span></label>
                         <div class="col-sm-7">
@@ -103,6 +134,12 @@
                         </div>
                     </div><br>
 
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+
+                    </div>
+
+                    <div class="row setup-content" id="step-2">
+
                     <h3>Project scope</h3><br>
 
                     <div  class="form-group">
@@ -113,27 +150,27 @@
                         </div>
                     </div><br>
 
-                    {% block javascripts %}
-                        <script>
-                            jQuery(document).ready(function() {
-                                var $wrapper = $('.js-genus-scientist-wrapper');
-                                $wrapper.on('click', '.js-genus-scientist-add', function(e) {
-                                    e.preventDefault();
-                                    // Get the data-prototype explained earlier
-                                    var prototype = $wrapper.data('prototype');
-                                    // get the new index
-                                    var index = $wrapper.data('index');
-                                    // Replace '__name__' in the prototype's HTML to
-                                    // instead be a number based on how many items we have
-                                    var newForm = prototype.replace(/__name__/g, index);
-                                    // increase the index with one for the next item
-                                    $wrapper.data('index', index + 1);
-                                    // Display the form in the page before the "new" link
-                                    $(this).before(newForm);
-                                });
-                            });
-                        </script>
-                    {% endblock %}
+                    {#{% block javascripts %}#}
+                        {#<script>#}
+                            {#jQuery(document).ready(function() {#}
+                                {#var $wrapper = $('.js-genus-scientist-wrapper');#}
+                                {#$wrapper.on('click', '.js-genus-scientist-add', function(e) {#}
+                                    {#e.preventDefault();#}
+                                    {#// Get the data-prototype explained earlier#}
+                                    {#var prototype = $wrapper.data('prototype');#}
+                                    {#// get the new index#}
+                                    {#var index = $wrapper.data('index');#}
+                                    {#// Replace '__name__' in the prototype's HTML to#}
+                                    {#// instead be a number based on how many items we have#}
+                                    {#var newForm = prototype.replace(/__name__/g, index);#}
+                                    {#// increase the index with one for the next item#}
+                                    {#$wrapper.data('index', index + 1);#}
+                                    {#// Display the form in the page before the "new" link#}
+                                    {#$(this).before(newForm);#}
+                                {#});#}
+                            {#});#}
+                        {#</script>#}
+                    {#{% endblock %}#}
 
 
                     <div  class="form-group">
@@ -157,8 +194,11 @@
 
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
 
+                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
 
+                    </div>
 
+                    <div class="row setup-content" id="step-3">
 
                     <h4>Major Deliverables</h4><br>
 
@@ -181,7 +221,16 @@
 
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
 
-                    <br><br>
+                    <br>
+
+                        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+
+                    </div>
+
+                    <br>
+
+                    <div class="row setup-content" id="step-4">
+
 
                     <h3>Project Milestones & Waving</h3><br>
 
@@ -219,6 +268,12 @@
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
                     <br><br><br>
 
+                        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+
+                    </div>
+
+                    <div class="row setup-content" id="step-5">
+
                     <h3>Constraints, Assumptions</h3><br>
 
 
@@ -252,6 +307,11 @@
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
 
                     <br>
+                        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+
+                    </div>
+
+                    <div class="row setup-content" id="step-6">
 
                     <h3>Stakeholders</h3><br>
 
@@ -286,7 +346,13 @@
 
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
 
-                    <br><br><br>
+                    <br>
+                        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+
+                    </div>
+                        <br><br>
+
+                    <div class="row setup-content" id="step-7">
 
                     <h3>Project Budget</h3><br>
 
@@ -345,6 +411,12 @@
                         </div>
                     </div><br><br>
 
+                        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+
+                    </div>
+
+                    <div class="row setup-content" id="step-8">
+
                     {% for budget in form.budgets %}
 
                     <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">profile </span></label>
@@ -381,6 +453,11 @@
                     <br>
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
                     <br>
+                        <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+
+                    </div>
+
+                    <div class="row setup-content" id="step-9">
 
                     <h4> 3. Billing</h4>
 
@@ -417,18 +494,17 @@
                 {% endfor %}
 
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
-                    <br>
 
                     <div  class="form-group">
                         <label class="col-sm-6 control-label"></label>
                         <div class="col-sm-4" >
-                            <button class="btn btn-primary" type="submit">Create</button>
+                            <button class="btn btn-success" type="submit">Create</button>
                         </div>
+                    </div>
                     </div>
                     {{ form_end(form) }}
 
 
-                    <a class="btn btn-warning" href="{{ path('project_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
 
                 </div>
             </div>
