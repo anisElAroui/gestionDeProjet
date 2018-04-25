@@ -11,8 +11,7 @@ namespace App\Document\Charter;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Common\Collections\ArrayCollection;
-
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @MongoDB\Document(repositoryClass="App\Repository\CharterRepository")
  *
@@ -26,129 +25,168 @@ class Charter
 
     /**
      * @MongoDB\Field(type="string")
+     * @Assert\NotBlank(groups={"step1"})
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 50,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters",
+     *     groups={"step1"}
+     * )
      */
     protected $title;
 
     /**
      * @MongoDB\Field(type="string")
+     * @Assert\NotBlank(groups={"step1"})
      */
     protected $projectName;
 
     /**
      * @MongoDB\Field(type="string")
+     * @Assert\NotBlank(groups={"step1"})
      */
     protected $projectManager;
 
     /**
      * @MongoDB\Field(type="string")
+     * @Assert\NotBlank(groups={"step1"})
      */
     protected $projectInternalRefrances;
 
     /**
      * @MongoDB\Field(type="string")
+     * @Assert\NotBlank(groups={"step1"})
      */
     protected $finalClient;
 
     /**
      * @MongoDB\Field(type="string")
+     * @Assert\NotBlank(groups={"step1"})
      */
     protected $client;
 
     /**
      * @MongoDB\Field(type="string")
+     * @Assert\NotBlank(groups={"step1"})
      */
     protected $projectDescription;
 
     /**
      * @MongoDB\Field(type="string")
+     * @Assert\NotBlank(groups={"step1"})
      */
     protected $projectRepository;
 
     /**
      * @MongoDB\Field(type="string")
+     * @Assert\NotBlank(groups={"step2"})
      */
     protected $objectives;
 
     /**
      * @MongoDB\EmbedMany(targetDocument="Requirement")
+     * @Assert\NotBlank(groups={"step2"})
      */
     protected $requirements;
 
     /**
      * @MongoDB\EmbedMany(targetDocument="Deliverables")
+     * @Assert\NotBlank(groups={"step3"})
      */
     protected $deliverables;
 
     /**
      * @MongoDB\EmbedMany(targetDocument="Milestone")
+     * @Assert\NotBlank(groups={"step4"})
      */
     protected $milestones;
 
 
     /**
      * @MongoDB\EmbedMany(targetDocument="Constraint")
+     * @Assert\NotBlank(groups={"step5"})
      */
     protected $constraints;
 
     /**
      * @MongoDB\EmbedMany(targetDocument="Assumption")
+     * @Assert\NotBlank(groups={"step5"})
      */
     protected $assumptions;
 
     /**
      * @MongoDB\EmbedMany(targetDocument="Stakeholder")
+     * @Assert\NotBlank(groups={"step6"})
      */
     protected $stakeholders;
 
     /**
      * @MongoDB\Field(type="float")
+     * @Assert\NotBlank(groups={"step7"})
      */
     protected $budget;
 
     /**
      * @MongoDB\Field(type="float")
+     * @Assert\NotBlank(groups={"step7"})
      */
     protected $incomesManDayAffection;
 
     /**
      * @MongoDB\Field(type="float")
+     * @Assert\NotBlank(groups={"step7"})
      */
     protected $agreedWageExpenses;
 
     /**
      * @MongoDB\Field(type="float")
+     * @Assert\NotBlank(groups={"step7"})
      */
     protected $plannedExpensesBudget;
 
     /**
      * @MongoDB\Field(type="float")
+     * @Assert\NotBlank(groups={"step7"})
      */
     protected $targetProfitability;
 
     /**
      * @MongoDB\Field(type="float")
+     * @Assert\NotBlank(groups={"step7"})
      */
     protected $thresholdProfitability;
 
     /**
      * @MongoDB\Field(type="float")
+     * @Assert\NotBlank(groups={"step7"})
      */
     protected $expensesManDayAffection;
 
     /**
      * @MongoDB\EmbedMany(targetDocument="Budget")
+     * @Assert\NotBlank(groups={"step8"})
      */
     protected $budgets;
 
     /**
      * @MongoDB\Field(type="string")
+     * @Assert\NotBlank(groups={"step9"})
      */
     protected $billingResponsible;
 
     /**
      * @MongoDB\EmbedMany(targetDocument="Billing")
+     * @Assert\NotBlank(groups={"step9"})
      */
     protected $billings;
+
+
+    /**
+     * @MongoDB\Field(type="int")
+     */
+
+    protected $steps;
 
     /**
      * Charter constructor.
@@ -585,6 +623,22 @@ class Charter
     public function addBillings(Billing $billings): void
     {
         $this->billings[] = $billings;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSteps()
+    {
+        return $this->steps;
+    }
+
+    /**
+     * @param mixed $steps
+     */
+    public function setSteps($steps): void
+    {
+        $this->steps = $steps;
     }
 
 }

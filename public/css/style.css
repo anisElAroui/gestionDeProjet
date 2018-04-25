@@ -150,7 +150,7 @@
 	/* main content */
 		#maincontainer {min-height:100%}
         #contentwrapper{float: left;width: 100%}
-		.main_content{padding:64px 30px 30px;background:#fff;border-left:1px solid transparent;margin-left:240px}
+		.main_content{padding:64px 30px 30px;background:#fff;border-left:1px solid transparent;margin-left:95px}
 		.main_content li{line-height:22px}
 	
 	/* typeahead */

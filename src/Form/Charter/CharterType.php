@@ -30,7 +30,7 @@ class CharterType extends AbstractType
             ->add('projectName')
             ->add('projectManager', ChoiceType::class, array(
                 'choices'  => array(
-                    'project manager 1' => null,
+                    'project manager 1' => 'anis',
                     'project manager 2' => null,
                     'project manager 3' => null,
                 ),))
@@ -90,7 +90,7 @@ class CharterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Document\Charter\Charter'
+            'data_class' => 'App\Document\Charter\Charter',
         ));
     }
 

@@ -1,0 +1,70 @@
+<a href="javascript:void(0)" class="sidebar_switch on_switch bs_ttip" data-placement="auto right" data-viewport="body" title="Hide Sidebar">Sidebar switch</a>
+<div class="sidebar">
+     <div class="sidebar_inner_scroll">
+            <div class="sidebar_inner">
+                <div id="side_accordion" class="panel-group">
+                    <strong>Project Name:</strong>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="{{ path('charter_show', {'id': charter.id}) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                                <img src="{{ asset('img/gCons/copy-item.png') }}" alt="" /> Charter
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                                <img src="{{ asset('img/gCons/multi-agents.png') }}" alt="" /> Stakeholder
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                                <img src="{{ asset('img/gCons/fire.png') }}" alt="" /> Risks
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                                <img src="{{ asset('img/gCons/heart.png') }}" alt="" /> Opportunities
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                                <img src="{{ asset('img/gCons/configuration.png') }}" alt="" /> Actions
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                                <img src="{{ asset('img/gCons/dollar.png') }}" alt="" /> Finance
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                                <img src="{{ asset('img/gCons/addressbook.png') }}" alt="" /> Project log
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                                <img src="{{ asset('img/gCons/lookup.png') }}" alt="" />Project report
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <form action="search_page.html" class="input-group input-group-sm" method="post">
+                    <input autocomplete="off" name="query" class="search_query form-control input-sm" size="16" placeholder="Search..." type="text">
+                    <span class="input-group-btn"><button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button></span>
+                </form>
+            </div>
+        </div>
+</div>

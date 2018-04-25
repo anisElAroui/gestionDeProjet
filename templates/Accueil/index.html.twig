@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block breadCrumb %}
+    {% include 'breadCrumb.html.twig' %}
+{% endblock %}
+
 {% block main_content %}
 
     <div class="container">
@@ -35,7 +39,7 @@
                                 <tbody>
                                 {% for charter in charters %}
                                     <tr>
-                                        <td><a href="{{ path('charter_show', { 'id': charter.id }) }}">{{ charter.id }}</a></td>
+                                        <td><a href="{{ path('project_show', { 'id': charter.id }) }}">{{ charter.id }}</a></td>
                                         <td>{{ charter.projectName }}</td>
                                         <td>{{ charter.projectManager }}</td>
                                         {#<td>{{ charter.year }}</td>#}
@@ -54,7 +58,7 @@
                                         <td></td>
 
                                         <td>
-                                            <a class="btn btn-info" href="{{ path('project_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
+                                            <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
                                             <a class="btn btn-primary" href="{{ path('project_edit', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
 
                                         </td>

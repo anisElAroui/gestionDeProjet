@@ -1,15 +1,15 @@
-{% extends 'project.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block main_content %}
 
-    <div class="container">
+    <div class="main_content">
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
                     <h1>Stakeholder list</h1>
 
                     <div class="table-responsive">
-                        {% if stakeholders is defined and stakeholders is not null  %}
+                        {% if charter.stakeholders is defined and charter.stakeholders is not null  %}
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -23,9 +23,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for stakeholder in stakeholders %}
+                                {% for stakeholder in charter.stakeholders %}
                                     <tr>
-                                        <td><a href="{{ path('stakeholder_show', { 'id': stakeholder.id }) }}">{{ stakeholder.id }}</a></td>
+                                        <td><a href="{{ path('stakeholder_show', { 'id2': stakeholder.id ,'id1': charter.id }) }}">{{ stakeholder.id }}</a></td>
                                         <td>{{ stakeholder.name }}</td>
                                         <td>{{ stakeholder.role }}</td>
                                         <td>{{ stakeholder.email }}</td>
@@ -33,8 +33,8 @@
                                         
 
                                         <td>
-                                            <a class="btn btn-info" href="{{ path('stakeholder_show', { 'id': stakeholder.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
-                                            <a class="btn btn-primary" href="{{ path('stakeholder_edit', { 'id': stakeholder.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+                                            <a class="btn btn-info" href="{{ path('stakeholder_show', { 'id2': stakeholder.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
+                                            <a class="btn btn-primary" href="{{ path('stakeholder_edit', { 'id2': stakeholder.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
 
                                         </td>
                                     </tr>
@@ -45,11 +45,15 @@
                     </div>
 
                     <br>
-                    <a class="btn btn-success" href="{{ path('stakeholder_new') }}"><i class="glyphicon glyphicon-plus"></i> Create a new entry</a>
+                    <a class="btn btn-success" href="{{ path('stakeholder_new',{'id': charter.id}) }}"><i class="glyphicon glyphicon-plus"></i> Create a new entry</a>
 
                 </div>
             </div>
         </div>
     </div>
 
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'sidebar.html.twig' %}
 {% endblock %}

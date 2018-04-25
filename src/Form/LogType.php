@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: anis
- * Date: 28/03/18
- * Time: 10:30
+ * Date: 20/04/18
+ * Time: 10:24
  */
 
 namespace App\Form;
@@ -11,8 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
-class AccueilType extends AbstractType
+class LogType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -21,10 +20,10 @@ class AccueilType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('projectName')
-            ->add('projectManager')
-            ->add('budget')
-            ->add('plannedExpensesBudget')
+            ->add('date')
+            ->add('note')
+            ->add('description')
+            ->add('author')
 
 
         ;
@@ -36,7 +35,7 @@ class AccueilType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Document\Charter\Charter'
+            'data_class' => 'App\Document\Log'
         ));
     }
 }

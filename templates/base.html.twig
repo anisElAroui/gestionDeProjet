@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GestionDeProjet</title>
+    <title>ProjectManagement</title>
 
 
     <!-- Bootstrap framework -->
@@ -26,18 +26,13 @@
     <link rel="stylesheet" href="{{ asset('img/flags/flags.css') }}" />
     <!-- datatables -->
     <link rel="stylesheet" href="{{ asset('lib/datatables/extras/TableTools/media/css/TableTools.css') }}">
-
     <!-- font-awesome -->
-    <link rel="stylesheet" href="{{ asset('img/font-awesome/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="img/font-awesome/css/font-awesome.min.css" />
 
     <!-- main styles -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <!-- theme color-->
     <link rel="stylesheet" href="{{ asset('css/blue.css') }}" id="link_theme" />
-
-    <!-- online icons fontawesome -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-
     <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
 
     <!-- favicon -->
@@ -54,6 +49,10 @@
     <script src="js/ie/respond.min.js"></script>
     <script src="lib/flot/excanvas.min.js"></script>
     <![endif]-->
+
+    <!-- online icons fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+
 
 </head>
 
@@ -119,9 +118,9 @@
                         </li>
                         <li class="divider-vertical hidden-sm hidden-xs"></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user_avatar.png" alt="" class="user_avatar">Johny Smith <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ asset('img/user_avatar.png')}}" alt="" class="user_avatar">Johny Smith <b class="caret"></b></a>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <li><a href="user_profile.html">My Profile</a></li>
+                                <li><a href="{{ path('profile_show') }}">My Profile</a></li>
                                 <li class="divider"></li>
                                 <li><a href="{{ path('fos_user_security_logout') }}">Log Out</a></li>
                             </ul>
@@ -247,24 +246,17 @@
     </header>
     <div id="contentwrapper">
         <div class="main_content">
-            <div id="jCrumbs" class="breadCrumb module">
-                <ul>
-                    <li>
-                        <a href="{{ path('project_index') }}"><i class="glyphicon glyphicon-th-list"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-chart-pie"></i></a>
-                    </li>
-                </ul>
-            </div>
 
+            {% block breadCrumb %}{% endblock %}
+            {% block main_content %}{% endblock %}
 
         </div>
-        {% block main_content %}{% endblock %}
 
     </div>
 
 </div>
+
+{% block sidebar %}{% endblock %}
 
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/jquery-migrate.min.js') }}"></script>

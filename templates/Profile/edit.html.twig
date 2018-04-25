@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <h3 class="heading">User Profile</h3>
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Username</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">
+                            <strong>jSmith</strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fileinput" class="control-label col-sm-2">User avatar</label>
+                    <div class="col-sm-8">
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-new thumbnail" style="width: 80px; height: 80px;"><img src="http://www.placehold.it/80x80/EFEFEF/AAAAAA" /></div>
+                            <div class="fileupload-preview fileupload-exists thumbnail" style="width: 80px; height: 80px;"></div>
+                            <span class="btn btn-default btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+                            <a href="#" class="btn btn-link fileupload-exists" data-dismiss="fileupload">Remove</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="u_fname" class="control-label col-sm-2">Full name</label>
+                    <div class="col-sm-8">
+                        <input id="u_fname" class="input-xlarge form-control" value="John Smith" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="u_email" class="control-label col-sm-2">Email</label>
+                    <div class="col-sm-8">
+                        <input id="u_email" class="input-xlarge form-control" value="johnSmith@example.com" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="u_password" class="control-label col-sm-2">Password</label>
+                    <div class="col-sm-8">
+                        <div class="sepH_b">
+                            <input id="u_password" class="input-xlarge form-control" value="my_password" type="password">
+                            <span class="help-block">Enter your password</span>
+                        </div>
+                        <input id="s_password_re" class="input-xlarge form-control" type="password">
+                        <span class="help-block">Repeat password</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">I want to receive:</label>
+                    <div class="col-sm-8">
+                        <label class="checkbox-inline">
+                            <input value="newsletter" id="email_newsletter" name="email_receive" type="checkbox">
+                            Newsletters
+                        </label>
+                        <label class="checkbox-inline">
+                            <input value="sys_messages" id="email_sysmessages" name="email_receive" checked="checked" type="checkbox">
+                            System messages
+                        </label>
+                        <label class="checkbox-inline">
+                            <input value="other_messages" id="email_othermessages" name="email_receive" type="checkbox">
+                            Other messages
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Language(s)</label>
+                    <div class="col-sm-8">
+                        <select name="user_languages" id="user_languages" multiple="" data-placeholder="Choose a language(s)..." class="form-control">
+                            <option selected="selected">English</option>
+                            <option>French</option>
+                            <option>German</option>
+                            <option>Italian</option>
+                            <option>Chinese</option>
+                            <option>Spanish</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Gender</label>
+                    <div class="col-sm-8">
+                        <label class="radio-inline">
+                            <input value="male" id="s_male" name="f_gender" checked="checked" type="radio">
+                            Male
+                        </label>
+                        <label class="radio-inline">
+                            <input value="female" id="s_female" name="f_gender" type="radio">
+                            Female
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="u_signature" class="control-label col-sm-2">Signature</label>
+                    <div class="col-sm-8">
+							<textarea rows="4" id="u_signature" class="form-control">
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto assumenda aut deserunt facilis fugiat harum ipsum numquam omnis quasi vero? Architecto atque dolorem dolores eveniet magni natus quas tenetur, voluptate!
+							</textarea>
+                        <span class="help-block">Automatic resize</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <button class="btn btn-default" type="submit">Save changes</button>
+                        <button class="btn btn-link">Cancel</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

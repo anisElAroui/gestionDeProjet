@@ -10,7 +10,6 @@ namespace App\Controller;
 
 use App\Document\Charter\Stakeholder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Form\Charter\StakeholderType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -18,52 +17,59 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class StakeholderController extends Controller
 {
     /**
-     * @Route("/stakeholder", name="stakeholder_index")
+     * @Route("project/{id}/stakeholder", name="stakeholder_index")
      * @Method({"GET"})
      */
-    public function indexAction()
+    public function indexAction($id)
     {
-        $stakeholders = $this->get('doctrine_mongodb')->getRepository('App\Document\Charter\Stakeholder')->findAll();
-
-        return $this->render('Stakeholder/index.html.twig', ['stakeholders' => $stakeholders,]);
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
+        return $this->render('Stakeholder/index.html.twig', ['charter' => $charter,]);
     }
 
 
     /**
-     * @Route("/stakeholder/new", name="stakeholder_new")
+     * @Route("project/{id}/stakeholder/new", name="stakeholder_new")
      * @Method({"POST","GET"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $id)
     {
         $stakeholder = new Stakeholder();
         $form = $this->createForm('App\Form\Charter\StakeholderType', $stakeholder);
         $form->handleRequest($request);
 
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $dm = $this->get('doctrine_mongodb')->getManager();
+            $charter->addStakeholders($stakeholder);
+            $dm->persist($charter);
             $dm->persist($stakeholder);
             $dm->flush();
 
-            return $this->redirectToRoute('stakeholder_show', array('id' => $stakeholder->getId()));
+            return $this->redirectToRoute('stakeholder_show', array('id1' => $id,'id2' => $stakeholder->getId()));
         }
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
 
         return $this->render('Stakeholder/new.html.twig', array(
             'stakeholder' => $stakeholder,
+            'charter' => $charter,
             'form' => $form->createView(),
         ));
     }
 
 
     /**
-     * @Route("/stakeholder/{id}/show", name="stakeholder_show")
+     * @Route("project/{id1}/stakeholder/{id2}/show", name="stakeholder_show")
      * @Method({"GET","DELETE"})
      */
-    public function showAction(Request $request, $id)
+    public function showAction(Request $request, $id1, $id2)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $stakeholder = $dm->getRepository('App\Document\Charter\Stakeholder')->findOneBy(array('id' => $id));
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id1));
+        $stakeholder = $dm->getRepository('App\Document\Charter\Stakeholder')->findOneBy(array('id' => $id2));
 
-        $deleteForm = $this->createDeleteForm($stakeholder,$id);
+        $deleteForm = $this->createDeleteForm($id1,$id2);
 
         $deleteForm->handleRequest($request);
 
@@ -77,7 +83,8 @@ class StakeholderController extends Controller
 
 
         return $this->render('Stakeholder/show.html.twig', array(
-            'stakeholder' => $stakeholder,
+            'charter'=> $charter,
+            'Stakeholder_id'=> $id2,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -85,36 +92,40 @@ class StakeholderController extends Controller
 
     /**
      *
-     * @Route("/stakeholder/{id}/edit", name="stakeholder_edit")
+     * @Route("project/{id1}/stakeholder/{id2}/edit", name="stakeholder_edit")
      * @Method({"GET","POST"})
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, $id1, $id2)
     {
 
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $stakeholder = $dm->getRepository('App\Document\Charter\Stakeholder')->findOneBy(array('id' => $id));
+        $stakeholder = $dm->getRepository('App\Document\Charter\Charter')->findOneByProperty('stakeholders.id', $id2);
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id1));
+        dump($stakeholder);
 
         $editForm = $this->createForm('App\Form\Charter\StakeholderType', $stakeholder);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $dm->persist($charter);
             $dm->persist($stakeholder);
             $dm->flush();
 
-            return $this->redirectToRoute('stakeholder_show', array('id' => $id));
+            return $this->redirectToRoute('stakeholder_show', array('id1'=>$id1,'id2' => $id2));
         }
 
         return $this->render('Stakeholder/edit.html.twig', array(
-            'stakeholder' => $stakeholder,
+            'charter'=>$charter,
+            'Stakeholder_id'=>$id2,
             'edit_form' => $editForm->createView(),
         ));
     }
 
-    private function createDeleteForm(Stakeholder $stakeholder,string $id)
+    private function createDeleteForm(string $id1,string $id2)
     {
 
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('stakeholder_show', array('id' => $id)))
+            ->setAction($this->generateUrl('stakeholder_show', array('id1' => $id1,'id2' => $id2)))
             ->setMethod('DELETE')
             ->getForm()
             ;

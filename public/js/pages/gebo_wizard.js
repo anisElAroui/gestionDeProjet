@@ -13,7 +13,7 @@
 		simple: function(){
 			$('#simple_wizard').stepy({
 				titleClick	: true,
-				nextLabel:      'Next <i class="glyphicon glyphicon-chevron-right"></i>',
+				nextLabel:      '<button type="submit" class="btn btn-primary">NEXT<i class="glyphicon glyphicon-chevron-right"></i></button>',
 				backLabel:      '<i class="glyphicon glyphicon-chevron-left"></i> Back'
 			});
 		},

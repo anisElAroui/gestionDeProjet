@@ -12,7 +12,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 
 /**
- * @MongoDB\Document (repositoryClass="App\Repository\RequirementRepository")
+ * @MongoDB\EmbeddedDocument
  *
  */
 class Requirement

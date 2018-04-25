@@ -10,7 +10,7 @@ namespace App\Document\Charter;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document
+ * @MongoDB\EmbeddedDocument
  *
  */
 class Deliverables
