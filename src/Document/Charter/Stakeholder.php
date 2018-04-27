@@ -11,7 +11,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 
 /**
- * @MongoDB\EmbeddedDocument
+ * @MongoDB\Document
  *
  */
 class Stakeholder
@@ -42,6 +42,9 @@ class Stakeholder
      * @MongoDB\Field(type="string")
      */
     protected $phoneNumber;
+
+
+
 
     /**
      * Stakeholder constructor.

@@ -151,16 +151,29 @@ class CharterController extends Controller
 
         $charter->setSteps($charter->getSteps()+1);
 
-
         $step=$charter->getSteps();
-        dump($step);
 
         $form = $this->createForm('App\Form\Charter\CharterType', $charter, array('validation_groups' => ['step'.$step]));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+//            $steackHolders=$form->getData('stakeholders');
+//
+//            foreach ($steackHolders as $steackHolder){
+//                $stak=new Stakeholder();
+//                $stak->setEmail($steackHolder['email']);
+//                $stak->setName($steackHolder['name']);
+//                $stak->setPhoneNumber($steackHolder['phoneNumber']);
+//                $stak->setRole($steackHolder['role']);
+//                $dm->persist($stak);
+//                $dm->flush();
+//                $charter->addStakeholders($stak);
+//            }
+
             $dm->persist($charter);
             $dm->flush();
+
+            // lors du submit de la dernière étape
             if ($step == 9){
                 return $this->redirectToRoute('charter_show', array('id' => $id));
             }

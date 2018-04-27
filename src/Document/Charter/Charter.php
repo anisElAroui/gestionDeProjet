@@ -116,7 +116,7 @@ class Charter
     protected $assumptions;
 
     /**
-     * @MongoDB\EmbedMany(targetDocument="Stakeholder")
+     * @MongoDB\ReferenceMany(targetDocument="Stakeholder",  cascade={"persist"},simple=true)
      * @Assert\NotBlank(groups={"step6"})
      */
     protected $stakeholders;
@@ -448,7 +448,7 @@ class Charter
     }
 
     /**
-     * @return Collection $stakeholders
+     * @return Stakeholder $stakeholders
      */
     public function getStakeholders()
     {

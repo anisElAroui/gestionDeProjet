@@ -3,17 +3,17 @@
      <div class="sidebar_inner_scroll">
             <div class="sidebar_inner">
                 <div id="side_accordion" class="panel-group">
-                    <strong>Project Name:</strong>
+                    <strong>{{ charter.title }}</strong>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="{{ path('charter_show', {'id': charter.id}) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                            <a href="{{ path('charter_show', {'id': charter.id}) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
                                 <img src="{{ asset('img/gCons/copy-item.png') }}" alt="" /> Charter
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion"  style="display:block;padding:8px 15px">
                                 <img src="{{ asset('img/gCons/multi-agents.png') }}" alt="" /> Stakeholder
                             </a>
                         </div>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                            <a href="{{ path('finance_index') }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
                                 <img src="{{ asset('img/gCons/dollar.png') }}" alt="" /> Finance
                             </a>
                         </div>

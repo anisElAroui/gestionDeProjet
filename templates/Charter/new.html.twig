@@ -14,18 +14,83 @@
     <script src="{{ asset('js/pages/gebo_wizard.js') }}"></script>
 
     {#<script>#}
-
-        {#$('#validate_wizard-title-0').click();#}
-        {#$('#validate_wizard-title-1').click();#}
-        {#$('#validate_wizard-title-2').click();#}
-        {#$('#validate_wizard-title-3').click();#}
-        {#$('#validate_wizard-title-4').click();#}
-        {#$('#validate_wizard-title-5').click();#}
-        {#$('#validate_wizard-title-6').click();#}
-        {#$('#validate_wizard-title-7').click();#}
-        {#$('#validate_wizard-title-8').click();#}
-
+        {#jQuery(document).ready(function() {#}
+        {#var $wrapper = $('.js-genus-scientist-wrapper');#}
+        {#$wrapper.on('click', '.js-genus-scientist-add', function(e) {#}
+        {#e.preventDefault();#}
+        {#// Get the data-prototype explained earlier#}
+        {#var prototype = $wrapper.data('prototype');#}
+        {#// get the new index#}
+        {#var index = $wrapper.data('index');#}
+        {#// Replace '__name__' in the prototype's HTML to#}
+        {#// instead be a number based on how many items we have#}
+        {#var newForm = prototype.replace(/__name__/g, index);#}
+        {#// increase the index with one for the next item#}
+        {#$wrapper.data('index', index + 1);#}
+        {#// Display the form in the page before the "new" link#}
+        {#$(this).before(newForm);#}
+        {#});#}
+        {#});#}
     {#</script>#}
+
+    <script>
+    var $collectionHolder;
+
+    // setup an "add a tag" link
+    var $addRequirementLink = $('<a href="#" class="add_requirement_link">Add a highLevelRequirement</a>');
+    var $newLinkLi = $('<li></li>').append($addRequirementLink);
+
+
+    jQuery(document).ready(function() {
+    // Get the ul that holds the collection of tags
+    $collectionHolder = $('ul.requirements');
+
+    // add the "add a highLevelRequirement" anchor and li to the tags ul
+    $collectionHolder.append($newLinkLi);
+
+    // count the current form inputs we have (e.g. 2), use that as the new
+    // index when inserting a new item (e.g. 2)
+    $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+    $addRequirementLink.on('click', function(e) {
+    // prevent the link from creating a "#" on the URL
+    e.preventDefault();
+
+    // add a new tag form (see next code block)
+    addRequimentForm($collectionHolder, $newLinkLi);
+    });
+
+    function addRequimentForm($collectionHolder, $newLinkLi) {
+    // Get the data-prototype explained earlier
+    var prototype = $collectionHolder.data('prototype');
+
+    // get the new index
+    var index = $collectionHolder.data('index');
+
+    var newForm = prototype;
+    // You need this only if you didn't set 'label' => false in your tags field in TaskType
+    // Replace '__name__label__' in the prototype's HTML to
+    // instead be a number based on how many items we have
+    //newForm = newForm.replace(/__name__label__/g, index);
+
+    // Replace '__name__' in the prototype's HTML to
+    // instead be a number based on how many items we have
+    newForm = newForm.replace(/__name__/g, index);
+
+    // increase the index with one for the next item
+    $collectionHolder.data('index', index + 1);
+
+    // Display the form in the page in an li, before the "Add a tag" link li
+    var $newFormLi = $('<li></li>').append(newForm);
+    $newLinkLi.before($newFormLi);
+    }
+
+
+    });
+
+    </script>
+
+
 {% endblock %}
 
 {% block main_content %}
@@ -126,44 +191,29 @@
                         </div>
                     </div><br>
 
-                    {#{% block javascripts %}#}
-                        {#<script>#}
-                            {#jQuery(document).ready(function() {#}
-                                {#var $wrapper = $('.js-genus-scientist-wrapper');#}
-                                {#$wrapper.on('click', '.js-genus-scientist-add', function(e) {#}
-                                    {#e.preventDefault();#}
-                                    {#// Get the data-prototype explained earlier#}
-                                    {#var prototype = $wrapper.data('prototype');#}
-                                    {#// get the new index#}
-                                    {#var index = $wrapper.data('index');#}
-                                    {#// Replace '__name__' in the prototype's HTML to#}
-                                    {#// instead be a number based on how many items we have#}
-                                    {#var newForm = prototype.replace(/__name__/g, index);#}
-                                    {#// increase the index with one for the next item#}
-                                    {#$wrapper.data('index', index + 1);#}
-                                    {#// Display the form in the page before the "new" link#}
-                                    {#$(this).before(newForm);#}
-                                {#});#}
-                            {#});#}
-                        {#</script>#}
-                    {#{% endblock %}#}
-
                 <div  class=" form-group">
                         <label class="col-sm-3 control-label" ><span class="label label-primary">High Level Requirement</span></label>
                         <div class="col-sm-7">
-                            {#{{ form_widget(form.requirements.highLevelRequirement,  {'attr': {'required':'required','class':'form-control'} }) }}#}
-                            {#{{ form_errors(form.requirements.highLevelRequirement) }}#}
-                            <div class="js-genus-scientist-wrapper" data-prototype="{{ form_widget(form.requirements.vars.prototype)|e('html_attr') }}"data-index="{{ form.requirements|length }}">
-                            {% for requirement in form.requirements %}
+                            {#<div class="js-genus-scientist-wrapper" data-prototype="{{ form_widget(form.requirements.vars.prototype)|e('html_attr') }}"data-index="{{ form.requirements|length }}">#}
+                            {#{% for requirement in form.requirements %}#}
+
+                                    {#{{ form_widget(requirement.highLevelRequirement,  {'attr': {'required':'required','class':'form-control'} }) }}#}
+                                    {#{{ form_errors(requirement.highLevelRequirement) }}#}
+
+                            {#{% endfor %}#}
+                            {#<a href="#" class="js-genus-scientist-add">#}
+                                {#Add a highLevelRequirement#}
+                            {#</a>#}
+                            {#</div>#}
+                            <ul class="requirements" data-prototype="{{ form_widget(form.requirements.vars.prototype)|e('html_attr') }}"data-index="{{ form.requirements|length }}">
+                                {% for requirement in form.requirements %}
 
                                     {{ form_widget(requirement.highLevelRequirement,  {'attr': {'required':'required','class':'form-control'} }) }}
                                     {{ form_errors(requirement.highLevelRequirement) }}
 
-                            {% endfor %}
-                            <a href="#" class="js-genus-scientist-add">
-                                Add a highLevelRequirement
-                            </a>
-                            </div>
+                                {% endfor %}
+
+                            </ul>
                         </div>
 
                     <a class="btn btn-success pull-right" href="#"><i class="glyphicon glyphicon-plus"></i> Add</a><br>
@@ -457,7 +507,9 @@
             <button type="submit" class="finish btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Send registration</button>
                     {{ form_end(form) }}
 
-
+            {% if charter.id is not null %}
+            <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> Go to charter</a>
+            {% endif %}
 
                 </div>
             </div>
@@ -465,64 +517,6 @@
     </div>
     </div>
 
-    {#{% block javascripts %}#}
-        {#<script>#}
-            {#var $collectionHolder;#}
-
-            {#// setup an "add a tag" link#}
-            {#var $addRequirementLink = $('<a href="#" class="add_requirement_link">Add a highLevelRequirement</a>');#}
-            {#var $newLinkLi = $('<li></li>').append($addRequirementLink);#}
-
-
-            {#jQuery(document).ready(function() {#}
-                {#// Get the ul that holds the collection of tags#}
-                {#$collectionHolder = $('ul.requirements');#}
-
-                {#// add the "add a highLevelRequirement" anchor and li to the tags ul#}
-                {#$collectionHolder.append($newLinkLi);#}
-
-                {#// count the current form inputs we have (e.g. 2), use that as the new#}
-                {#// index when inserting a new item (e.g. 2)#}
-                {#$collectionHolder.data('index', $collectionHolder.find(':input').length);#}
-
-                {#$addRequirementLink.on('click', function(e) {#}
-                    {#// prevent the link from creating a "#" on the URL#}
-                    {#e.preventDefault();#}
-
-                    {#// add a new tag form (see next code block)#}
-                    {#addRequimentForm($collectionHolder, $newLinkLi);#}
-                {#});#}
-
-                {#function addRequimentForm($collectionHolder, $newLinkLi) {#}
-                    {#// Get the data-prototype explained earlier#}
-                    {#var prototype = $collectionHolder.data('prototype');#}
-
-                    {#// get the new index#}
-                    {#var index = $collectionHolder.data('index');#}
-
-                    {#var newForm = prototype;#}
-                    {#// You need this only if you didn't set 'label' => false in your tags field in TaskType#}
-                    {#// Replace '__name__label__' in the prototype's HTML to#}
-                    {#// instead be a number based on how many items we have#}
-                    {#//newForm = newForm.replace(/__name__label__/g, index);#}
-
-                    {#// Replace '__name__' in the prototype's HTML to#}
-                    {#// instead be a number based on how many items we have#}
-                    {#newForm = newForm.replace(/__name__/g, index);#}
-
-                    {#// increase the index with one for the next item#}
-                    {#$collectionHolder.data('index', index + 1);#}
-
-                    {#// Display the form in the page in an li, before the "Add a tag" link li#}
-                    {#var $newFormLi = $('<li></li>').append(newForm);#}
-                    {#$newLinkLi.before($newFormLi);#}
-                {#}#}
-
-
-            {#});#}
-
-        {#</script>#}
-    {#{% endblock %}#}
 
     <script>
         window.onload = function() {

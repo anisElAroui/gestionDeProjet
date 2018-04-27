@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Document\Charter\Stakeholder;
+use App\Form\Charter\CharterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -44,7 +45,6 @@ class StakeholderController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $charter->addStakeholders($stakeholder);
             $dm->persist($charter);
-            $dm->persist($stakeholder);
             $dm->flush();
 
             return $this->redirectToRoute('stakeholder_show', array('id1' => $id,'id2' => $stakeholder->getId()));
@@ -99,15 +99,22 @@ class StakeholderController extends Controller
     {
 
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $stakeholder = $dm->getRepository('App\Document\Charter\Charter')->findOneByProperty('stakeholders.id', $id2);
-        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id1));
-        dump($stakeholder);
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id1);
+        $stakeholder = $dm->getRepository('App\Document\Charter\Stakeholder')->find($id2);
 
-        $editForm = $this->createForm('App\Form\Charter\StakeholderType', $stakeholder);
+        // ici on récupere tout le charter
+//        $stakeholder = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('stakeholders.id' => $id2));
+//
+        // collection
+//        dump($charter->getStakeholders());
+//        $stakeholder=$charter->getStakeholders();
+
+//        $stakeholder = $dm->getRepository('App\Document\Charter\Charter')->findStakeholder($id2);
+
+        $editForm = $this->createForm('App\Form\Charter\StakeholderType',$stakeholder);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $dm->persist($charter);
             $dm->persist($stakeholder);
             $dm->flush();
 

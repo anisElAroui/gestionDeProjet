@@ -43,6 +43,7 @@ class CharterType extends AbstractType
             ->add('requirements',CollectionType::class, array(
                 'entry_type' => RequirementType::class,
                 'allow_add' => true,
+                'entry_options' => array('label' => false),
                 ))
             ->add('deliverables',CollectionType::class, array(
                 'entry_type' => DeliverableType::class,
@@ -63,6 +64,7 @@ class CharterType extends AbstractType
             ->add('stakeholders',CollectionType::class, array(
                 'entry_type' => StakeholderType::class,
                 'allow_add' => true,
+                'by_reference'=> true
             ))
             ->add('budget')
             ->add('incomesManDayAffection')
