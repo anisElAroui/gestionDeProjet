@@ -116,7 +116,7 @@ class Charter
     protected $assumptions;
 
     /**
-     * @MongoDB\ReferenceMany(targetDocument="Stakeholder",  cascade={"persist"},simple=true)
+     * @MongoDB\ReferenceMany(targetDocument="Stakeholder",  cascade={"persist","remove"},simple=true)
      * @Assert\NotBlank(groups={"step6"})
      */
     protected $stakeholders;
