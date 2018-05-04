@@ -20,66 +20,74 @@ class ActionController extends Controller
 {
 
     /**
-     * @Route("/action", name="action_index")
+     * @Route("project/{id}/action", name="action_index")
      * @Method({"GET"})
      */
-    public function indexAction()
+    public function indexAction($id)
     {
         $actions = $this->get('doctrine_mongodb')->getRepository('App\Document\Action')->findAll();
 
-        return $this->render('Action/index.html.twig', ['actions' => $actions,]);
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
+
+        return $this->render('Action/index.html.twig', ['actions' => $actions,'charter' => $charter,]);
     }
 
 
     /**
-     * @Route("/action/new", name="action_new")
+     * @Route("project/{id}/action/new", name="action_new")
      * @Method({"POST","GET"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request,$id)
     {
         $action = new Action();
         $form = $this->createForm('App\Form\ActionType', $action);
         $form->handleRequest($request);
 
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $dm = $this->get('doctrine_mongodb')->getManager();
+            $action->setCharter($charter);
             $dm->persist($action);
             $dm->flush();
 
-            return $this->redirectToRoute('action_show', array('id' => $action->getId()));
+            return $this->redirectToRoute('action_show', array('id1' => $id,'id2' => $action->getId()));
         }
 
         return $this->render('Action/new.html.twig', array(
             'action' => $action,
+            'charter' => $charter,
             'form' => $form->createView(),
         ));
     }
 
 
     /**
-     * @Route("/action/{id}/show", name="action_show")
+     * @Route("project/{id1}/action/{id2}/show", name="action_show")
      * @Method({"GET","DELETE"})
      */
-    public function showAction(Request $request, $id)
+    public function showAction(Request $request, $id1,$id2)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $action = $dm->getRepository('App\Document\Action')->findOneBy(array('id' => $id));
+        $action = $dm->getRepository('App\Document\Action')->find($id2);
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id1);
 
-        $deleteForm = $this->createDeleteForm($action,$id);
+        $deleteForm = $this->createDeleteForm($id1,$id2);
 
         $deleteForm->handleRequest($request);
 
         if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
-            $dm = $this->get('doctrine_mongodb')->getManager();
             $dm->remove($action);
             $dm->flush();
 
-            return $this->redirectToRoute('action_index');
+            return $this->redirectToRoute('action_index',array('id'=>$id1));
         }
 
 
         return $this->render('Action/show.html.twig', array(
             'action' => $action,
+            'charter' => $charter,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -87,36 +95,38 @@ class ActionController extends Controller
 
     /**
      *
-     * @Route("/action/{id}/edit", name="action_edit")
+     * @Route("project/{id1}/action/{id2}/edit", name="action_edit")
      * @Method({"GET","POST"})
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request,$id1,$id2)
     {
 
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $action = $dm->getRepository('App\Document\Action')->findOneBy(array('id' => $id));
+        $action = $dm->getRepository('App\Document\Action')->find($id2);
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find( $id1);
 
-        $editForm = $this->createForm('App\Form\Charter\ActionType', $action);
+        $editForm = $this->createForm('App\Form\ActionType', $action);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $dm->persist($action);
             $dm->flush();
 
-            return $this->redirectToRoute('action_show', array('id' => $id));
+            return $this->redirectToRoute('action_show', array('id1'=>$id1,'id2' => $id2));
         }
 
         return $this->render('Action/edit.html.twig', array(
             'action' => $action,
+            'charter' => $charter,
             'edit_form' => $editForm->createView(),
         ));
     }
 
-    private function createDeleteForm(Action $action,string $id)
+    private function createDeleteForm($id1,$id2)
     {
 
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('action_show', array('id' => $id)))
+            ->setAction($this->generateUrl('action_show', array('id1' => $id1,'id2' => $id2)))
             ->setMethod('DELETE')
             ->getForm()
             ;

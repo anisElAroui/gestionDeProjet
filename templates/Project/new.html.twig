@@ -6,31 +6,62 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
-                    <h1>New project</h1>
+                    <h1 class="tac">New project</h1><br>
 
                     {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
                     {{ form_widget(form._token) }}
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">projectName</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">projectName</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form.projectName,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_widget(form.projectName,  {'attr': {'class':'form-control'} }) }}
                             {{ form_errors(form.projectName) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Description</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Description</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form.description,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_widget(form.description,  {'attr': {'class':'form-control'} }) }}
                             {{ form_errors(form.description) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Project manager</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Project manager</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form.projectManager,  {'attr': {'required':'required','class':'form-control'} }) }}
+
+                            {{ form_widget(form.projectManager,{'attr': {'class':'form-control'}}) }}
                             {{ form_errors(form.projectManager) }}
+
                         </div>
                     </div>
+                    <div  class="form-group">
+
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Pole</span></label>
+                        <div class="col-sm-7">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form_widget(form.poleEbusniss) }}
+                                    {{ form_errors(form.poleEbusniss) }}
+                                    EBusiness
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    {{ form_widget(form.poleEss) }}
+                                    {{ form_errors(form.poleEss) }}
+                                    ESS
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    {{ form_widget(form.poleMobile) }}
+                                    {{ form_errors(form.poleMobile) }}
+                                    Mobile
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+
 
                     <br>
 
@@ -41,6 +72,13 @@
                         </div>
                     </div>
                     {{ form_end(form) }}
+
+                    <div class="sticky-queue top-right">
+                        <div class="sticky border-top-right st-success" id="89628" style="height: 17px; display: block;">
+                            <span class="close st-close" rel="89628" title="Close">×</span>
+                            <div class="sticky-note" rel="89628">Project added ...</div>
+                        </div>
+                    </div>
 
                     <br>
                     <a class="btn btn-warning" href="{{ path('project_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to project list</a>

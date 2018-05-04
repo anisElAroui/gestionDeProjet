@@ -37,6 +37,26 @@ class Project
     protected $projectManager;
 
     /**
+     * @MongoDB\Field(type="int")
+     */
+    protected $poleEbusniss;
+
+    /**
+     * @MongoDB\Field(type="int")
+     */
+    protected $poleEss;
+
+    /**
+     * @MongoDB\Field(type="int")
+     */
+    protected $poleMobile;
+
+    /**
+     * @MongoDB\Field(type="date")
+     */
+    protected $createdAt;
+
+    /**
      * Project constructor.
      */
     public function __construct()
@@ -107,5 +127,68 @@ class Project
         $this->projectManager = $projectManager;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPoleEbusniss()
+    {
+        return $this->poleEbusniss;
+    }
+
+    /**
+     * @param mixed $poleEbusniss
+     */
+    public function setPoleEbusniss($poleEbusniss): void
+    {
+        $this->poleEbusniss = $poleEbusniss;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoleEss()
+    {
+        return $this->poleEss;
+    }
+
+    /**
+     * @param mixed $poleEss
+     */
+    public function setPoleEss($poleEss): void
+    {
+        $this->poleEss = $poleEss;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoleMobile()
+    {
+        return $this->poleMobile;
+    }
+
+    /**
+     * @param mixed $poleMobile
+     */
+    public function setPoleMobile($poleMobile): void
+    {
+        $this->poleMobile = $poleMobile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
 
 }

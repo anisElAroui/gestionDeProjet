@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block main_content %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                  <h1>Opportunity</h1>
+
+    <div class="table-responsive">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>description</th>
+                <td>{{ opportunity.description }}</td>
+            </tr>
+            <tr>
+                <th>mainCause</th>
+                <td>{{ opportunity.mainCause }}</td>
+            </tr>
+            <tr>
+                <th>impact</th>
+                <td>{{ opportunity.impact}}</td>
+            </tr>
+            <tr>
+                <th>probability</th>
+                <td>{{ opportunity.probability}}</td>
+            </tr>
+            <tr>
+                <th>detection</th>
+                <td>{{ opportunity.detection}}</td>
+            </tr>
+        </tbody>
+    </table>           
+
+    </div>
+            
+            <br>
+            <a class="btn btn-primary" href="{{ path('opportunities_edit',{ 'id2': opportunity.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+            <a class="btn btn-warning" href="{{ path('opportunities_index',{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+            <br><br>
+                    {{ form_start(delete_form) }}
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                    {{ form_end(delete_form) }}
+                 </div>
+            </div>
+        </div>
+    </div>
+            
+{% endblock %}

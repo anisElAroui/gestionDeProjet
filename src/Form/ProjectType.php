@@ -7,12 +7,13 @@
  */
 
 namespace App\Form;
+use App\Document\User;
+use Doctrine\Bundle\MongoDBBundle\Form\Type\DocumentType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-
 
 
 class ProjectType extends AbstractType
@@ -26,12 +27,14 @@ class ProjectType extends AbstractType
         $builder
             ->add('projectName')
             ->add('description', TextareaType::class)
-            ->add('projectManager', ChoiceType::class, array(
-                'choices'  => array(
-                    'project manager 1' => null,
-                    'project manager 2' => null,
-                    'project manager 3' => null,
-                ),))
+            ->add('poleEbusniss',CheckboxType::class,array('required' => false))
+            ->add('poleEss',CheckboxType::class,array('required' => false))
+            ->add('poleMobile',CheckboxType::class,array('required' => false))
+            ->add('projectManager', DocumentType::class, array(
+                'class'        => 'App\Document\User',
+                'choice_label' => 'username',
+                'multiple'     => false,
+                ))
         ;
     }
 

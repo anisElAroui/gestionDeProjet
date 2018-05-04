@@ -50,8 +50,8 @@
     </div>
             
             <br>
-            <a class="btn btn-primary" href="{{ path('action_edit', { 'id': action.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
-            <a class="btn btn-warning" href="{{ path('action_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+            <a class="btn btn-primary" href="{{ path('action_edit',{ 'id2': action.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+            <a class="btn btn-warning" href="{{ path('action_index',{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
             <br><br>
                     {{ form_start(delete_form) }}
                     <input class="btn btn-danger" type="submit" value="Delete">

@@ -17,52 +17,60 @@ class ReportController extends Controller
 {
 
     /**
-     * @Route("/report", name="report_index")
+     * @Route("project/{id}/report", name="report_index")
      * @Method({"GET"})
      */
-    public function indexAction()
+    public function indexAction($id)
     {
         $reports = $this->get('doctrine_mongodb')->getRepository('App\Document\Report')->findAll();
 
-        return $this->render('Report/index.html.twig', ['reports' => $reports,]);
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
+
+        return $this->render('Report/index.html.twig', ['reports' => $reports,'charter' => $charter,]);
     }
 
 
     /**
-     * @Route("/report/new", name="report_new")
+     * @Route("project/{id}/report/new", name="report_new")
      * @Method({"POST","GET"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request,$id)
     {
         $report = new Report();
         $form = $this->createForm('App\Form\ReportType', $report);
         $form->handleRequest($request);
 
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $dm = $this->get('doctrine_mongodb')->getManager();
+            $report->setCharter($charter);
             $dm->persist($report);
             $dm->flush();
 
-            return $this->redirectToRoute('report_show', array('id' => $report->getId()));
+            return $this->redirectToRoute('report_show', array('id1' => $id,'id2' => $report->getId()));
         }
 
         return $this->render('Report/new.html.twig', array(
             'report' => $report,
+            'charter' => $charter,
             'form' => $form->createView(),
         ));
     }
 
 
     /**
-     * @Route("/report/{id}/show", name="report_show")
+     * @Route("project/{id1}/report/{id2}/show", name="report_show")
      * @Method({"GET","DELETE"})
      */
-    public function showAction(Request $request, $id)
+    public function showAction(Request $request, $id1,$id2)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $report = $dm->getRepository('App\Document\Report')->findOneBy(array('id' => $id));
+        $report = $dm->getRepository('App\Document\Report')->findOneBy(array('id' => $id2));
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id1);
 
-        $deleteForm = $this->createDeleteForm($report,$id);
+        $deleteForm = $this->createDeleteForm($id1,$id2);
 
         $deleteForm->handleRequest($request);
 
@@ -71,12 +79,13 @@ class ReportController extends Controller
             $dm->remove($report);
             $dm->flush();
 
-            return $this->redirectToRoute('report_index');
+            return $this->redirectToRoute('report_index',array('id'=>$id1));
         }
 
 
         return $this->render('Report/show.html.twig', array(
             'report' => $report,
+            'charter' => $charter,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -84,14 +93,15 @@ class ReportController extends Controller
 
     /**
      *
-     * @Route("/report/{id}/edit", name="report_edit")
+     * @Route("project/{id1}/report/{id2}/edit", name="report_edit")
      * @Method({"GET","POST"})
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request,$id1,$id2)
     {
 
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $report = $dm->getRepository('App\Document\Report')->findOneBy(array('id' => $id));
+        $report = $dm->getRepository('App\Document\Report')->findOneBy(array('id' => $id2));
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find( $id1);
 
         $editForm = $this->createForm('App\Form\ReportType', $report);
         $editForm->handleRequest($request);
@@ -100,20 +110,21 @@ class ReportController extends Controller
             $dm->persist($report);
             $dm->flush();
 
-            return $this->redirectToRoute('report_show', array('id' => $id));
+            return $this->redirectToRoute('report_show', array('id1'=>$id1,'id2' => $id2));
         }
 
         return $this->render('Report/edit.html.twig', array(
             'report' => $report,
+            'charter' => $charter,
             'edit_form' => $editForm->createView(),
         ));
     }
 
-    private function createDeleteForm(Report $report,string $id)
+    private function createDeleteForm( $id1, $id2)
     {
 
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('report_show', array('id' => $id)))
+            ->setAction($this->generateUrl('report_show', array('id1' => $id1,'id2' => $id2)))
             ->setMethod('DELETE')
             ->getForm()
             ;

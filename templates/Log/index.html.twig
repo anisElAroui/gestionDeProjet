@@ -6,7 +6,7 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
-                    <h1>Log</h1>
+                    <h1>log</h1>
 
                     <div class="table-responsive">
                         {% if logs is defined and logs is not null  %}
@@ -23,21 +23,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for Log in logs %}
+                                {% for log in logs %}
+                                    {% if log.charter.id is defined and log.charter.id == charter.id %}
                                     <tr>
-                                        <td><a href="{{ path('log_show', { 'id': Log.id }) }}">{{ Log.id }}</a></td>
-                                        <td>{{ Log.date | date('Y-m-d')}}</td>
-                                        <td>{{ Log.note }}</td>
-                                        <td>{{ Log.description }}</td>
-                                        <td>{{ Log.author}}</td>
+                                        <td><a href="{{ path('log_show', { 'id2': log.id,'id1': charter.id  }) }}">{{ log.id }}</a></td>
+                                        <td>{{ log.date | date('Y-m-d')}}</td>
+                                        <td>{{ log.note }}</td>
+                                        <td>{{ log.description }}</td>
+                                        <td>{{ log.author}}</td>
                                         
 
                                         <td>
-                                            <a class="btn btn-info" href="{{ path('log_show', { 'id': Log.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
-                                            <a class="btn btn-primary" href="{{ path('log_edit', { 'id': Log.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+                                            <a class="btn btn-info" href="{{ path('log_show', {  'id2': log.id,'id1': charter.id  }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
+                                            <a class="btn btn-primary" href="{{ path('log_edit', {  'id2': log.id,'id1': charter.id  }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
 
                                         </td>
                                     </tr>
+                                    {% endif %}
                                 {% endfor %}
                                 </tbody>
                             </table>
@@ -45,7 +47,7 @@
                     </div>
 
                     <br>
-                    <a class="btn btn-success" href="{{ path('log_new') }}"><i class="glyphicon glyphicon-plus"></i> Create a new entry</a>
+                    <a class="btn btn-success" href="{{ path('log_new',{ 'id':charter.id}) }}"><i class="glyphicon glyphicon-plus"></i> Create a new entry</a>
 
                 </div>
             </div>

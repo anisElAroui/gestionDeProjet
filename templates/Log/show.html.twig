@@ -34,8 +34,8 @@
     </div>
             
             <br>
-            <a class="btn btn-primary" href="{{ path('log_edit', { 'id': log.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
-            <a class="btn btn-warning" href="{{ path('log_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+            <a class="btn btn-primary" href="{{ path('log_edit', { 'id2': log.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+            <a class="btn btn-warning" href="{{ path('log_index',{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
             <br><br>
                     {{ form_start(delete_form) }}
                     <input class="btn btn-danger" type="submit" value="Delete">

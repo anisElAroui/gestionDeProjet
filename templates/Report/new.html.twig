@@ -11,21 +11,21 @@
                 {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
                 {{ form_widget(form._token) }}
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">conclusion</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">conclusion</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.conclusion,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.conclusion) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">lesson</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">lesson</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.lesson,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.lesson) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">assets</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">assets</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.assets,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.assets) }}
@@ -41,7 +41,7 @@
                 {{ form_end(form) }}
 
    
-                     <a class="btn btn-warning" href="{{ path('report_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+                     <a class="btn btn-warning" href="{{ path('report_index',{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
  
                 </div>
             </div>

@@ -63,6 +63,11 @@ class Action
     protected $identificator;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="App\Document\Charter\Charter", storeAs="id")
+     */
+    protected $charter;
+
+    /**
      * Action constructor.
      */
     public function __construct()
@@ -211,6 +216,22 @@ class Action
     public function setIdentificator($identificator): void
     {
         $this->identificator = $identificator;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCharter()
+    {
+        return $this->charter;
+    }
+
+    /**
+     * @param mixed $charter
+     */
+    public function setCharter($charter): void
+    {
+        $this->charter = $charter;
     }
 
 }

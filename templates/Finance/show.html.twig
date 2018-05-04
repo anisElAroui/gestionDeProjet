@@ -17,7 +17,7 @@
                 <td>{{ finance.budget }}</td>
             </tr>
             <tr>
-                <th>sellingPrice</th>
+                <th>Selling Price</th>
                 <td>{{ finance.sellingPrice }}</td>
             </tr>
             <tr>
@@ -25,8 +25,12 @@
                 <td>{{ finance.Deadline|date('Y-m-d') }}</td>
             </tr>
             <tr>
-                <th>expensesPlanned</th>
+                <th>Expenses Planned</th>
                 <td>{{ finance.expensesPlanned }}</td>
+            </tr>
+            <tr>
+                <th>Current Expenses</th>
+                <td>{{ finance.currentExpenses }}</td>
             </tr>
         </tbody>
     </table>           
@@ -34,8 +38,8 @@
     </div>
             
             <br>
-            <a class="btn btn-primary" href="{{ path('finance_edit', { 'id': finance.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
-            <a class="btn btn-warning" href="{{ path('finance_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+            <a class="btn btn-primary" href="{{ path('finance_edit', { 'id2': finance.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+            <a class="btn btn-warning" href="{{ path('finance_index', { 'id':charter.id}) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
             <br><br>
                     {{ form_start(delete_form) }}
                     <input class="btn btn-danger" type="submit" value="Delete">

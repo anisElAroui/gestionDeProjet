@@ -11,28 +11,28 @@
                 {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
                 {{ form_widget(form._token) }}
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">date</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">date</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.date,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.date) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">note</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">note</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.note,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.note) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">description</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">description</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.description,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.description) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">author</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">author</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.author,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.author) }}
@@ -48,7 +48,7 @@
                 {{ form_end(form) }}
 
    
-                     <a class="btn btn-warning" href="{{ path('log_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+                     <a class="btn btn-warning" href="{{ path('log_index',{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
  
                 </div>
             </div>

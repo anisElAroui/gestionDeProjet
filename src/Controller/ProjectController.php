@@ -8,13 +8,11 @@
 
 namespace App\Controller;
 
+use App\Document\Notification;
 use App\Document\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Document\Accueil;
 use App\Form\AccueilType;
 use DateTime;
-use Doctrine\ODM\MongoDB\DocumentManager;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -30,7 +28,7 @@ class ProjectController extends Controller
      * @Route("/project", name="project_index")
      * @Method({"GET"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $charters = $this->get('doctrine_mongodb')->getRepository('App\Document\Charter\Charter')->findAll();
 
@@ -49,7 +47,15 @@ class ProjectController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $dm = $this->get('doctrine_mongodb')->getManager();
+            $notification = new Notification();
+            $notification->setReceiver($project->getProjectManager());
+            $notification->setProjectName($project->getProjectName());
+            $notification->setDescription("first step: prepare charter");
+            $notification->setFlag(false);
+            $date = new \DateTime();
+            $notification->setCreatedAt($date);
             $dm->persist($project);
+            $dm->persist($notification);
             $dm->flush();
 
             return $this->redirectToRoute('project_index', array('id' => $project->getId()));

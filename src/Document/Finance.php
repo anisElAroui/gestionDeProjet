@@ -47,6 +47,11 @@ class Finance
     protected $currentExpenses;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="App\Document\Charter\Charter", storeAs="id")
+     */
+    protected $charter;
+
+    /**
      * Finance constructor.
      */
     public function __construct()
@@ -147,6 +152,22 @@ class Finance
     public function setCurrentExpenses($currentExpenses): void
     {
         $this->currentExpenses = $currentExpenses;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCharter()
+    {
+        return $this->charter;
+    }
+
+    /**
+     * @param mixed $charter
+     */
+    public function setCharter($charter): void
+    {
+        $this->charter = $charter;
     }
 
 

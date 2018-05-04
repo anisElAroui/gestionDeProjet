@@ -6,66 +6,66 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
-                <h1>Finance edit</h1>
+                <h1>Action edit</h1>
 
                 {{ form_start(edit_form, {'attr': {'class': 'form-horizontal' }}) }}
 
                 {{ form_widget(edit_form._token) }}
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">actionType</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">actionType</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form_edit.actionType,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form_edit.actionType) }}
+                            {{ form_widget(edit_form.actionType,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(edit_form.actionType) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">priority</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">priority</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form_edit.priority,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form_edit.priority) }}
+                            {{ form_widget(edit_form.priority,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(edit_form.priority) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">initialDate</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">initialDate</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form_edit.initialDate,  {'attr': {'required':'required'} }) }}
-                            {{ form_errors(form_edit.initialDate) }}
+                            {{ form_widget(edit_form.initialDate,  {'attr': {'required':'required'} }) }}
+                            {{ form_errors(edit_form.initialDate) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Author</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Author</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form_edit.author,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form_edit.author) }}
+                            {{ form_widget(edit_form.author,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(edit_form.author) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">status</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">status</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form_edit.status,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form_edit.status) }}
+                            {{ form_widget(edit_form.status,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(edit_form.status) }}
                         </div>
                     </div>
 
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">currentDate</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">currentDate</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form_edit.currentDate,  {'attr': {'required':'required'} }) }}
-                            {{ form_errors(form_edit.currentDate) }}
+                            {{ form_widget(edit_form.currentDate,  {'attr': {'required':'required'} }) }}
+                            {{ form_errors(edit_form.currentDate) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">realDate</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">realDate</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form_edit.realDate,  {'attr': {'required':'required'} }) }}
-                            {{ form_errors(form_edit.realDate) }}
+                            {{ form_widget(edit_form.realDate,  {'attr': {'required':'required'} }) }}
+                            {{ form_errors(edit_form.realDate) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">identificator</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">identificator</span></label>
                         <div class="col-sm-7">
-                            {{ form_widget(form_edit.identificator,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form_edit.identificator) }}
+                            {{ form_widget(edit_form.identificator,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(edit_form.identificator) }}
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@
                 {{ form_end(edit_form) }}
                  <br>
   
-                <a class="btn btn-warning" href="{{ path('finance_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+                <a class="btn btn-warning" href="{{ path('action_index',{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
 
 
 

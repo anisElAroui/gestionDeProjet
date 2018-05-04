@@ -42,6 +42,11 @@ class Log
     protected $author;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="App\Document\Charter\Charter", storeAs="id")
+     */
+    protected $charter;
+
+    /**
      * Log constructor.
      */
     public function __construct()
@@ -126,6 +131,22 @@ class Log
     public function setAuthor($author): void
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCharter()
+    {
+        return $this->charter;
+    }
+
+    /**
+     * @param mixed $charter
+     */
+    public function setCharter($charter): void
+    {
+        $this->charter = $charter;
     }
 
 }

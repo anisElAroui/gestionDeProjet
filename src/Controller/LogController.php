@@ -18,66 +18,74 @@ class LogController extends Controller
 {
 
     /**
-     * @Route("/log", name="log_index")
+     * @Route("project/{id}/log", name="log_index")
      * @Method({"GET"})
      */
-    public function indexAction()
+    public function indexAction($id)
     {
         $logs = $this->get('doctrine_mongodb')->getRepository('App\Document\Log')->findAll();
 
-        return $this->render('Log/index.html.twig', ['logs' => $logs,]);
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
+
+        return $this->render('Log/index.html.twig', ['logs' => $logs,'charter' => $charter,]);
     }
 
 
     /**
-     * @Route("/log/new", name="log_new")
+     * @Route("project/{id}/log/new", name="log_new")
      * @Method({"POST","GET"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request,$id)
     {
         $log = new Log();
         $form = $this->createForm('App\Form\LogType', $log);
         $form->handleRequest($request);
 
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $dm = $this->get('doctrine_mongodb')->getManager();
+            $log->setCharter($charter);
             $dm->persist($log);
             $dm->flush();
 
-            return $this->redirectToRoute('log_show', array('id' => $log->getId()));
+            return $this->redirectToRoute('log_show', array('id1' => $id,'id2' => $log->getId()));
         }
 
         return $this->render('Log/new.html.twig', array(
             'log' => $log,
+            'charter' => $charter,
             'form' => $form->createView(),
         ));
     }
 
 
     /**
-     * @Route("/log/{id}/show", name="log_show")
+     * @Route("project/{id1}/log/{id2}/show", name="log_show")
      * @Method({"GET","DELETE"})
      */
-    public function showAction(Request $request, $id)
+    public function showAction(Request $request, $id1, $id2)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $log = $dm->getRepository('App\Document\Log')->findOneBy(array('id' => $id));
+        $log = $dm->getRepository('App\Document\Log')->find($id2);
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id1);
 
-        $deleteForm = $this->createDeleteForm($log,$id);
+        $deleteForm = $this->createDeleteForm($id1,$id2);
 
         $deleteForm->handleRequest($request);
 
         if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
-            $dm = $this->get('doctrine_mongodb')->getManager();
             $dm->remove($log);
             $dm->flush();
 
-            return $this->redirectToRoute('log_index');
+            return $this->redirectToRoute('log_index',array('id'=>$id1));
         }
 
 
         return $this->render('Log/show.html.twig', array(
             'log' => $log,
+            'charter' => $charter,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -85,14 +93,15 @@ class LogController extends Controller
 
     /**
      *
-     * @Route("/log/{id}/edit", name="log_edit")
+     * @Route("project/{id1}/log/{id2}/edit", name="log_edit")
      * @Method({"GET","POST"})
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request,$id1,$id2)
     {
 
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $log = $dm->getRepository('App\Document\Log')->findOneBy(array('id' => $id));
+        $log = $dm->getRepository('App\Document\Log')->find($id2);
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find( $id1);
 
         $editForm = $this->createForm('App\Form\LogType', $log);
         $editForm->handleRequest($request);
@@ -101,20 +110,21 @@ class LogController extends Controller
             $dm->persist($log);
             $dm->flush();
 
-            return $this->redirectToRoute('log_show', array('id' => $id));
+            return $this->redirectToRoute('log_show', array('id1'=>$id1,'id2' => $id2));
         }
 
         return $this->render('Log/edit.html.twig', array(
             'log' => $log,
+            'charter' => $charter,
             'edit_form' => $editForm->createView(),
         ));
     }
 
-    private function createDeleteForm(Log $log,string $id)
+    private function createDeleteForm($id1,$id2)
     {
 
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('log_show', array('id' => $id)))
+            ->setAction($this->generateUrl('log_show', array('id1' => $id1,'id2' => $id2)))
             ->setMethod('DELETE')
             ->getForm()
             ;

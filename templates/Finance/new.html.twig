@@ -11,35 +11,35 @@
                 {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
                 {{ form_widget(form._token) }}
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">budget</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">budget</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.budget,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.budget) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">sellingPrice</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">sellingPrice</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.sellingPrice,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.sellingPrice) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Deadline</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Deadline</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.Deadline,  {'attr': {'required':'required'} }) }}
                             {{ form_errors(form.Deadline) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Expenses planned</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Expenses planned</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.expensesPlanned,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.expensesPlanned) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Current expenses</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Current expenses</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.currentExpenses,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(form.currentExpenses) }}
@@ -55,7 +55,7 @@
                 {{ form_end(form) }}
 
    
-                     <a class="btn btn-warning" href="{{ path('finance_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+                     <a class="btn btn-warning" href="{{ path('finance_index' ,{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
  
                 </div>
             </div>

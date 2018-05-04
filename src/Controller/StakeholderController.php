@@ -24,7 +24,7 @@ class StakeholderController extends Controller
     public function indexAction($id)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
 
         return $this->render('Stakeholder/index.html.twig', ['charter' => $charter,]);
     }
@@ -42,7 +42,7 @@ class StakeholderController extends Controller
         $form->handleRequest($request);
 
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
 
         if ($form->isSubmitted() && $form->isValid())
         {
@@ -97,8 +97,8 @@ class StakeholderController extends Controller
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
 
-        $stakeholder = $dm->getRepository('App\Document\Charter\Stakeholder')->findOneBy(array('id' => $id2));
-        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id1));
+        $stakeholder = $dm->getRepository('App\Document\Charter\Stakeholder')->find($id2);
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id1);
 
 //        $deleteForm = $this->DeleteForm($id1,$id2);
 //        $deleteForm->handleRequest($request);
@@ -119,7 +119,7 @@ class StakeholderController extends Controller
         ));
     }
 
-//    private function DeleteForm(string $id1,string $id2)
+    //    private function DeleteForm(string $id1,string $id2)
 //    {
 //
 //        return $this->createFormBuilder()

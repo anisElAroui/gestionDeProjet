@@ -28,8 +28,9 @@
                                 </thead>
                                 <tbody>
                                 {% for action in actions %}
+                                    {% if action.charter.id is defined and action.charter.id == charter.id %}
                                     <tr>
-                                        <td><a href="{{ path('action_show', { 'id': action.id }) }}">{{ action.id }}</a></td>
+                                        <td><a href="{{ path('action_show', {'id2': action.id,'id1': charter.id  }) }}">{{ action.id }}</a></td>
                                         <td>{{ action.actionType }}</td>
                                         <td>{{ action.priority }}</td>
                                         <td>{{ action.initialDate |date('Y-m-d') }}</td>
@@ -40,11 +41,12 @@
                                         <td>{{ action.identificator}}</td>
 
                                         <td>
-                                            <a class="btn btn-info" href="{{ path('action_show', { 'id': action.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
-                                            <a class="btn btn-primary" href="{{ path('action_edit', { 'id': action.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+                                            <a class="btn btn-info" href="{{ path('action_show', { 'id2': action.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
+                                            <a class="btn btn-primary" href="{{ path('action_edit', { 'id2': action.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
 
                                         </td>
                                     </tr>
+                                    {% endif %}
                                 {% endfor %}
                                 </tbody>
                             </table>
@@ -52,7 +54,7 @@
                     </div>
 
                     <br>
-                    <a class="btn btn-success" href="{{ path('action_new') }}"><i class="glyphicon glyphicon-plus"></i> Create a new entry</a>
+                    <a class="btn btn-success" href="{{ path('action_new',{ 'id':charter.id}) }}"><i class="glyphicon glyphicon-plus"></i> Create a new entry</a>
 
                 </div>
             </div>

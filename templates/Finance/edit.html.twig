@@ -12,35 +12,35 @@
 
                 {{ form_widget(edit_form._token) }}
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">budget</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">budget</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(edit_form.budget,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(edit_form.budget) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">sellingPrice</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">sellingPrice</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(edit_form.sellingPrice,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(edit_form.sellingPrice) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Deadline</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Deadline</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(edit_form.Deadline,  {'attr': {'required':'required'} }) }}
                             {{ form_errors(edit_form.Deadline) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">expensesPlanned</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">expensesPlanned</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(edit_form.expensesPlanned,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(edit_form.expensesPlanned) }}
                         </div>
                     </div>
                     <div  class="form-group">
-                        <label class="col-sm-3 control-label" style="font-size:1em"><span class="label label-primary">Current expenses</span></label>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Current expenses</span></label>
                         <div class="col-sm-7">
                             {{ form_widget(edit_form.currentExpenses,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(edit_form.currentExpenses) }}
@@ -56,7 +56,7 @@
                 {{ form_end(edit_form) }}
                  <br>
   
-                <a class="btn btn-warning" href="{{ path('finance_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+                <a class="btn btn-warning" href="{{ path('finance_index',{'id':charter.id}) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
 
 
 

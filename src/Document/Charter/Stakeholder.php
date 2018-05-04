@@ -39,7 +39,7 @@ class Stakeholder
 
 
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\Field(type="int")
      */
     protected $phoneNumber;
 

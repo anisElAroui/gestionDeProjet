@@ -29,66 +29,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class CharterController extends Controller
 {
 
-//    /**
-//     * @Route("/charter/{id}", name="charter_edit")
-//     * @Route("/charter/new", name="charter_new")
-//     * @Method({"POST","GET"})
-//     */
-//    public function newAction(Request $request,Charter $charter_id=null)
-//    {
-////        if(! $charter_id){
-//            $charter = new Charter();
-//            $requirement = new Requirement();
-//            $deliverables = new Deliverables();
-//            $milestone = new Milestone();
-//            $constraint = new Constraint();
-//            $assumption = new Assumption();
-//            $stakeholder = new Stakeholder();
-//            $budget = new Budget();
-//            $billing = new Billing();
-//
-//            $charter->addRequirement($requirement);
-//            $charter->addDeliverables($deliverables);
-//            $charter->addMilestones($milestone);
-//            $charter->addConstraints($constraint);
-//            $charter->addAssumptions($assumption);
-//            $charter->addStakeholders($stakeholder);
-//            $charter->addBudgets($budget);
-//            $charter->addBillings($billing);
-//            $charter->setSteps(0);
-//
-////        }else{
-//        $step = $charter->setSteps($charter->getSteps()+1);
-////        }
-//
-//        $step=$charter->getSteps();
-//
-////        if( $charter_id){
-////            $dm = $this->get('doctrine_mongodb')->getManager();
-////            $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $charter_id));
-////        }
-//
-//        $form = $this->createForm('App\Form\Charter\CharterType',$charter, array('validation_groups' => ['step'.$step]));
-//        $form->handleRequest($request);
-//
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $dm = $this->get('doctrine_mongodb')->getManager();
-//            $dm->persist($charter);
-//            $dm->flush();
-////            return $this->redirectToRoute('charter_edit', array('id' => $charter->getId()));
-//        }
-//
-//
-//
-//        return $this->render('Charter/new.html.twig', array(
-//            'charter' => $charter,
-//            'form' => $form->createView(),
-//            'step'=>$step,
-//
-//        ));
-//    }
-
     /**
      * @Route("/charter/new", name="charter_new")
      * @Method({"POST","GET"})
@@ -126,6 +66,8 @@ class CharterController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $dm = $this->get('doctrine_mongodb')->getManager();
+//            $notification =
+//            $notification->setFlag(true);
             $dm->persist($charter);
             $dm->flush();
 
@@ -191,7 +133,7 @@ class CharterController extends Controller
      * @Route("/project/{id}/charter/show", name="charter_show")
      * @Method({"GET","DELETE"})
      */
-    public function showAction($id)
+    public function showStep1Action($id)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
         $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
@@ -201,44 +143,60 @@ class CharterController extends Controller
         ));
     }
 
-//
-//
-//    /**
-//     *
-//     * @Route("/charter/{id}/edit", name="charter_edit")
-//     * @Method({"GET","POST"})
-//     */
-//    public function editAction(Request $request, $id)
-//    {
-//
-//        $dm = $this->get('doctrine_mongodb')->getManager();
-//        $charter = $dm->getRepository('App\Document\Charter')->findOneBy(array('id' => $id));
-//
-//        $editForm = $this->createForm('App\Form\CharterType', $charter);
-//        $editForm->handleRequest($request);
-//
-//        if ($editForm->isSubmitted() && $editForm->isValid()) {
-//            $dm->persist($charter);
-//            $dm->flush();
-//
-//            return $this->redirectToRoute('charter_show', array('id' => $id));
-//        }
-//
-//        return $this->render('Charter/edit.html.twig', array(
-//            'charter' => $charter,
-//            'edit_form' => $editForm->createView(),
-//        ));
-//    }
-//
-//    private function createDeleteForm(string $id)
-//    {
-//
-//        return $this->createFormBuilder()
-//            ->setAction($this->generateUrl('charter_show', array('id' => $id)))
-//            ->setMethod('DELETE')
-//            ->getForm()
-//            ;
-//    }
+    /**
+     * @Route("/project/{id}/charter/show2", name="charter_show2")
+     * @Method({"GET","DELETE"})
+     */
+    public function showStep2Action($id)
+    {
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
 
+        return $this->render('Charter/show2.html.twig', array(
+            'charter' => $charter,
+        ));
+    }
+
+    /**
+     * @Route("/project/{id}/charter/show3", name="charter_show3")
+     * @Method({"GET","DELETE"})
+     */
+    public function showStep3Action($id)
+    {
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
+
+        return $this->render('Charter/show3.html.twig', array(
+            'charter' => $charter,
+        ));
+    }
+
+    /**
+     * @Route("/project/{id}/charter/show4", name="charter_show4")
+     * @Method({"GET","DELETE"})
+     */
+    public function showStep4Action($id)
+    {
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
+
+        return $this->render('Charter/show4.html.twig', array(
+            'charter' => $charter,
+        ));
+    }
+
+    /**
+     * @Route("/project/{id}/charter/show5", name="charter_show5")
+     * @Method({"GET","DELETE"})
+     */
+    public function showStep5Action($id)
+    {
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
+
+        return $this->render('Charter/show5.html.twig', array(
+            'charter' => $charter,
+        ));
+    }
 
 }

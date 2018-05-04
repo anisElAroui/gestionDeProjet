@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Doctrine\Bundle\MongoDBBundle\Form\Type\DocumentType;
 
 class CharterType extends AbstractType
 {
@@ -28,22 +28,22 @@ class CharterType extends AbstractType
         $builder
             ->add('title')
             ->add('projectName')
-            ->add('projectManager', ChoiceType::class, array(
-                'choices'  => array(
-                    'project manager 1' => 'anis',
-                    'project manager 2' => null,
-                    'project manager 3' => null,
-                ),))
+            ->add('projectManager', DocumentType::class, array(
+                'class'        => 'App\Document\User',
+                'choice_label' => 'username',
+                'multiple'     => false,
+            ))
             ->add('projectInternalRefrances')
             ->add('finalClient')
             ->add('client')
             ->add('projectDescription', TextareaType::class)
             ->add('projectRepository', TextareaType::class)
             ->add('objectives', TextareaType::class)
-            ->add('requirements',CollectionType::class, array(
+            ->add('requirements',customRequirementTypesCollectionType::class, array(
                 'entry_type' => RequirementType::class,
                 'allow_add' => true,
-                'entry_options' => array('label' => false),
+                'allow_delete' => true,
+                'entry_options' => array('label' => false)
                 ))
             ->add('deliverables',CollectionType::class, array(
                 'entry_type' => DeliverableType::class,

@@ -36,6 +36,11 @@ class Report
     protected $assets;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="App\Document\Charter\Charter", storeAs="id")
+     */
+    protected $charter;
+
+    /**
      * Report constructor.
      */
     public function __construct()
@@ -104,6 +109,22 @@ class Report
     public function setAssets($assets): void
     {
         $this->assets = $assets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCharter()
+    {
+        return $this->charter;
+    }
+
+    /**
+     * @param mixed $charter
+     */
+    public function setCharter($charter): void
+    {
+        $this->charter = $charter;
     }
 
 }

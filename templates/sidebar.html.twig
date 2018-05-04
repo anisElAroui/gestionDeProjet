@@ -3,60 +3,71 @@
      <div class="sidebar_inner_scroll">
             <div class="sidebar_inner">
                 <div id="side_accordion" class="panel-group">
-                    <strong>{{ charter.title }}</strong>
+                    <strong><div style="display:block;padding:8px 15px">{{ charter.projectName }}</div></strong>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="{{ path('charter_show', {'id': charter.id}) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
-                                <img src="{{ asset('img/gCons/copy-item.png') }}" alt="" /> Charter
+                            <a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+                                <i class="glyphicon glyphicon-file"></i> Charter
                             </a>
+                        </div>
+                        <div class="accordion-body collapse in" id="collapseOne">
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li><a href="{{ path('charter_show', {'id': charter.id}) }}">Project and Product Overview</a></li>
+                                    <li><a href="{{ path('charter_show2', {'id': charter.id}) }}">Project scope</a></li>
+                                    <li><a href="{{ path('charter_show3', {'id': charter.id}) }}">Project Milestones & Waving</a></li>
+                                    <li><a href="{{ path('charter_show4', {'id': charter.id}) }}">Assumptions, Constraints</a></li>
+                                    <li><a href="{{ path('charter_show5', {'id': charter.id}) }}">Project Budget</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion"  style="display:block;padding:8px 15px">
-                                <img src="{{ asset('img/gCons/multi-agents.png') }}" alt="" /> Stakeholder
+                                <i class="glyphicon glyphicon-user"></i> Stakeholder
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                                <img src="{{ asset('img/gCons/fire.png') }}" alt="" /> Risks
+                            <a href="{{ path('risks_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
+                                <i class="glyphicon glyphicon-warning-sign"></i> Risks
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                                <img src="{{ asset('img/gCons/heart.png') }}" alt="" /> Opportunities
+                            <a href="{{ path('opportunities_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
+                                <i class="glyphicon glyphicon-heart"></i> Opportunities
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                                <img src="{{ asset('img/gCons/configuration.png') }}" alt="" /> Actions
+                            <a href="{{ path('action_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
+                                <i class="glyphicon glyphicon-ok"></i> Actions
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="{{ path('finance_index') }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                                <img src="{{ asset('img/gCons/dollar.png') }}" alt="" /> Finance
+                            <a href="{{ path('finance_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
+                                <i class="glyphicon glyphicon-euro"></i> Finance
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                                <img src="{{ asset('img/gCons/addressbook.png') }}" alt="" /> Project log
+                            <a href="{{ path('log_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
+                                <i class="glyphicon glyphicon-list-alt"></i> Project log
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                                <img src="{{ asset('img/gCons/lookup.png') }}" alt="" />Project report
+                            <a href="{{ path('report_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
+                                <i class="glyphicon glyphicon-book"></i> Project report
                             </a>
                         </div>
                     </div>
