@@ -51,7 +51,7 @@ class ProjectController extends Controller
             $notification->setReceiver($project->getProjectManager());
             $notification->setProjectName($project->getProjectName());
             $notification->setDescription("first step: prepare charter");
-            $notification->setFlag(false);
+            $notification->setFlag(true);
             $date = new \DateTime();
             $notification->setCreatedAt($date);
             $dm->persist($project);

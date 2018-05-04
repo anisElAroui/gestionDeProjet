@@ -58,7 +58,7 @@ class CharterController extends Controller
 
 
             $step=$charter->getSteps();
-            dump($step);
+//            dump($step);
 
         $form = $this->createForm('App\Form\Charter\CharterType', $charter, array('validation_groups' => ['step'.$step]));
         $form->handleRequest($request);
@@ -66,9 +66,14 @@ class CharterController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $dm = $this->get('doctrine_mongodb')->getManager();
-//            $notification =
-//            $notification->setFlag(true);
+
+            // enlever notification en rendant flag = false
+            $user = $this->getUser();
+            $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('projectName' => $charter->getProjectName(),'receiver' => $user->getUsername(),'flag'=>true));
+            $notification->setFlag(false);
+
             $dm->persist($charter);
+            $dm->persist($notification);
             $dm->flush();
 
             return $this->redirectToRoute('charter_edit', array('id' => $charter->getId()));
@@ -89,7 +94,7 @@ class CharterController extends Controller
     {
 
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
+        $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
 
         $charter->setSteps($charter->getSteps()+1);
 
@@ -99,17 +104,12 @@ class CharterController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $steackHolders=$form->getData('stakeholders');
-//
-//            foreach ($steackHolders as $steackHolder){
-//                $stak=new Stakeholder();
-//                $stak->setEmail($steackHolder['email']);
-//                $stak->setName($steackHolder['name']);
-//                $stak->setPhoneNumber($steackHolder['phoneNumber']);
-//                $stak->setRole($steackHolder['role']);
-//                $dm->persist($stak);
-//                $dm->flush();
-//                $charter->addStakeholders($stak);
+
+            // envoyer notification au PMO
+//            if($step == 6){
+//                $user = $this->getUser(); // à modifier
+//                $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('projectName' => $charter->getProjectName(),'receiver' => $user->getUsername(),'flag'=>true));
+//                $notification->setFlag(true);
 //            }
 
             $dm->persist($charter);
@@ -119,6 +119,8 @@ class CharterController extends Controller
             if ($step == 9){
                 return $this->redirectToRoute('charter_show', array('id' => $id));
             }
+
+            // lors des autres submit
             return $this->redirectToRoute('charter_edit', array('id' => $id));
         }
 

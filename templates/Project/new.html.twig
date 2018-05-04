@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+
 {% block main_content %}
 
     <div class="container">
@@ -68,17 +69,11 @@
                     <div  class="form-group">
                         <label class="col-sm-6 control-label"></label>
                         <div class="col-sm-4" >
-                            <button class="btn btn-primary" type="submit">Send</button>
+                            <button id="sticky_b" class="btn btn-primary " type="submit">Send</button>
                         </div>
                     </div>
                     {{ form_end(form) }}
 
-                    <div class="sticky-queue top-right">
-                        <div class="sticky border-top-right st-success" id="89628" style="height: 17px; display: block;">
-                            <span class="close st-close" rel="89628" title="Close">×</span>
-                            <div class="sticky-note" rel="89628">Project added ...</div>
-                        </div>
-                    </div>
 
                     <br>
                     <a class="btn btn-warning" href="{{ path('project_index') }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to project list</a>
