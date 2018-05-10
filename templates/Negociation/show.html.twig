@@ -37,7 +37,7 @@
 
                 <div  class="form-group">
                     <div class="col-sm-12 tac" >
-                        <a class="btn btn-primary pull-left" href="{{ path('charter_edit',{'id':negociation.charterId}) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+                        <a class="btn btn-primary pull-left" href="{{ path('charter_edit',{'id':charter.id}) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
 
                         {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
                         {{ form_widget(form._token) }}

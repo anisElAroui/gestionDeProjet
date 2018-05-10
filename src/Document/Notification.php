@@ -52,7 +52,7 @@ class Notification
     protected $flag;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\Field(type="int")
      */
     protected $charterId;
 

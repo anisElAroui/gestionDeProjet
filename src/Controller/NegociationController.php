@@ -43,7 +43,7 @@ class NegociationController extends Controller
                 $receiver = $this->getUser(); // changer le receiver par PMO
                 $notification = $this->sendNotification($charter, "budget decision", $receiver, "Negociation");
 
-            $negociation->setCharterId($id);
+            $negociation->setCharterId($charter);
             $dm->persist($notification);
             $dm->persist($negociation);
             $dm->flush();
@@ -59,19 +59,20 @@ class NegociationController extends Controller
     }
 
     /**
-     * @Route("/project/{id}/charter/show5", name="negociation_show")
+     * @Route("/project/{id}/charter/show5/negoction/show", name="negociation_show")
      * @Method({"GET"})
      */
     public function showAction(Request $request,$id)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
 
-        $negociation = $dm->getRepository("App\Document\Negociation")->findOneBy(array('charterId'=>$id));
-        $charter = $dm->getRepository("App\Document\Negociation")->find($id);
+        $charter = $dm->getRepository("App\Document\Charter\Charter")->find($id);
+        $negociation = $dm->getRepository("App\Document\Negociation")->findOneBy(array('charterId'=>$charter));
         $form = $this->createForm('App\Form\NegociationType', $negociation,array(
             'action' => $this->generateUrl('negociation_show',['id'=>$id]),
             'method' => 'GET',
-        ));        $form->handleRequest($request);
+        ));
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -87,12 +88,13 @@ class NegociationController extends Controller
         }
         return $this->render('Negociation/show.html.twig', array(
             'negociation' => $negociation,
-            'form' => $form->createView(),
+            'charter'=>$charter,
+            'form' => $form->createView()
         ));
     }
 
     /**
-     * @Route("/project/{id}/charter/show5", name="negociation_edit")
+     * @Route("/project/{id}/charter/show5/edit", name="negociation_edit")
      * @Method({"GET","POST"})
      */
     public function editAction(Request $request,$id)
@@ -100,7 +102,7 @@ class NegociationController extends Controller
         $dm = $this->get('doctrine_mongodb')->getManager();
         $charter = $dm->getRepository("App\Document\Charter\Charter")->find($id);
 
-        $negociation = $dm->getRepository("App\Document\Negociation")->findOneBy(array('charterId'=>$id));
+        $negociation = $dm->getRepository("App\Document\Negociation")->findOneBy(array('charterId'=>$charter));
         $form = $this->createForm('App\Form\NegociationType', $negociation,array(
             'action' => $this->generateUrl('negociation_edit',['id'=>$id]),
             'method' => 'GET',

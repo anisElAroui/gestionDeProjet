@@ -38,7 +38,9 @@ class Negociation
     protected $reasons;
 
     /**
-     * @MongoDB\Field(type="string")
+     * @var integer $charterId
+     *
+     * @MongoDB\ReferenceOne(targetDocument="App\Document\Charter\Charter", storeAs="id")
      */
     protected $charterId;
 
