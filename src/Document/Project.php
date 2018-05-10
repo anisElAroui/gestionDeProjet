@@ -17,7 +17,9 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 class Project
 {
     /**
-     * @MongoDB\Id
+     * @var integer $id
+     *
+     * @MongoDB\Id(strategy="INCREMENT")
      */
     protected $id;
 
@@ -37,17 +39,17 @@ class Project
     protected $projectManager;
 
     /**
-     * @MongoDB\Field(type="int")
+     * @MongoDB\Field(type="boolean")
      */
     protected $poleEbusniss;
 
     /**
-     * @MongoDB\Field(type="int")
+     * @MongoDB\Field(type="boolean")
      */
     protected $poleEss;
 
     /**
-     * @MongoDB\Field(type="int")
+     * @MongoDB\Field(type="boolean")
      */
     protected $poleMobile;
 

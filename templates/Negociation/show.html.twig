@@ -1,0 +1,56 @@
+{#  modal pour la validation de projet ou editer budget  #}
+
+<div class="modal fade" id="decision">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title tac"> Budget decision</h3>
+            </div>
+            <div class="modal-body">
+
+                {% if negociation is defined and negociation is not null %}
+
+                <div  class="form-group">
+                    <label class="col-sm-3 control-label" ><span class="label label-primary">Budget decision</span></label>
+                    <div class="col-sm-7">
+                        {% if negociation.accept == 1 %}
+                            <p> budget accepted </p>
+                        {% elseif negociation.denie == 1 %}
+                            <p> budget denied </p>
+
+                        {% endif  %}
+                    </div>
+                </div>
+                <div  class="form-group">
+                    <label class="col-sm-3 control-label" ><span class="label label-primary">Reasons</span></label>
+                    <div class="col-sm-7">
+
+                        <p>{{ negociation.reasons }}</p>
+
+
+                    </div>
+                </div>
+
+
+                <br>
+
+                <div  class="form-group">
+                    <div class="col-sm-12 tac" >
+                        <a class="btn btn-primary pull-left" href="{{ path('charter_edit',{'id':negociation.charterId}) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+
+                        {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
+                        {{ form_widget(form._token) }}
+                        <button id="sticky_b" class="btn btn-primary pull-right " type="submit"><i class="glyphicon glyphicon-ok"></i> Validate</button>
+                        {{ form_end(form,{'render_rest': false}) }}
+
+                    </div>
+                </div><br><br>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+</div>

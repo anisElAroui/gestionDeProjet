@@ -15,15 +15,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class OpportunityController extends Controller
 {
+
     /**
      * @Route("project/{id}/opportunities", name="opportunities_index")
      * @Method({"GET"})
      */
     public function indexAction($id)
     {
-        $opportunities = $this->get('doctrine_mongodb')->getRepository('App\Document\Opportunity')->findAll();
-
         $dm = $this->get('doctrine_mongodb')->getManager();
+        $opportunities = $dm->getRepository('App\Document\Opportunity')->findAll();
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
 
         return $this->render('Opportunity/index.html.twig', ['opportunities' => $opportunities,'charter' => $charter,]);
@@ -120,7 +120,6 @@ class OpportunityController extends Controller
 
     private function createDeleteForm($id1,$id2)
     {
-
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('opportunities_show', array('id1' => $id1,'id2' => $id2)))
             ->setMethod('DELETE')

@@ -22,12 +22,12 @@ class ReportController extends Controller
      */
     public function indexAction($id)
     {
-        $reports = $this->get('doctrine_mongodb')->getRepository('App\Document\Report')->findAll();
 
         $dm = $this->get('doctrine_mongodb')->getManager();
+        $reports = $dm->getRepository('App\Document\Report')->findAll();
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
 
-        return $this->render('Report/index.html.twig', ['reports' => $reports,'charter' => $charter,]);
+        return $this->render('Report/index.html.twig', ['reports' => $reports,'charter' => $charter]);
     }
 
 
@@ -55,7 +55,7 @@ class ReportController extends Controller
         return $this->render('Report/new.html.twig', array(
             'report' => $report,
             'charter' => $charter,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ));
     }
 
@@ -86,7 +86,7 @@ class ReportController extends Controller
         return $this->render('Report/show.html.twig', array(
             'report' => $report,
             'charter' => $charter,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView()
         ));
     }
 
@@ -116,13 +116,12 @@ class ReportController extends Controller
         return $this->render('Report/edit.html.twig', array(
             'report' => $report,
             'charter' => $charter,
-            'edit_form' => $editForm->createView(),
+            'edit_form' => $editForm->createView()
         ));
     }
 
     private function createDeleteForm( $id1, $id2)
     {
-
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('report_show', array('id1' => $id1,'id2' => $id2)))
             ->setMethod('DELETE')

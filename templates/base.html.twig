@@ -1,172 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Management</title>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Project Management</title>
 
 
-    <!-- Bootstrap framework -->
-    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}" />
-    <!-- jQuery UI theme -->
-    <link rel="stylesheet" href="{{ asset('lib/jquery-ui/css/Aristo/Aristo.css') }}" />
-    <!-- breadcrumbs -->
-    <link rel="stylesheet" href="{{ asset('lib/jBreadcrumbs/css/BreadCrumb.css') }}" />
-    <!-- tooltips-->
-    <link rel="stylesheet" href="{{ asset('lib/qtip2/jquery.qtip.min.css') }}" />
-    <!-- colorbox -->
-    <link rel="stylesheet" href="{{ asset('lib/colorbox/colorbox.css') }}" />
-    <!-- code prettify -->
-    <link rel="stylesheet" href="{{ asset('lib/google-code-prettify/prettify.css') }}" />
-    <!-- sticky notification -->
-    <link rel="stylesheet" href="{{ asset('lib/sticky/sticky.css') }}" />
-    <!-- aditional icons -->
-    <link rel="stylesheet" href="{{ asset('img/splashy/splashy.css') }}" />
-    <!-- flags -->
-    <link rel="stylesheet" href="{{ asset('img/flags/flags.css') }}" />
-    <!-- datatables -->
-    <link rel="stylesheet" href="{{ asset('lib/datatables/extras/TableTools/media/css/TableTools.css') }}">
-    <!-- font-awesome -->
-    <link rel="stylesheet" href="img/font-awesome/css/font-awesome.min.css" />
+        <!-- Bootstrap framework -->
+        <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}" />
+        <!-- jQuery UI theme -->
+        <link rel="stylesheet" href="{{ asset('lib/jquery-ui/css/Aristo/Aristo.css') }}" />
+        <!-- breadcrumbs -->
+        <link rel="stylesheet" href="{{ asset('lib/jBreadcrumbs/css/BreadCrumb.css') }}" />
+        <!-- tooltips-->
+        <link rel="stylesheet" href="{{ asset('lib/qtip2/jquery.qtip.min.css') }}" />
+        <!-- colorbox -->
+        <link rel="stylesheet" href="{{ asset('lib/colorbox/colorbox.css') }}" />
+        <!-- code prettify -->
+        <link rel="stylesheet" href="{{ asset('lib/google-code-prettify/prettify.css') }}" />
+        <!-- sticky notification -->
+        <link rel="stylesheet" href="{{ asset('lib/sticky/sticky.css') }}" />
+        <!-- aditional icons -->
+        <link rel="stylesheet" href="{{ asset('img/splashy/splashy.css') }}" />
+        <!-- flags -->
+        <link rel="stylesheet" href="{{ asset('img/flags/flags.css') }}" />
+        <!-- datatables -->
+        <link rel="stylesheet" href="{{ asset('lib/datatables/extras/TableTools/media/css/TableTools.css') }}">
+        <!-- font-awesome -->
+        <link rel="stylesheet" href="img/font-awesome/css/font-awesome.min.css" />
 
-    <!-- main styles -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-    <!-- theme color-->
-    <link rel="stylesheet" href="{{ asset('css/blue.css') }}" id="link_theme" />
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+        <!-- main styles -->
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+        <!-- theme color-->
+        <link rel="stylesheet" href="{{ asset('css/blue.css') }}" id="link_theme" />
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
 
-    <!-- favicon -->
-    <link rel="shortcut icon" href="favicon.ico" />
+        <!-- favicon -->
+        <link rel="shortcut icon" href="favicon.ico" />
 
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" href="css/ie.css" />
-    <![endif]-->
+        <!--[if lte IE 8]>
+        <link rel="stylesheet" href="css/ie.css" />
+        <![endif]-->
 
-    {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}{% endblock %}
 
-    <!--[if lt IE 9]>
-    <script src="js/ie/html5.js"></script>
-    <script src="js/ie/respond.min.js"></script>
-    <script src="lib/flot/excanvas.min.js"></script>
-    <![endif]-->
+        <!--[if lt IE 9]>
+        <script src="js/ie/html5.js"></script>
+        <script src="js/ie/respond.min.js"></script>
+        <script src="lib/flot/excanvas.min.js"></script>
+        <![endif]-->
 
-    <!-- online icons fontawesome -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-
-
-</head>
-
-<body class="full_width">
-
-<div class="style_switcher">
-    <div class="sepH_c">
-        <p>Colors:</p>
-        <div class="clearfix">
-            <a href="javascript:void(0)" class="style_item jQclr blue_theme style_active" title="blue">blue</a>
-            <a href="javascript:void(0)" class="style_item jQclr dark_theme" title="dark">dark</a>
-            <a href="javascript:void(0)" class="style_item jQclr green_theme" title="green">green</a>
-            <a href="javascript:void(0)" class="style_item jQclr brown_theme" title="brown">brown</a>
-            <a href="javascript:void(0)" class="style_item jQclr eastern_blue_theme" title="eastern_blue">eastern blue</a>
-            <a href="javascript:void(0)" class="style_item jQclr tamarillo_theme" title="tamarillo">tamarillo</a>
-        </div>
-    </div>
-    <div class="sepH_c">
-        <p>Backgrounds:</p>
-        <div class="clearfix">
-            <span class="style_item jQptrn style_active ptrn_def" title=""></span>
-            <span class="ssw_ptrn_a style_item jQptrn" title="ptrn_a"></span>
-            <span class="ssw_ptrn_b style_item jQptrn" title="ptrn_b"></span>
-            <span class="ssw_ptrn_c style_item jQptrn" title="ptrn_c"></span>
-            <span class="ssw_ptrn_d style_item jQptrn" title="ptrn_d"></span>
-            <span class="ssw_ptrn_e style_item jQptrn" title="ptrn_e"></span>
-        </div>
-    </div>
-    <div class="sepH_c">
-        <p>Layout:</p>
-        <div class="clearfix">
-            <label class="radio-inline"><input name="ssw_layout" id="ssw_layout_fluid" value="" checked="" type="radio"> Fluid</label>
-            <label class="radio-inline"><input name="ssw_layout" id="ssw_layout_fixed" value="gebo-fixed" type="radio"> Fixed</label>
-        </div>
-    </div>
+        <!-- online icons fontawesome -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 
 
-    <div class="gh_button-group">
-        <a href="#" id="resetDefault" class="btn btn-default btn-sm">Reset</a>
-    </div>
-    <div class="hide">
-        <ul id="ssw_styles">
-            <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
-            <li class="small ssw_lColor sepH_a" style="display:none">a { color: #<span></span> }</li>
-        </ul>
-    </div>
-</div>
-<div id="maincontainer" class="clearfix">
+    </head>
 
-    <header>
-        {{ render(controller('App\\Controller\\NotificationController::indexAction', {})) }}
-        {% block navbar %}{% endblock %}
-    </header>
+    <body class="full_width">
 
-    <div id="contentwrapper">
-        <div class="main_content">
+        <div id="maincontainer" class="clearfix">
 
-            {% block breadCrumb %}{% endblock %}
-            {% block main_content %}{% endblock %}
+            <header>
+
+                {{ render(controller('App\\Controller\\NotificationController::indexAction', {})) }}
+                {% block navbar %}{% endblock %}
+
+            </header>
+
+            <div id="contentwrapper">
+                <div class="container">
+
+                    {% block breadCrumb %}{% endblock %}
+                    {% block main_content %}{% endblock %}
+
+                </div>
+            </div>
 
         </div>
 
-    </div>
-
-</div>
-
-{% block sidebar %}{% endblock %}
+        {% block sidebar %}{% endblock %}
 
 
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/jquery-migrate.min.js') }}"></script>
-<script src="{{ asset('lib/jquery-ui/jquery-ui-1.10.0.custom.min.js') }}"></script>
-<!-- touch events for jquery ui-->
-<script src="{{ asset('js/forms/jquery.ui.touch-punch.min.js') }}"></script>
-<!-- easing plugin -->
-<script src="{{ asset('js/jquery.easing.1.3.min.js') }}"></script>
-<!-- smart resize event -->
-<script src="{{ asset('js/jquery.debouncedresize.min.js') }}"></script>
-<!-- js cookie plugin -->
-<script src="{{ asset('js/jquery_cookie_min.js') }}"></script>
-<!-- main bootstrap js -->
-<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-<!-- bootstrap plugins -->
-<script src="{{ asset('js/bootstrap.plugins.min.js') }}"></script>
-<!-- typeahead -->
-<script src="{{ asset('lib/typeahead/typeahead.min.js') }}"></script>
-<!-- code prettifier -->
-<script src="{{ asset('lib/google-code-prettify/prettify.min.js') }}"></script>
-<!-- sticky messages -->
-<script src="{{ asset('lib/sticky/sticky.min.js') }}"></script>
-<!-- lightbox -->
-<script src="{{ asset('lib/colorbox/jquery.colorbox.min.js') }}"></script>
-<!-- jBreadcrumbs -->
-<script src="{{ asset('lib/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min.js') }}"></script>
-<!-- hidden elements width/height -->
-<script src="{{ asset('js/jquery.actual.min.js') }}"></script>
-<!-- custom scrollbar -->
-<script src="{{ asset('lib/slimScroll/jquery.slimscroll.js') }}"></script>
-<!-- fix for ios orientation change -->
-<script src="{{ asset('js/ios-orientationchange-fix.js') }}"></script>
-<!-- to top -->
-<script src="{{ asset('lib/UItoTop/jquery.ui.totop.min.js') }}"></script>
-<!-- mobile nav -->
-<script src="{{ asset('js/selectNav.js') }}"></script>
-<!-- moment.js date library -->
-<script src="{{ asset('lib/moment/moment.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-migrate.min.js') }}"></script>
+        <script src="{{ asset('lib/jquery-ui/jquery-ui-1.10.0.custom.min.js') }}"></script>
+        <!-- touch events for jquery ui-->
+        <script src="{{ asset('js/forms/jquery.ui.touch-punch.min.js') }}"></script>
+        <!-- easing plugin -->
+        <script src="{{ asset('js/jquery.easing.1.3.min.js') }}"></script>
+        <!-- smart resize event -->
+        <script src="{{ asset('js/jquery.debouncedresize.min.js') }}"></script>
+        <!-- js cookie plugin -->
+        <script src="{{ asset('js/jquery_cookie_min.js') }}"></script>
+        <!-- main bootstrap js -->
+        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+        <!-- bootstrap plugins -->
+        <script src="{{ asset('js/bootstrap.plugins.min.js') }}"></script>
+        <!-- typeahead -->
+        <script src="{{ asset('lib/typeahead/typeahead.min.js') }}"></script>
+        <!-- code prettifier -->
+        <script src="{{ asset('lib/google-code-prettify/prettify.min.js') }}"></script>
+        <!-- sticky messages -->
+        <script src="{{ asset('lib/sticky/sticky.min.js') }}"></script>
+        <!-- lightbox -->
+        <script src="{{ asset('lib/colorbox/jquery.colorbox.min.js') }}"></script>
+        <!-- jBreadcrumbs -->
+        <script src="{{ asset('lib/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min.js') }}"></script>
+        <!-- hidden elements width/height -->
+        <script src="{{ asset('js/jquery.actual.min.js') }}"></script>
+        <!-- custom scrollbar -->
+        <script src="{{ asset('lib/slimScroll/jquery.slimscroll.js') }}"></script>
+        <!-- fix for ios orientation change -->
+        <script src="{{ asset('js/ios-orientationchange-fix.js') }}"></script>
+        <!-- to top -->
+        <script src="{{ asset('lib/UItoTop/jquery.ui.totop.min.js') }}"></script>
+        <!-- mobile nav -->
+        <script src="{{ asset('js/selectNav.js') }}"></script>
+        <!-- moment.js date library -->
+        <script src="{{ asset('lib/moment/moment.min.js') }}"></script>
 
-{% block javascripts %}{% endblock %}
+        {% block javascripts %}{% endblock %}
 
-<!-- common functions -->
-<script src="{{ asset('js/pages/gebo_common.js') }}"></script>
-<!-- notifications functions -->
-<script src="{{ asset('js/pages/gebo_notifications.js') }}"></script>
+        <!-- common functions -->
+        <script src="{{ asset('js/pages/gebo_common.js') }}"></script>
+        <!-- notifications functions -->
+        <script src="{{ asset('js/pages/gebo_notifications.js') }}"></script>
 
-</body>
+    </body>
 
 </html>

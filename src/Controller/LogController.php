@@ -7,12 +7,12 @@
  */
 
 namespace App\Controller;
+
 use App\Document\Log;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
 
 class LogController extends Controller
 {
@@ -23,12 +23,11 @@ class LogController extends Controller
      */
     public function indexAction($id)
     {
-        $logs = $this->get('doctrine_mongodb')->getRepository('App\Document\Log')->findAll();
-
         $dm = $this->get('doctrine_mongodb')->getManager();
+        $logs = $dm->getRepository('App\Document\Log')->findAll();
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
 
-        return $this->render('Log/index.html.twig', ['logs' => $logs,'charter' => $charter,]);
+        return $this->render('Log/index.html.twig', ['logs' => $logs,'charter' => $charter]);
     }
 
 
@@ -98,7 +97,6 @@ class LogController extends Controller
      */
     public function editAction(Request $request,$id1,$id2)
     {
-
         $dm = $this->get('doctrine_mongodb')->getManager();
         $log = $dm->getRepository('App\Document\Log')->find($id2);
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find( $id1);
@@ -122,13 +120,11 @@ class LogController extends Controller
 
     private function createDeleteForm($id1,$id2)
     {
-
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('log_show', array('id1' => $id1,'id2' => $id2)))
             ->setMethod('DELETE')
             ->getForm()
             ;
     }
-
 
 }

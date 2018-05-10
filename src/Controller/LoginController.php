@@ -8,16 +8,15 @@
 
 namespace App\Controller;
 
-use App\Document\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Security\Core\Security;
 
-class UserController extends Controller
+class LoginController extends Controller
 {
+
     /**
      * @Route ("/login", name="login_page")
      * @Method({"GET","POST"})

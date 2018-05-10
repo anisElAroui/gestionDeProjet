@@ -10,7 +10,6 @@ namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
-
 /**
  * @MongoDB\Document
  *
@@ -18,7 +17,9 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 class Action
 {
     /**
-     * @MongoDB\Id
+     * @var integer $id
+     *
+     * @MongoDB\Id(strategy="INCREMENT")
      */
     protected $id;
 

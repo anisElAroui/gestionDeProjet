@@ -12,17 +12,12 @@ use App\Document\Notification;
 use App\Document\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Form\AccueilType;
-use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-
-
-
 class ProjectController extends Controller
 {
-
 
     /**
      * @Route("/project", name="project_index")
@@ -34,6 +29,7 @@ class ProjectController extends Controller
 
         return $this->render('Accueil/index.html.twig', ['charters' => $charters,]);
     }
+
 
     /**
      * @Route("/project/add", name="add_new_project")
@@ -50,8 +46,9 @@ class ProjectController extends Controller
             $notification = new Notification();
             $notification->setReceiver($project->getProjectManager());
             $notification->setProjectName($project->getProjectName());
-            $notification->setDescription("first step: prepare charter");
+            $notification->setDescription("prepare charter");
             $notification->setFlag(true);
+            $notification->setType("Charter");
             $date = new \DateTime();
             $notification->setCreatedAt($date);
             $dm->persist($project);
@@ -82,7 +79,6 @@ class ProjectController extends Controller
         $deleteForm->handleRequest($request);
 
         if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
-            $dm = $this->get('doctrine_mongodb')->getManager();
             $dm->remove($charter);
             $dm->flush();
 
@@ -104,7 +100,6 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-
         $dm = $this->get('doctrine_mongodb')->getManager();
         $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
 
@@ -127,7 +122,6 @@ class ProjectController extends Controller
 
     private function createDeleteForm(string $id)
     {
-
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('project_show', array('id' => $id)))
             ->setMethod('DELETE')

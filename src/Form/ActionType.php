@@ -9,6 +9,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,11 +24,11 @@ class ActionType extends AbstractType
         $builder
             ->add('actionType')
             ->add('priority')
-            ->add('initialDate')
+            ->add('initialDate',DateType::class)
             ->add('author')
             ->add('status')
-            ->add('currentDate')
-            ->add('realDate')
+            ->add('currentDate',DateType::class)
+            ->add('realDate',DateType::class)
             ->add('identificator');
 
 

@@ -15,9 +15,12 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  *
  */
 class Report
-{  /**
- * @MongoDB\Id
- */
+{
+    /**
+     * @var integer $id
+     *
+     * @MongoDB\Id(strategy="INCREMENT")
+     */
     protected $id;
 
     /**

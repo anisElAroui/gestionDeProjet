@@ -17,7 +17,9 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 class Log
 {
     /**
-     * @MongoDB\Id
+     * @var integer $id
+     *
+     * @MongoDB\Id(strategy="INCREMENT")
      */
     protected $id;
 

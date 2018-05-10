@@ -9,7 +9,6 @@
 namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @MongoDB\Document
@@ -43,9 +42,19 @@ class Notification
     protected $receiver;
 
     /**
+     * @MongoDB\Field(type="string")
+     */
+    protected $type;
+
+    /**
      * @MongoDB\Field(type="boolean")
      */
     protected $flag;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    protected $charterId;
 
     /**
      * Notification constructor.
@@ -53,14 +62,6 @@ class Notification
     public function __construct()
     {
     }
-//
-//    /**
-//     * @MongoDB\PrePersist
-//     */
-//    public function onPrePersist()
-//    {
-//        $this->createdAt = new DateTime();
-//    }
 
     /**
      * @return mixed
@@ -129,6 +130,22 @@ class Notification
     /**
      * @return mixed
      */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getFlag()
     {
         return $this->flag;
@@ -156,6 +173,22 @@ class Notification
     public function setDescription($description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCharterId()
+    {
+        return $this->charterId;
+    }
+
+    /**
+     * @param mixed $charterId
+     */
+    public function setCharterId($charterId): void
+    {
+        $this->charterId = $charterId;
     }
 
 }

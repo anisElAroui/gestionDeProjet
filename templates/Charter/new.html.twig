@@ -190,35 +190,21 @@
                             {{ form_errors(form.objectives) }}
                         </div>
                     </div><br>
-                {#{% form_theme form 'Form/custom_requirement_types_collection.html.twig' %}#}
-                {#{% block form_widget %}{% endblock %}#}
-                {#<div  class=" form-group">#}
-                        {#<label class="col-sm-3 control-label" ><span class="label label-primary">High Level Requirement</span></label>#}
-                        {#<div class="col-sm-7">#}
-                            {#<div class="js-genus-scientist-wrapper" data-prototype="{{ form_widget(form.requirements.vars.prototype)|e('html_attr') }}"data-index="{{ form.requirements|length }}">#}
-                            {#{% for requirement in form.requirements %}#}
+                <div  class=" form-group">
+                    <label class="col-sm-3 control-label" ><span class="label label-primary">High Level Requirement</span></label>
+                    <div class="col-sm-7">
+                        <ul class="requirements" data-prototype="{{ form_widget(form.requirements.vars.prototype)|e('html_attr') }}"data-index="{{ form.requirements|length }}">
+                            {% for requirement in form.requirements %}
 
-                                    {#{{ form_widget(requirement.highLevelRequirement,  {'attr': {'required':'required','class':'form-control'} }) }}#}
-                                    {#{{ form_errors(requirement.highLevelRequirement) }}#}
+                                {{ form_widget(requirement.highLevelRequirement,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(requirement.highLevelRequirement) }}
 
-                            {#{% endfor %}#}
-                            {#<a href="#" class="js-genus-scientist-add">#}
-                                {#Add a highLevelRequirement#}
-                            {#</a>#}
-                            {#</div>#}
-                            {#<ul class="requirements" data-prototype="{{ form_widget(form.requirements.vars.prototype)|e('html_attr') }}"data-index="{{ form.requirements|length }}">#}
-                                {#{% for requirement in form.requirements %}#}
+                            {% endfor %}
 
-                                    {#{{ form_widget(requirement.highLevelRequirement,  {'attr': {'required':'required','class':'form-control'} }) }}#}
-                                    {#{{ form_errors(requirement.highLevelRequirement) }}#}
+                        </ul>
+                    </div>
 
-                                {#{% endfor %}#}
-
-                            {#</ul>#}
-                        {#</div>#}
-
-                {#</div>#}
-
+                </div>
             </fieldset>
             <fieldset title="Major Deliverables">
                 <legend class="hide">....</legend>
@@ -227,19 +213,22 @@
 
 
                 {% for deliverable in form.deliverables %}
-                            <label class="col-sm-3 control-label" ><span class="label label-primary">Major Deliverables</span></label>
-                                <div class="col-sm-7">
-                                    {{ form_widget(deliverable.majorDeliverables,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                    {{ form_errors(deliverable.majorDeliverables) }}
-                                </div>
+                    <div  class="formSep form-group">
 
-                                    <br><br>
-                            <label class="col-sm-3 control-label" ><span class="label label-primary">Deliverables Description</span></label>
-                                <div class="col-sm-7">
-                                    {{ form_widget(deliverable.deliverablesDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                    {{ form_errors(deliverable.deliverablesDescription) }}
-                                </div>
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Major Deliverables</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(deliverable.majorDeliverables,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(deliverable.majorDeliverables) }}
+                        </div>
+                    </div>
+                    <div  class=" form-group">
 
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Deliverables Description</span></label>
+                        <div class="col-sm-7">
+                            {{ form_widget(deliverable.deliverablesDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
+                            {{ form_errors(deliverable.deliverablesDescription) }}
+                        </div>
+                    </div>
                             {% endfor %}
 
 
@@ -256,30 +245,36 @@
 
                 {% for milestone in form.milestones %}
 
-                                <label class="col-sm-3 control-label" ><span class="label label-primary">Executive Milestones </span></label>
+                    <div  class="formSep form-group">
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">Executive Milestones </span></label>
                                 <div class="col-sm-7">
                                 {{ form_widget(milestone.executiveMilestones,  {'attr': {'required':'required','class':'form-control'} }) }}
                                 {{ form_errors(milestone.executiveMilestones) }}
                                 </div>
-                                <br>
-                                <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedDuration </span></label>
+                    </div>
+                    <div  class="formSep form-group">
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedDuration </span></label>
                                 <div class="col-sm-7">
                                 {{ form_widget(milestone.estimatedDuration,  {'attr': {'required':'required','class':'form-control'} }) }}
                                 {{ form_errors(milestone.estimatedDuration) }}
                                 </div>
-                                <br>
-                                <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedCompletionTimeframe</span></label>
+                    </div>
+                    <div  class="formSep form-group">
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedCompletionTimeframe</span></label>
                                 <div class="col-sm-7">
-                                {{ form_widget(milestone.estimatedCompletionTimeframe,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_widget(milestone.estimatedCompletionTimeframe) }}
                                 {{ form_errors(milestone.estimatedCompletionTimeframe) }}
                                 </div>
-                                <br>
-                                <label class="col-sm-3 control-label" ><span class="label label-primary">comments </span></label>
+                    </div>
+                    <div  class="form-group">
+                        <label class="col-sm-3 control-label" ><span class="label label-primary">comments </span></label>
                                 <div class="col-sm-7">
                                 {{ form_widget(milestone.comments,  {'attr': {'required':'required','class':'form-control'} }) }}
                                 {{ form_errors(milestone.comments) }}
                                 </div>
-                            {% endfor %}
+                    </div>
+
+                {% endfor %}
 
 
 
@@ -305,7 +300,7 @@
 
                     <br>
 
-                    <div  class="formSep form-group">
+                    <div  class="form-group">
                         <label class="col-sm-3 control-label" ><span class="label label-primary">assumptions</span></label>
                         <div class="col-sm-7">
                             {% for assumption in form.assumptions %}
@@ -327,31 +322,34 @@
 
                 {% for stakeholder in form.stakeholders %}
                 <div  class="formSep form-group">
-
-                <label class="col-sm-3 control-label" ><span class="label label-primary">stakeholderName</span></label>
+                    <label class="col-sm-3 control-label" ><span class="label label-primary">stakeholderName</span></label>
                                 <div class="col-sm-7">
-                                {{ form_widget(stakeholder.name,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                {{ form_errors(stakeholder.name) }}
+                                    {{ form_widget(stakeholder.name,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(stakeholder.name) }}
                                 </div>
-                                <br>
-                                <label class="col-sm-3 control-label" ><span class="label label-primary">stakeholderRole </span></label>
+                </div>
+                <div  class="formSep form-group">
+                    <label class="col-sm-3 control-label" ><span class="label label-primary">stakeholderRole </span></label>
                                 <div class="col-sm-7">
-                                {{ form_widget(stakeholder.role,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                {{ form_errors(stakeholder.role) }}
+                                    {{ form_widget(stakeholder.role,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(stakeholder.role) }}
                                 </div>
-                                <br>
-                                <label class="col-sm-3 control-label" ><span class="label label-primary">email </span></label>
+                </div>
+                <div  class="formSep form-group">
+                <label class="col-sm-3 control-label" ><span class="label label-primary">email </span></label>
                                 <div class="col-sm-7">
                                     {{ form_widget(stakeholder.email,  {'attr': {'required':'required','class':'form-control'} }) }}
                                     {{ form_errors(stakeholder.email) }}
                                 </div>
-                                <label class="col-sm-3 control-label" ><span class="label label-primary">phoneNumber </span></label>
+                </div>
+                <div  class="form-group">
+                <label class="col-sm-3 control-label" ><span class="label label-primary">phoneNumber </span></label>
                                 <div class="col-sm-7">
                                         {{ form_widget(stakeholder.phoneNumber,  {'attr': {'required':'required','class':'form-control'} }) }}
                                         {{ form_errors(stakeholder.phoneNumber) }}
                                 </div>
-
                 </div>
+
                 {% endfor %}
 
 
@@ -409,7 +407,7 @@
                             {{ form_errors(form.thresholdProfitability) }}
                         </div>
                     </div>
-                    <div  class="formSep form-group">
+                    <div  class=" form-group">
                         <label class="col-sm-3 control-label" ><span class="label label-primary">expensesManDayAffection </span></label>
                         <div class="col-sm-7">
                             {{ form_widget(form.expensesManDayAffection,  {'attr': {'required':'required','class':'form-control'} }) }}
@@ -423,37 +421,42 @@
 
 
                 {% for budget in form.budgets %}
+                <div  class="formSep form-group">
 
                     <label class="col-sm-3 control-label" ><span class="label label-primary">profile </span></label>
                         <div class="col-sm-7">
                             {{ form_widget(budget.profile,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(budget.profile) }}
                         </div>
-                    <br>
+                </div>
+                <div  class="formSep form-group">
                     <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedDurationBudget </span></label>
                         <div class="col-sm-7">
                             {{ form_widget(budget.estimatedDurationBudget,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(budget.estimatedDurationBudget) }}
                         </div>
-                        <br>
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedCost </span></label>
+                </div>
+                <div  class="formSep form-group">
+                <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedCost </span></label>
                         <div class="col-sm-7">
                             {{ form_widget(budget.estimatedCost,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(budget.estimatedCost) }}
                         </div>
-                        <br>
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">budgetComments </span></label>
+                </div>
+                <div  class="formSep form-group">
+                <label class="col-sm-3 control-label" ><span class="label label-primary">budgetComments </span></label>
                         <div class="col-sm-7">
                             {{ form_widget(budget.budgetComments,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(budget.budgetComments) }}
                         </div>
-                        <br>
+                </div>
+                <div  class="form-group">
                         <label class="col-sm-3 control-label" ><span class="label label-primary">projectBudgetType </span></label>
                         <div class="col-sm-7">
                             {{ form_widget(budget.projectBudgetType,  {'attr': {'required':'required','class':'form-control'} }) }}
                             {{ form_errors(budget.projectBudgetType) }}
                         </div>
-                        <br>
+                </div>
                     {% endfor %}
                     <br>
                     <br>
@@ -472,27 +475,34 @@
                     </div>
 
                 {% for billing in form.billings %}
-                    <label class="col-sm-3 control-label" ><span class="label label-primary">billingDescription</span></label>
+                <div  class="formSep form-group">
+                <label class="col-sm-3 control-label" ><span class="label label-primary">billingDescription</span></label>
                     <div class="col-sm-7">
                         {{ form_widget(billing.billingDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
                         {{ form_errors(billing.billingDescription) }}
                     </div>
-                    <label class="col-sm-3 control-label" ><span class="label label-primary">billingAmount</span></label>
+                </div>
+                <div  class="formSep form-group">
+                <label class="col-sm-3 control-label" ><span class="label label-primary">billingAmount</span></label>
                     <div class="col-sm-7">
                         {{ form_widget(billing.billingAmount,  {'attr': {'required':'required','class':'form-control'} }) }}
                         {{ form_errors(billing.billingAmount) }}
                     </div>
-                    <label class="col-sm-3 control-label" ><span class="label label-primary">billingPlanedDate</span></label>
+                </div>
+                <div  class="formSep form-group">
+                <label class="col-sm-3 control-label" ><span class="label label-primary">billingPlanedDate</span></label>
                     <div class="col-sm-7">
-                        {{ form_widget(billing.billingPlanedDate,  {'attr': {'required':'required','class':'form-control'} }) }}
+                        {{ form_widget(billing.billingPlanedDate) }}
                         {{ form_errors(billing.billingPlanedDate) }}
                     </div>
-                    <br><br>
+                </div>
+                <div  class="form-group">
                     <label class="col-sm-3 control-label" ><span class="label label-primary">billingDeliveredDate</span></label>
                     <div class="col-sm-7">
-                        {{ form_widget(billing.billingDeliveredDate,  {'attr': {'required':'required','class':'form-control'} }) }}
+                        {{ form_widget(billing.billingDeliveredDate) }}
                         {{ form_errors(billing.billingDeliveredDate) }}
                     </div>
+                </div>
                 {% endfor %}
 
 

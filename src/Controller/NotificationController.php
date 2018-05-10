@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class NotificationController extends Controller
 {
+
     /**
      * @Route("/notification", name="notification")
      * @Method({"GET"})
@@ -22,7 +23,6 @@ class NotificationController extends Controller
     public function indexAction(Request $request)
     {
         $notifications = $this->get('doctrine_mongodb')->getRepository('App\Document\Notification')->findAll();
-
         $user = $this->getUser();
 
         return $this->render('navbar.html.twig', ['notifications' => $notifications,'user'=>$user]);

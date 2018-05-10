@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-
 class FinanceController extends Controller
 {
     /**
@@ -23,12 +22,11 @@ class FinanceController extends Controller
      */
     public function indexAction($id)
     {
-        $finances = $this->get('doctrine_mongodb')->getRepository('App\Document\Finance')->findAll();
-
         $dm = $this->get('doctrine_mongodb')->getManager();
+        $finances = $dm->getRepository('App\Document\Finance')->findAll();
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
 
-        return $this->render('Finance/index.html.twig', ['finances' => $finances,'charter' => $charter,]);
+        return $this->render('Finance/index.html.twig', ['finances' => $finances,'charter' => $charter]);
     }
 
 
@@ -83,7 +81,6 @@ class FinanceController extends Controller
             return $this->redirectToRoute('finance_index',array('id'=>$id1));
         }
 
-
         return $this->render('Finance/show.html.twig', array(
             'finance' => $finance,
             'charter' => $charter,
@@ -99,7 +96,6 @@ class FinanceController extends Controller
      */
     public function editAction(Request $request,$id1,$id2)
     {
-
         $dm = $this->get('doctrine_mongodb')->getManager();
         $finance = $dm->getRepository('App\Document\Finance')->find($id2);
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find( $id1);
@@ -130,6 +126,5 @@ class FinanceController extends Controller
             ->getForm()
             ;
     }
-
 
 }

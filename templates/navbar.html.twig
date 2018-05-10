@@ -8,21 +8,31 @@
                     <li class="divider-vertical hidden-sm hidden-xs"></li>
                     <li>
                         <div class="nb_boxes clearfix label-danger">
-                            <a data-toggle="modal" data-backdrop="static" href="#myMail" data-placement="bottom" data-container="body" class="label bs_ttip" title="New messages">
+                            <a data-toggle="modal" data-backdrop="static" href="#myNotification" data-placement="bottom" data-container="body" class="label bs_ttip" title="New messages">
                                 {% set count = 0 %}
                                 {% for notification in notifications %}
-                                    {% if notification.receiver == user and notification.flag == true%}
+                                    {% if notification.receiver == user and notification.flag == true and notification.type == "Charter"%}
                                         {% set count = count + 1 %}
                                     {% endif %}
                                 {% endfor %}
                                 {{ count }}
-                                <i class="splashy-comment_alert"></i></a>
+                                <i class="splashy-comment_alert"></i>
+                            </a>
                         </div>
                     </li>
                     <li class="divider-vertical hidden-sm hidden-xs"></li>
                     <li>
                         <div class="nb_boxes clearfix ">
-                            <a data-toggle="modal" data-backdrop="static" href="#myTasks" data-placement="bottom" data-container="body" class="label bs_ttip" title="New tasks">10 <i class="splashy-mail_light"></i></a>
+                            <a data-toggle="modal" data-backdrop="static" href="#myNegociation" data-placement="bottom" data-container="body" class="label bs_ttip" title="New tasks">
+                                {% set count2 = 0 %}
+                                {% for notification in notifications %}
+                                    {% if notification.receiver == user and notification.flag == true and notification.type == "Negociation"%}
+                                        {% set count2 = count2 + 1 %}
+                                    {% endif %}
+                                {% endfor %}
+                                {{ count2 }}
+                                <i class="splashy-mail_light"></i>
+                            </a>
                         </div>
                     </li>
                     <li class="divider-vertical hidden-sm hidden-xs"></li>
@@ -41,7 +51,7 @@
 
     {#  modal pour les notification  #}
 
-    <div class="modal fade" id="myMail">
+    <div class="modal fade" id="myNotification">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -59,12 +69,22 @@
                         </thead>
                         <tbody>
                         {% if notifications is defined and notifications is not null  %}
-
+                            {# affichage des notifications de ce user qui ont le type="Charter" et flag=True car si flag=false càd notif viewed#}
                             {% for notification in notifications %}
-                                {% if notification.receiver == user and notification.flag == true %}
+                                {% if notification.receiver == user and notification.flag == true and notification.type == "Charter" %}
                                 <tr>
                                     <td>{{ notification.projectName }}</td>
+                                    {# if PM #}
+                                    {% if notification.description == "prepare charter" %}
                                     <td><a href="{{ path('charter_new') }}">{{ notification.description }}</a></td>
+                                    {# if PMO #}
+                                    {% elseif notification.description == "complete charter" %}
+                                        <td><a href="{{ path('charter_edit', { 'id': notification.charterId }) }}">{{ notification.description }}</a></td>
+                                    {% elseif notification.description == "budget negociation" %}
+                                        <td><a href="{{ path('charter_edit', { 'id': notification.charterId }) }}">{{ notification.description }}</a></td>
+                                    {% elseif notification.description == "project validated" %}
+                                        <td><a href="{{ path('charter_show', { 'id': notification.charterId }) }}">{{ notification.description }}</a></td>
+                                    {% endif %}
                                     <td>{{ notification.createdAt | date }}</td>
                                 </tr>
                                 {% endif %}
@@ -78,5 +98,51 @@
             </div>
         </div>
     </div>
+
+    {#  modal pour les notifications de négociation  #}
+
+    <div class="modal fade" id="myNegociation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="modal-title">New Negociation</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-condensed table-striped" data-provides="rowlink">
+                        <thead>
+                        <tr>
+                            <th>Project name</th>
+                            <th>Description</th>
+                            <th>Created at</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if notifications is defined and notifications is not null  %}
+                            {# affichage des negociation de ce user qui ont le type="Negoctiation" et flag=True car si flag=false càd notif viewed#}
+                            {% for notification in notifications %}
+                                {% if notification.receiver == user and notification.flag == true and notification.type == "Negociation" %}
+                                    <tr>
+                                        <td>{{ notification.projectName }}</td>
+                                        {#{% if notification.description == "budget negociation" %}#}
+                                            <td><a href="{{ path('charter_show5', { 'id': notification.charterId }) }}">{{ notification.description }}</a></td>
+                                        {#{% elseif notification.description == "budget decision" %}#}
+                                            {#<td><a data-toggle="modal" data-backdrop="static" href="#decision">{{ notification.description }}</a></td>#}
+                                        {#{% endif %}#}
+                                        <td>{{ notification.createdAt | date }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 
 

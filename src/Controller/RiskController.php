@@ -7,6 +7,7 @@
  */
 
 namespace App\Controller;
+
 use App\Document\Risk;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,12 +22,11 @@ class RiskController extends Controller
      */
     public function indexAction($id)
     {
-        $risks = $this->get('doctrine_mongodb')->getRepository('App\Document\Risk')->findAll();
-
         $dm = $this->get('doctrine_mongodb')->getManager();
+        $risks = $dm->getRepository('App\Document\Risk')->findAll();
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
 
-        return $this->render('Risk/index.html.twig', ['risks' => $risks,'charter' => $charter,]);
+        return $this->render('Risk/index.html.twig', ['risks' => $risks,'charter' => $charter]);
     }
 
 
@@ -54,7 +54,7 @@ class RiskController extends Controller
         return $this->render('Risk/new.html.twig', array(
             'risk' => $risk,
             'charter' => $charter,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ));
     }
 
@@ -84,7 +84,7 @@ class RiskController extends Controller
         return $this->render('Risk/show.html.twig', array(
             'risk' => $risk,
             'charter' => $charter,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView()
         ));
     }
 
@@ -96,7 +96,6 @@ class RiskController extends Controller
      */
     public function editAction(Request $request,$id1,$id2)
     {
-
         $dm = $this->get('doctrine_mongodb')->getManager();
         $risk = $dm->getRepository('App\Document\Risk')->find($id2);
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find( $id1);
@@ -114,13 +113,12 @@ class RiskController extends Controller
         return $this->render('Risk/edit.html.twig', array(
             'risk' => $risk,
             'charter' => $charter,
-            'edit_form' => $editForm->createView(),
+            'edit_form' => $editForm->createView()
         ));
     }
 
     private function createDeleteForm($id1,$id2)
     {
-
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('risks_show', array('id1' => $id1,'id2' => $id2)))
             ->setMethod('DELETE')

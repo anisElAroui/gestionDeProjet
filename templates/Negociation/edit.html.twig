@@ -1,0 +1,59 @@
+<div class="modal fade" id="Negociation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title tac"> Negociation</h3>
+            </div>
+            <div class="modal-body">
+
+                {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
+                {{ form_widget(form._token) }}
+
+                <div  class="form-group">
+
+                    <label class="col-sm-3 control-label" ><span class="label label-primary">Budget decision</span></label>
+                    <div class="col-sm-7">
+                        <div class="checkbox">
+                            <label>
+                                {{ form_widget(form.accept) }}
+                                {{ form_errors(form.accept) }}
+                                accept
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                {{ form_widget(form.denie) }}
+                                {{ form_errors(form.denie) }}
+                                denie
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div  class="form-group">
+                    <label class="col-sm-3 control-label" ><span class="label label-primary">Reasons</span></label>
+                    <div class="col-sm-7">
+
+                        {{ form_widget(form.reasons,{'attr': {'class':'form-control'}}) }}
+                        {{ form_errors(form.reasons) }}
+
+                    </div>
+                </div>
+
+
+
+                <br>
+
+                <div  class="form-group">
+                    <label class="col-sm-6 control-label"></label>
+                    <div class="col-sm-4" >
+                        <button id="sticky_b" class="btn btn-primary " type="submit">Send</button>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -18,7 +18,9 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 class RiskOpportunity
 {
     /**
-     * @MongoDB\Id
+     * @var integer $id
+     *
+     * @MongoDB\Id(strategy="INCREMENT")
      */
     protected $id;
     /**

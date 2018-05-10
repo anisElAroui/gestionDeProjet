@@ -19,7 +19,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Charter
 {
     /**
-     * @MongoDB\Id
+     * @var integer $id
+     *
+     * @MongoDB\Id(strategy="INCREMENT")
      */
     protected $id;
 

@@ -10,7 +10,7 @@
                     <label class="control-label col-sm-2">Username</label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            <strong>jSmith</strong>
+                            <strong>{{ user.username }}</strong>
                         </p>
                     </div>
                 </div>
@@ -35,17 +35,6 @@
                     <label for="u_email" class="control-label col-sm-2">Email</label>
                     <div class="col-sm-8">
                         <input id="u_email" class="input-xlarge form-control" value="johnSmith@example.com" type="text">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="u_password" class="control-label col-sm-2">Password</label>
-                    <div class="col-sm-8">
-                        <div class="sepH_b">
-                            <input id="u_password" class="input-xlarge form-control" value="my_password" type="password">
-                            <span class="help-block">Enter your password</span>
-                        </div>
-                        <input id="s_password_re" class="input-xlarge form-control" type="password">
-                        <span class="help-block">Repeat password</span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -95,8 +84,8 @@
                     <label for="u_signature" class="control-label col-sm-2">Signature</label>
                     <div class="col-sm-8">
 							<textarea rows="4" id="u_signature" class="form-control">
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto assumenda aut deserunt facilis fugiat harum ipsum numquam omnis quasi vero? Architecto atque dolorem dolores eveniet magni natus quas tenetur, voluptate!
-							</textarea>
+                            Signature
+                            </textarea>
                         <span class="help-block">Automatic resize</span>
                     </div>
                 </div>

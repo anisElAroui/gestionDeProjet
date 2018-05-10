@@ -2,17 +2,18 @@
 /**
  * Created by PhpStorm.
  * User: anis
- * Date: 04/04/18
- * Time: 10:29
+ * Date: 05/05/18
+ * Time: 21:03
  */
 
 namespace App\Form;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class FinanceType extends AbstractType
+class NegociationType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -21,13 +22,9 @@ class FinanceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('budget')
-            ->add('sellingPrice')
-            ->add('Deadline',DateType::class)
-            ->add('expensesPlanned')
-            ->add('currentExpenses')
-
-
+            ->add('accept',CheckboxType::class,array('required' => false))
+            ->add('denie',CheckboxType::class,array('required' => false))
+            ->add('reasons', TextareaType::class)
         ;
     }
 
@@ -37,8 +34,7 @@ class FinanceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Document\Finance'
+            'data_class' => 'App\Document\Negociation'
         ));
     }
-
 }

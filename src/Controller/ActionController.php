@@ -7,14 +7,12 @@
  */
 
 namespace App\Controller;
+
 use App\Document\Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Doctrine\ODM\MongoDB\DocumentManager;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
 
 class ActionController extends Controller
 {
@@ -25,12 +23,11 @@ class ActionController extends Controller
      */
     public function indexAction($id)
     {
-        $actions = $this->get('doctrine_mongodb')->getRepository('App\Document\Action')->findAll();
-
         $dm = $this->get('doctrine_mongodb')->getManager();
+        $actions = $dm->getRepository('App\Document\Action')->findAll();
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
 
-        return $this->render('Action/index.html.twig', ['actions' => $actions,'charter' => $charter,]);
+        return $this->render('Action/index.html.twig', ['actions' => $actions,'charter' => $charter]);
     }
 
 
@@ -58,7 +55,7 @@ class ActionController extends Controller
         return $this->render('Action/new.html.twig', array(
             'action' => $action,
             'charter' => $charter,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ));
     }
 
@@ -88,7 +85,7 @@ class ActionController extends Controller
         return $this->render('Action/show.html.twig', array(
             'action' => $action,
             'charter' => $charter,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView()
         ));
     }
 
@@ -118,13 +115,12 @@ class ActionController extends Controller
         return $this->render('Action/edit.html.twig', array(
             'action' => $action,
             'charter' => $charter,
-            'edit_form' => $editForm->createView(),
+            'edit_form' => $editForm->createView()
         ));
     }
 
     private function createDeleteForm($id1,$id2)
     {
-
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('action_show', array('id1' => $id1,'id2' => $id2)))
             ->setMethod('DELETE')

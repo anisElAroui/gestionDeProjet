@@ -8,10 +8,10 @@
     gebo_notifications = {
         sticky: function() {
             $('#sticky_a').click(function(e){
-                $.sticky("Lorem ipsum dolor sit&hellip;.", {autoclose : 5000, position: "top-right", type: "st-error" });
+                $.sticky("Deleted ...", {autoclose : 5000, position: "top-right", type: "st-error" });
             });
             $('#sticky_b').click(function(e){
-                $.sticky("success", {autoclose : 5000, position: "top-right", type: "st-success" });
+                $.sticky("Success ...", {autoclose : 5000, position: "top-right", type: "st-success" });
             });
             $('#sticky_c').click(function(e){
                 $.sticky("Lorem ipsum dolor sit&hellip;", {autoclose : 5000, position: "top-right", type: "st-info" });

@@ -26,7 +26,7 @@ class StakeholderController extends Controller
         $dm = $this->get('doctrine_mongodb')->getManager();
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
 
-        return $this->render('Stakeholder/index.html.twig', ['charter' => $charter,]);
+        return $this->render('Stakeholder/index.html.twig', ['charter' => $charter]);
     }
 
 
@@ -55,7 +55,7 @@ class StakeholderController extends Controller
 
         return $this->render('Stakeholder/new.html.twig', array(
             'form' => $form->createView(),
-            'charter' => $charter,
+            'charter' => $charter
         ));
     }
 
@@ -85,7 +85,7 @@ class StakeholderController extends Controller
 
         return $this->render('Stakeholder/edit.html.twig', array(
             'edit_form' => $editForm->createView(),
-            'charter'=>$charter,
+            'charter'=>$charter
         ));
     }
 
