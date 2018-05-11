@@ -6,50 +6,47 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
-                <h1>Stakeholder creation</h1>
-            
-                {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
-                {{ form_widget(form._token) }}
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">name</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.name,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.name) }}
-                        </div>
-                    </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">role</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.role,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.role) }}
-                        </div>
-                    </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">email</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.email,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.email) }}
-                        </div>
-                    </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">phoneNumber</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.phoneNumber,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.phoneNumber) }}
-                        </div>
-                    </div>
+                    <h1>Stakeholder creation</h1>
 
-                    <div  class="form-group">
-                    <label class="col-sm-6 control-label"></label>
-                        <div class="col-sm-4" >
-                            <button class="btn btn-primary" type="submit">Create</button>
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
+                    {{ form_widget(form._token) }}
+                        <div  class="form-group">
+                            <label class="col-sm-3 control-label" ><span class="label label-primary">name</span></label>
+                            <div class="col-sm-7">
+                                {{ form_widget(form.name,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(form.name) }}
+                            </div>
                         </div>
-                    </div>
-                {{ form_end(form) }}
+                        <div  class="form-group">
+                            <label class="col-sm-3 control-label" ><span class="label label-primary">role</span></label>
+                            <div class="col-sm-7">
+                                {{ form_widget(form.role,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(form.role) }}
+                            </div>
+                        </div>
+                        <div  class="form-group">
+                            <label class="col-sm-3 control-label" ><span class="label label-primary">email</span></label>
+                            <div class="col-sm-7">
+                                {{ form_widget(form.email,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(form.email) }}
+                            </div>
+                        </div>
+                        <div  class="form-group">
+                            <label class="col-sm-3 control-label" ><span class="label label-primary">phoneNumber</span></label>
+                            <div class="col-sm-7">
+                                {{ form_widget(form.phoneNumber,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(form.phoneNumber) }}
+                            </div>
+                        </div>
+                        <div  class="form-group">
+                        <label class="col-sm-6 control-label"></label>
+                            <div class="col-sm-4" >
+                                <button class="btn btn-primary" type="submit">Create</button>
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
 
-   
                      <a class="btn btn-warning" href="{{ path('stakeholder_index',{'id': charter.id}) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
- 
                 </div>
             </div>
         </div>

@@ -6,43 +6,41 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
-                <h1>add report</h1>
-            
-                {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
-                {{ form_widget(form._token) }}
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">conclusion</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.conclusion,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.conclusion) }}
-                        </div>
-                    </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">lesson</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.lesson,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.lesson) }}
-                        </div>
-                    </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">assets</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.assets,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.assets) }}
-                        </div>
-                    </div>
+                    <h1>add report</h1>
 
-                    <div  class="form-group">
-                    <label class="col-sm-6 control-label"></label>
-                        <div class="col-sm-4" >
-                            <button class="btn btn-primary" type="submit">Create</button>
+                    {{ form_start(form, {'attr': {'class': 'form-horizontal' }}) }}
+                    {{ form_widget(form._token) }}
+                        <div  class="form-group">
+                            <label class="col-sm-3 control-label" ><span class="label label-primary">conclusion</span></label>
+                            <div class="col-sm-7">
+                                {{ form_widget(form.conclusion,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(form.conclusion) }}
+                            </div>
                         </div>
-                    </div>
-                {{ form_end(form) }}
+                        <div  class="form-group">
+                            <label class="col-sm-3 control-label" ><span class="label label-primary">lesson</span></label>
+                            <div class="col-sm-7">
+                                {{ form_widget(form.lesson,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(form.lesson) }}
+                            </div>
+                        </div>
+                        <div  class="form-group">
+                            <label class="col-sm-3 control-label" ><span class="label label-primary">assets</span></label>
+                            <div class="col-sm-7">
+                                {{ form_widget(form.assets,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                {{ form_errors(form.assets) }}
+                            </div>
+                        </div>
 
-   
+                        <div  class="form-group">
+                        <label class="col-sm-6 control-label"></label>
+                            <div class="col-sm-4" >
+                                <button class="btn btn-primary" type="submit">Create</button>
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+
                      <a class="btn btn-warning" href="{{ path('report_index',{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
- 
                 </div>
             </div>
         </div>

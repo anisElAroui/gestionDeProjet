@@ -2,45 +2,44 @@
 
 {% block main_content %}
 
-
     <div class="container">
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
-                  <h1>Event</h1>
+                    <h1>Event</h1>
 
-    <div class="table-responsive">
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>date</th>
-                <td>{{ log.date | date ('Y-m-d') }}</td>
-            </tr>
-            <tr>
-                <th>role</th>
-                <td>{{ log.note }}</td>
-            </tr>
-            <tr>
-                <th>email</th>
-                <td>{{ log.description }}</td>
-            </tr>
-            <tr>
-                <th>phoneNumber</th>
-                <td>{{ log.author }}</td>
-            </tr>
-        </tbody>
-    </table>           
+                    <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>date</th>
+                                <td>{{ log.date | date ('Y-m-d') }}</td>
+                            </tr>
+                            <tr>
+                                <th>role</th>
+                                <td>{{ log.note }}</td>
+                            </tr>
+                            <tr>
+                                <th>email</th>
+                                <td>{{ log.description }}</td>
+                            </tr>
+                            <tr>
+                                <th>phoneNumber</th>
+                                <td>{{ log.author }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-    </div>
-            
-            <br>
-            <a class="btn btn-primary" href="{{ path('log_edit', { 'id2': log.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
-            <a class="btn btn-warning" href="{{ path('log_index',{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
-            <br><br>
+                    </div>
+
+                    <br>
+                    <a class="btn btn-primary" href="{{ path('log_edit', { 'id2': log.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+                    <a class="btn btn-warning" href="{{ path('log_index',{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+                    <br><br>
                     {{ form_start(delete_form) }}
                     <input class="btn btn-danger" type="submit" value="Delete">
                     {{ form_end(delete_form) }}
-                 </div>
+                </div>
             </div>
         </div>
     </div>

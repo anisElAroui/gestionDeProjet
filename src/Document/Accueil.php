@@ -35,11 +35,6 @@ class Accueil
     /**
      * @MongoDB\Field(type="date")
      */
-    protected $year;
-
-    /**
-     * @MongoDB\Field(type="date")
-     */
     protected $realStartDate;
 
     /**

@@ -2,37 +2,35 @@
 
 {% block main_content %}
 
-
     <div class="container">
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
-                  <h1>Report</h1>
+                    <h1>Report</h1>
 
-    <div class="table-responsive">
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>conclusion</th>
-                <td>{{ report.conclusion }}</td>
-            </tr>
-            <tr>
-                <th>lesson</th>
-                <td>{{ report.lesson }}</td>
-            </tr>
-            <tr>
-                <th>assets</th>
-                <td>{{ report.assets }}</td>
-            </tr>
-        </tbody>
-    </table>           
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>conclusion</th>
+                                    <td>{{ report.conclusion }}</td>
+                                </tr>
+                                <tr>
+                                    <th>lesson</th>
+                                    <td>{{ report.lesson }}</td>
+                                </tr>
+                                <tr>
+                                    <th>assets</th>
+                                    <td>{{ report.assets }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-    </div>
-            
-            <br>
-            <a class="btn btn-primary" href="{{ path('report_edit', {'id2': report.id,'id1': charter.id}) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
-            <a class="btn btn-warning" href="{{ path('report_index',{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
-            <br><br>
+                    <br>
+                    <a class="btn btn-primary" href="{{ path('report_edit', {'id2': report.id,'id1': charter.id}) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+                    <a class="btn btn-warning" href="{{ path('report_index',{ 'id': charter.id }) }}"><i class="glyphicon glyphicon-arrow-left"></i> Back to the list</a>
+                    <br><br>
                     {{ form_start(delete_form) }}
                     <input class="btn btn-danger" type="submit" value="Delete">
                     {{ form_end(delete_form) }}

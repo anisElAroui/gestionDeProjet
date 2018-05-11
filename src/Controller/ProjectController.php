@@ -10,26 +10,14 @@ namespace App\Controller;
 
 use App\Document\Notification;
 use App\Document\Project;
+use App\Document\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Form\AccueilType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class ProjectController extends Controller
 {
-
-    /**
-     * @Route("/project", name="project_index")
-     * @Method({"GET"})
-     */
-    public function indexAction(Request $request)
-    {
-        $charters = $this->get('doctrine_mongodb')->getRepository('App\Document\Charter\Charter')->findAll();
-
-        return $this->render('Accueil/index.html.twig', ['charters' => $charters,]);
-    }
-
 
     /**
      * @Route("/project/add", name="add_new_project")
@@ -43,14 +31,10 @@ class ProjectController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $dm = $this->get('doctrine_mongodb')->getManager();
-            $notification = new Notification();
-            $notification->setReceiver($project->getProjectManager());
-            $notification->setProjectName($project->getProjectName());
-            $notification->setDescription("prepare charter");
-            $notification->setFlag(true);
-            $notification->setType("Charter");
-            $date = new \DateTime();
-            $notification->setCreatedAt($date);
+
+            $receiver = $project->getProjectManager();
+            $notification = $this->sendNotification($project, "prepare charter",$receiver,"Charter");
+
             $dm->persist($project);
             $dm->persist($notification);
             $dm->flush();
@@ -63,70 +47,18 @@ class ProjectController extends Controller
         ));
     }
 
-
-    /**
-     * @Route("/project/{id}/show", name="project_show")
-     * @Method({"GET","DELETE"})
-     */
-    public function showAction(Request $request, $id)
+    public function sendNotification(Project $project,String $description,User $receiver,String $type)
     {
-        $dm = $this->get('doctrine_mongodb')->getManager();
+        $notification = new Notification();
+        $notification->setReceiver($project->getProjectManager());
+        $notification->setProjectName($project->getProjectName());
+        $notification->setDescription($description);
+        $notification->setFlag(true);
+        $notification->setType("Charter");
+        $date = new \DateTime();
+        $notification->setCreatedAt($date);
+        $notification->setReceiver($receiver);
 
-        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        $deleteForm->handleRequest($request);
-
-        if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
-            $dm->remove($charter);
-            $dm->flush();
-
-            return $this->redirectToRoute('project_index');
-        }
-
-
-        return $this->render('Accueil/show.html.twig', array(
-            'charter' => $charter,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $notification;
     }
-
-
-    /**
-     *
-     * @Route("/project/{id}/edit", name="project_edit")
-     * @Method({"GET","POST"})
-     */
-    public function editAction(Request $request, $id)
-    {
-        $dm = $this->get('doctrine_mongodb')->getManager();
-        $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
-
-        $editForm = $this->createForm('App\Form\AccueilType', $charter);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $dm->persist($charter);
-            $dm->flush();
-
-            return $this->redirectToRoute('project_show', array('id' => $id));
-        }
-
-        return $this->render('Accueil/edit.html.twig', array(
-            'charter' => $charter,
-            'edit_form' => $editForm->createView(),
-        ));
-    }
-
-
-    private function createDeleteForm(string $id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('project_show', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->getForm()
-            ;
-    }
-
 }

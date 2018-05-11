@@ -17,16 +17,11 @@ use App\Document\Charter\Requirement;
 use App\Document\Charter\Deliverables;
 use App\Document\Charter\Stakeholder;
 use App\Document\Charter\Budget;
-use App\Document\Negociation;
 use App\Document\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use DateTime;
-use Doctrine\ODM\MongoDB\DocumentManager;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
 
 class CharterController extends Controller
 {
@@ -67,13 +62,7 @@ class CharterController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $dm = $this->get('doctrine_mongodb')->getManager();
-
-            // cette newAction ne s'effectue que par le PM
-//            $user = $this->getUser();
-//            $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('projectName' => $charter->getProjectName(),'receiver' => $user->getUsername(),'flag'=>true));
-//            $notification->setFlag(false);
             $notification = $this->removeNotification($charter);
-
             $dm->persist($charter);
             $dm->persist($notification);
             $dm->flush();
@@ -107,17 +96,7 @@ class CharterController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // envoyer notification au PMO
             if($step == 6){
-//                $user = $this->getUser();
-//                $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('projectName' => $charter->getProjectName(),'receiver' => $user->getUsername(),'flag'=>false));
-//                $notification->setFlag(true);
-//                $notification->setDescription("complete charter");
-//                $notification->setCharterId($charter->getId());
-//                $notification->setCreatedAt(new \DateTime());
-//
-//                // à modifier $user ici pour avoir le pmo
-//                $notification->setReceiver($user);
                 $receiver = $this->getUser(); // à changer selon le receiver= PMO
                 $notification = $this->sendNotification($charter, "complete charter",$receiver,"Charter");
                 $dm->persist($notification);
@@ -140,22 +119,13 @@ class CharterController extends Controller
                 if ($this->getUser() == $charter->getProjectManager()) {
                     $receiver = $charter->getProjectManager(); // PM
                     $notification = $this->sendNotification($charter, "budget negociation", $receiver, "Negociation");
-
                     // envoyer notif au PM pour la negociation
-//                $user = $this->getUser();
-//                $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('projectName' => $charter->getProjectName(),'receiver' => $user->getUsername()));
-//                $notification->setFlag(true);
-//                $notification->setDescription("budget negociation");
-//                $notification->setReceiver($charter->getProjectManager());
-                    // le type est créer pour differencier lors du comptage des notif
-//                $notification->setType("Negociation");
                     $dm->persist($notification);
                     $dm->flush();
                 }
 
                 return $this->redirectToRoute('charter_show', array('id' => $id));
             }
-
             // lors des autres submit
             return $this->redirectToRoute('charter_edit', array('id' => $id));
         }
@@ -233,54 +203,9 @@ class CharterController extends Controller
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id);
 
         $negociation = $dm->getRepository("App\Document\Negociation")->findOneBy(array('charterId'=>$id));
-//        if ($negociation == null){
-//            $NegociationController = new NegociationController();
-//            $NegociationController->newAction($request,$id);
-//        }else{
-//            $NegociationController = new NegociationController();
-//            $NegociationController->editAction($request,$id);
-//        }
-
-
-//        $negociation = new Negociation();
-//        $form = $this->createForm('App\Form\NegociationType', $negociation);
-//        $form->handleRequest($request);
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            // si PM a envoyé la negociation enlever notif et envoyer notif au PMO (les 2 avec un send)
-//            if ($this->getUser() == $charter->getProjectManager()) {
-//                $receiver = $this->getUser(); // changer le receiver par PMO
-//                $notification = $this->sendNotification($charter, "budget decision", $receiver, "Negociation");
-////                $negociation->setCharterId($charter->getId());
-//            }
-//
-//            // si PMO a envoyé la decision enlever notif et envoyer notif au PM (les 2 avec un send)
-//            if ($this->getUser() != $charter->getProjectManager()) {
-//                $receiver = $this->getUser(); // changer le receiver par PM
-//                // cdt si  project validated car budget edit se trouve dans editAction en boucle
-//                $notification = $this->sendNotification($charter, "project validated", $receiver, "Charter");
-//            }
-//              // code de dessous fonctionne
-//            $dm = $this->get('doctrine_mongodb')->getManager();
-//            // enlever notif pour pm en changeant le user et envoyer notif au PMO
-//            $user = $this->getUser();
-//            $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('projectName' => $charter->getProjectName(), 'receiver' => $user->getUsername(), 'flag' => true));
-//            // changer $user avec PMO sans mettre le flag à false
-//            $notification->setReceiver($user);
-//            $negociation->setCharterId($charter->getId());
-//            // if user=PM submitted setDescription budget decision et enlever notif et envoyé au PMO
-//            $notification->setDescription("budget decision");
-//            // if user=PMO submitted donc setDescription validate et enlever notif et envoyé au PM(à faire)
-//            $dm->persist($notification);
-//            $dm->persist($negociation);
-//            $dm->flush();
-//            return $this->redirectToRoute('charter_show5', array('id' => $charter->getId()));
-//        }
-
         return $this->render('Charter/show5.html.twig', array(
             'charter' => $charter,
             'negociation' => $negociation,
-//            'form' => $form->createView(),
-
         ));
     }
 

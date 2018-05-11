@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block javascripts %}
+
     <!-- validation -->
     <script src="{{ asset('lib/validation/jquery.validate.min.js') }}"></script>
     <!-- wizard -->
@@ -13,496 +14,443 @@
     <!-- wizard functions -->
     <script src="{{ asset('js/pages/gebo_wizard.js') }}"></script>
 
-
-    <script>
-    var $collectionHolder;
-
-    // setup an "add a tag" link
-    var $addRequirementLink = $('<a href="#" class="add_requirement_link">Add a highLevelRequirement</a>');
-    var $newLinkLi = $('<li></li>').append($addRequirementLink);
-
-
-    jQuery(document).ready(function() {
-    // Get the ul that holds the collection of tags
-    $collectionHolder = $('ul.requirements');
-
-    // add the "add a highLevelRequirement" anchor and li to the tags ul
-    $collectionHolder.append($newLinkLi);
-
-    // count the current form inputs we have (e.g. 2), use that as the new
-    // index when inserting a new item (e.g. 2)
-    $collectionHolder.data('index', $collectionHolder.find(':input').length);
-
-    $addRequirementLink.on('click', function(e) {
-    // prevent the link from creating a "#" on the URL
-    e.preventDefault();
-
-    // add a new tag form (see next code block)
-    addRequimentForm($collectionHolder, $newLinkLi);
-    });
-
-    function addRequimentForm($collectionHolder, $newLinkLi) {
-    // Get the data-prototype explained earlier
-    var prototype = $collectionHolder.data('prototype');
-
-    // get the new index
-    var index = $collectionHolder.data('index');
-
-    var newForm = prototype;
-    // You need this only if you didn't set 'label' => false in your tags field in TaskType
-    // Replace '__name__label__' in the prototype's HTML to
-    // instead be a number based on how many items we have
-    //newForm = newForm.replace(/__name__label__/g, index);
-
-    // Replace '__name__' in the prototype's HTML to
-    // instead be a number based on how many items we have
-    newForm = newForm.replace(/__name__/g, index);
-
-    // increase the index with one for the next item
-    $collectionHolder.data('index', index + 1);
-
-    // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = $('<li></li>').append(newForm);
-    $newLinkLi.before($newFormLi);
-    }
-
-
-    });
-
+    <script src="{{ asset('forms/js/jquery.collection.js') }}"></script>
+    <script type="text/javascript">
+        $('.collection-selector').collection();
     </script>
+    {#<script>#}
+    {#var $collectionHolder;#}
+
+    {#// setup an "add a tag" link#}
+    {#var $addRequirementLink = $('<a href="#" class="add_requirement_link">Add a highLevelRequirement</a>');#}
+    {#var $newLinkLi = $('<li></li>').append($addRequirementLink);#}
 
 
+    {#jQuery(document).ready(function() {#}
+    {#// Get the ul that holds the collection of tags#}
+    {#$collectionHolder = $('ul.requirements');#}
+
+    {#// add the "add a highLevelRequirement" anchor and li to the tags ul#}
+    {#$collectionHolder.append($newLinkLi);#}
+
+    {#// count the current form inputs we have (e.g. 2), use that as the new#}
+    {#// index when inserting a new item (e.g. 2)#}
+    {#$collectionHolder.data('index', $collectionHolder.find(':input').length);#}
+
+    {#$addRequirementLink.on('click', function(e) {#}
+    {#// prevent the link from creating a "#" on the URL#}
+    {#e.preventDefault();#}
+
+    {#// add a new tag form (see next code block)#}
+    {#addRequimentForm($collectionHolder, $newLinkLi);#}
+    {#});#}
+
+    {#function addRequimentForm($collectionHolder, $newLinkLi) {#}
+    {#// Get the data-prototype explained earlier#}
+    {#var prototype = $collectionHolder.data('prototype');#}
+
+    {#// get the new index#}
+    {#var index = $collectionHolder.data('index');#}
+
+    {#var newForm = prototype;#}
+    {#// You need this only if you didn't set 'label' => false in your tags field in TaskType#}
+    {#// Replace '__name__label__' in the prototype's HTML to#}
+    {#// instead be a number based on how many items we have#}
+    {#//newForm = newForm.replace(/__name__label__/g, index);#}
+
+    {#// Replace '__name__' in the prototype's HTML to#}
+    {#// instead be a number based on how many items we have#}
+    {#newForm = newForm.replace(/__name__/g, index);#}
+
+    {#// increase the index with one for the next item#}
+    {#$collectionHolder.data('index', index + 1);#}
+
+    {#// Display the form in the page in an li, before the "Add a tag" link li#}
+    {#var $newFormLi = $('<li></li>').append(newForm);#}
+    {#$newLinkLi.before($newFormLi);#}
+    {#}#}
+
+
+    {#});#}
+
+    {#</script>#}
 {% endblock %}
 
 {% block main_content %}
 
     <div class="container">
-    <div class="row">
-    <div class="col-sm-12 col-md-12">
-    <h2 class="heading">Charter creation</h2>
-    <div class="row">
-    <div class="col-sm-12 col-md-12">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <h2 class="heading">Charter creation</h2>
 
+
+                    {% form_theme form 'Form/jquery.collection.html.twig' %}
                     {{ form_start(form, {'attr': {'novalidate': 'novalidate','id':'simple_wizard','class': 'stepy-wizzard form-horizontal' }}) }}
                     {{ form_widget(form._token) }}
 
-            <fieldset title="Project and Product Overview">
-                <legend class="hide">....</legend>
+                    <fieldset title="Project and Product Overview">
+                        <legend class="hide">....</legend>
 
-                <div  class=" formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">Title</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.title,  {'attr': {'required':'required','class':'input-sm form-control'} }) }}
-                            {{ form_errors(form.title) }}
-                        </div>
-                    </div><br>
-
-
-                    <h4> 1- Project Identification</h4>
-                {#<h4>{{ 'project.identification'|trans }}</h4>#}
-
-                <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">Project Name</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.projectName,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.projectName) }}
-                        </div>
-                    </div>
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">Project Manager</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.projectManager,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.projectManager) }}
-                        </div>
-                    </div>
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary"> Project Internal Refrances</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.projectInternalRefrances,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.projectInternalRefrances) }}
-                        </div>
-                    </div>
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">Final Client </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.finalClient,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.finalClient) }}
-                        </div>
-                    </div>
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">Client</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.client,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.client) }}
-                        </div>
-                    </div><br>
-
-                    <h4> 2- Project Description</h4>
-
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary"> Project Description</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.projectDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.projectDescription) }}
-                        </div>
-                    </div><br>
-
-                    <h4> 3- Project repository</h4>
-
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary"> Project Repository</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.projectRepository,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.projectRepository) }}
-                        </div>
-                    </div><br>
+                            <div  class=" formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">Title</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(form.title,  {'attr': {'required':'required','class':'input-sm form-control'} }) }}
+                                        {{ form_errors(form.title) }}
+                                    </div>
+                            </div><br>
 
 
-            </fieldset>
+                                <h4> 1- Project Identification</h4>
+                            {#<h4>{{ 'project.identification'|trans }}</h4>#}
 
-            <fieldset title="Project scope">
-                <legend class="hide">....</legend>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">Project Name</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(form.projectName,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(form.projectName) }}
+                                    </div>
+                            </div>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">Project Manager</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(form.projectManager,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(form.projectManager) }}
+                                    </div>
+                            </div>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary"> Project Internal Refrances</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(form.projectInternalRefrances,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(form.projectInternalRefrances) }}
+                                    </div>
+                            </div>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">Final Client </span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(form.finalClient,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(form.finalClient) }}
+                                    </div>
+                            </div>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">Client</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(form.client,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(form.client) }}
+                                    </div>
+                            </div><br>
 
+                            <h4> 2- Project Description</h4>
 
-                <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">objectives</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.objectives,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.objectives) }}
-                        </div>
-                    </div><br>
-                <div  class=" form-group">
-                    <label class="col-sm-3 control-label" ><span class="label label-primary">High Level Requirement</span></label>
-                    <div class="col-sm-7">
-                        <ul class="requirements" data-prototype="{{ form_widget(form.requirements.vars.prototype)|e('html_attr') }}"data-index="{{ form.requirements|length }}">
-                            {% for requirement in form.requirements %}
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary"> Project Description</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(form.projectDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(form.projectDescription) }}
+                                    </div>
+                            </div><br>
 
-                                {{ form_widget(requirement.highLevelRequirement,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                {{ form_errors(requirement.highLevelRequirement) }}
+                            <h4> 3- Project repository</h4>
 
+                            <div  class="form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary"> Project Repository</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(form.projectRepository,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(form.projectRepository) }}
+                                    </div>
+                            </div><br>
+                    </fieldset>
+
+                    <fieldset title="Project scope">
+                        <legend class="hide">....</legend>
+                            <div  class="formSep form-group">
+                                    <label class="col-sm-3 control-label" ><span class="label label-primary">objectives</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(form.objectives,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(form.objectives) }}
+                                    </div>
+                            </div><br>
+                            <div  class=" form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">High Level Requirement</span></label>
+                                <div class="col-sm-7">
+                                    {#<ul class="requirements" data-prototype="{{ form_widget(form.requirements.vars.prototype)|e('html_attr') }}"data-index="{{ form.requirements|length }}">#}
+                                        {#{% for requirement in form.requirements %}#}
+
+                                            {#{{ form_widget(requirement.highLevelRequirement,  {'attr': {'required':'required','class':'form-control'} }) }}#}
+                                            {#{{ form_errors(requirement.highLevelRequirement) }}#}
+
+                                        {#{% endfor %}#}
+                                    {#</ul>#}
+                                    {{ form_widget(form.requirements,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(form.requirements) }}
+                                </div>
+                            </div>
+                    </fieldset>
+                    <fieldset title="Major Deliverables">
+                        <legend class="hide">....</legend>
+                            {% for deliverable in form.deliverables %}
+                                <div  class="formSep form-group">
+
+                                    <label class="col-sm-3 control-label" ><span class="label label-primary">Major Deliverables</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(deliverable.majorDeliverables,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(deliverable.majorDeliverables) }}
+                                    </div>
+                                </div>
+                                <div  class=" form-group">
+
+                                    <label class="col-sm-3 control-label" ><span class="label label-primary">Deliverables Description</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(deliverable.deliverablesDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(deliverable.deliverablesDescription) }}
+                                    </div>
+                                </div>
                             {% endfor %}
-
-                        </ul>
-                    </div>
-
-                </div>
-            </fieldset>
-            <fieldset title="Major Deliverables">
-                <legend class="hide">....</legend>
-
-
-
-
-                {% for deliverable in form.deliverables %}
-                    <div  class="formSep form-group">
-
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">Major Deliverables</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(deliverable.majorDeliverables,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(deliverable.majorDeliverables) }}
-                        </div>
-                    </div>
-                    <div  class=" form-group">
-
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">Deliverables Description</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(deliverable.deliverablesDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(deliverable.deliverablesDescription) }}
-                        </div>
-                    </div>
+                            <br><br>
+                    </fieldset>
+                    <fieldset title="Project Milestones & Waving">
+                        <legend class="hide">....</legend>
+                            {% for milestone in form.milestones %}
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">Executive Milestones </span></label>
+                                        <div class="col-sm-7">
+                                        {{ form_widget(milestone.executiveMilestones,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(milestone.executiveMilestones) }}
+                                        </div>
+                            </div>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedDuration </span></label>
+                                        <div class="col-sm-7">
+                                        {{ form_widget(milestone.estimatedDuration,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(milestone.estimatedDuration) }}
+                                        </div>
+                            </div>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedCompletionTimeframe</span></label>
+                                        <div class="col-sm-7">
+                                        {{ form_widget(milestone.estimatedCompletionTimeframe) }}
+                                        {{ form_errors(milestone.estimatedCompletionTimeframe) }}
+                                        </div>
+                            </div>
+                            <div  class="form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">comments </span></label>
+                                        <div class="col-sm-7">
+                                        {{ form_widget(milestone.comments,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(milestone.comments) }}
+                                        </div>
+                            </div>
                             {% endfor %}
+                            <br><br><br>
+                    </fieldset>
+                    <fieldset title="Constraints, Assumptions">
+                        <legend class="hide">....</legend>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">constraints</span></label>
+                                    <div class="col-sm-7">
+                                        {% for constraint in form.constraints %}
 
+                                        {{ form_widget(constraint.constraints,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(constraint.constraints) }}
 
+                                        {% endfor %}
+                                    </div>
+                            </div>
+                            <br>
+                            <div  class="form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">assumptions</span></label>
+                                    <div class="col-sm-7">
+                                        {% for assumption in form.assumptions %}
 
+                                            {{ form_widget(assumption.assumptions,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                            {{ form_errors(assumption.assumptions) }}
 
-                    <br><br>
-
-            </fieldset>
-            <fieldset title="Project Milestones & Waving">
-                <legend class="hide">....</legend>
-
-
-
-
-                {% for milestone in form.milestones %}
-
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">Executive Milestones </span></label>
-                                <div class="col-sm-7">
-                                {{ form_widget(milestone.executiveMilestones,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                {{ form_errors(milestone.executiveMilestones) }}
-                                </div>
-                    </div>
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedDuration </span></label>
-                                <div class="col-sm-7">
-                                {{ form_widget(milestone.estimatedDuration,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                {{ form_errors(milestone.estimatedDuration) }}
-                                </div>
-                    </div>
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedCompletionTimeframe</span></label>
-                                <div class="col-sm-7">
-                                {{ form_widget(milestone.estimatedCompletionTimeframe) }}
-                                {{ form_errors(milestone.estimatedCompletionTimeframe) }}
-                                </div>
-                    </div>
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">comments </span></label>
-                                <div class="col-sm-7">
-                                {{ form_widget(milestone.comments,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                {{ form_errors(milestone.comments) }}
-                                </div>
-                    </div>
-
-                {% endfor %}
-
-
-
-                    <br><br><br>
-            </fieldset>
-            <fieldset title="Constraints, Assumptions">
-                <legend class="hide">....</legend>
-
-
-
-
-                <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">constraints</span></label>
-                        <div class="col-sm-7">
-                            {% for constraint in form.constraints %}
-
-                            {{ form_widget(constraint.constraints,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(constraint.constraints) }}
-
+                                        {% endfor %}
+                                     </div>
+                            </div>
+                            <br>
+                    </fieldset>
+                    <fieldset title="Stakeholders">
+                        <legend class="hide">....</legend>
+                            {% for stakeholder in form.stakeholders %}
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">stakeholderName</span></label>
+                                            <div class="col-sm-7">
+                                                {{ form_widget(stakeholder.name,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                                {{ form_errors(stakeholder.name) }}
+                                            </div>
+                            </div>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">stakeholderRole </span></label>
+                                            <div class="col-sm-7">
+                                                {{ form_widget(stakeholder.role,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                                {{ form_errors(stakeholder.role) }}
+                                            </div>
+                            </div>
+                            <div  class="formSep form-group">
+                            <label class="col-sm-3 control-label" ><span class="label label-primary">email </span></label>
+                                            <div class="col-sm-7">
+                                                {{ form_widget(stakeholder.email,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                                {{ form_errors(stakeholder.email) }}
+                                            </div>
+                            </div>
+                            <div  class="form-group">
+                            <label class="col-sm-3 control-label" ><span class="label label-primary">phoneNumber </span></label>
+                                            <div class="col-sm-7">
+                                                    {{ form_widget(stakeholder.phoneNumber,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                                    {{ form_errors(stakeholder.phoneNumber) }}
+                                            </div>
+                            </div>
                             {% endfor %}
-                        </div>
-                    </div>
+                            <br>
+                    </fieldset>
+                    <fieldset title="Project Budget 1">
+                        <legend class="hide">....</legend>
+                            <h4> 1- Incomes (€)</h4>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">budget</span></label>
+                                <div class="col-sm-7">
+                                    {{ form_widget(form.budget,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(form.budget) }}
+                                </div>
+                            </div>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">incomesManDayAffectation </span></label>
+                                <div class="col-sm-7">
+                                    {{ form_widget(form.incomesManDayAffection,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(form.incomesManDayAffection) }}
+                                </div>
+                            </div>
 
-                    <br>
+                            <h4> 2. Expenses (€)</h4>
 
-                    <div  class="form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">assumptions</span></label>
-                        <div class="col-sm-7">
-                            {% for assumption in form.assumptions %}
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">agreedWageExpenses </span></label>
+                                <div class="col-sm-7">
+                                    {{ form_widget(form.agreedWageExpenses,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(form.agreedWageExpenses) }}
+                                </div>
+                            </div>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">plannedExpensesBudget </span></label>
+                                <div class="col-sm-7">
+                                    {{ form_widget(form.plannedExpensesBudget,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(form.plannedExpensesBudget) }}
+                                </div>
+                            </div>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">targetProfitability </span></label>
+                                <div class="col-sm-7">
+                                    {{ form_widget(form.targetProfitability,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(form.targetProfitability) }}
+                                </div>
+                            </div>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">thresholdProfitability </span></label>
+                                <div class="col-sm-7">
+                                    {{ form_widget(form.thresholdProfitability,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(form.thresholdProfitability) }}
+                                </div>
+                            </div>
+                            <div  class=" form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">expensesManDayAffectation </span></label>
+                                <div class="col-sm-7">
+                                    {{ form_widget(form.expensesManDayAffection,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(form.expensesManDayAffection) }}
+                                </div>
+                            </div><br><br>
+                    </fieldset>
+                    <fieldset title="Project Budget 2">
+                        <legend class="hide">....</legend>
+                            {% for budget in form.budgets %}
+                                <div  class="formSep form-group">
 
-                                {{ form_widget(assumption.assumptions,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                {{ form_errors(assumption.assumptions) }}
-
+                                    <label class="col-sm-3 control-label" ><span class="label label-primary">profile </span></label>
+                                        <div class="col-sm-7">
+                                            {{ form_widget(budget.profile,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                            {{ form_errors(budget.profile) }}
+                                        </div>
+                                </div>
+                                <div  class="formSep form-group">
+                                    <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedDurationBudget </span></label>
+                                        <div class="col-sm-7">
+                                            {{ form_widget(budget.estimatedDurationBudget,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                            {{ form_errors(budget.estimatedDurationBudget) }}
+                                        </div>
+                                </div>
+                                <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedCost </span></label>
+                                        <div class="col-sm-7">
+                                            {{ form_widget(budget.estimatedCost,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                            {{ form_errors(budget.estimatedCost) }}
+                                        </div>
+                                </div>
+                                <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">budgetComments </span></label>
+                                        <div class="col-sm-7">
+                                            {{ form_widget(budget.budgetComments,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                            {{ form_errors(budget.budgetComments) }}
+                                        </div>
+                                </div>
+                                <div  class="form-group">
+                                        <label class="col-sm-3 control-label" ><span class="label label-primary">projectBudgetType </span></label>
+                                        <div class="col-sm-7">
+                                            {{ form_widget(budget.projectBudgetType,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                            {{ form_errors(budget.projectBudgetType) }}
+                                        </div>
+                                </div>
                             {% endfor %}
-                         </div>
-                    </div>
-
-
-                    <br>
-            </fieldset>
-            <fieldset title="Stakeholders">
-                <legend class="hide">....</legend>
-
-
-
-                {% for stakeholder in form.stakeholders %}
-                <div  class="formSep form-group">
-                    <label class="col-sm-3 control-label" ><span class="label label-primary">stakeholderName</span></label>
+                            <br><br>
+                    </fieldset>
+                    <fieldset title="Billing">
+                        <legend class="hide">....</legend>
+                            <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">billingResponsible </span></label>
                                 <div class="col-sm-7">
-                                    {{ form_widget(stakeholder.name,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                    {{ form_errors(stakeholder.name) }}
+                                    {{ form_widget(form.billingResponsible,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_errors(form.billingResponsible) }}
                                 </div>
-                </div>
-                <div  class="formSep form-group">
-                    <label class="col-sm-3 control-label" ><span class="label label-primary">stakeholderRole </span></label>
-                                <div class="col-sm-7">
-                                    {{ form_widget(stakeholder.role,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                    {{ form_errors(stakeholder.role) }}
+                            </div>
+
+                            {% for billing in form.billings %}
+                                <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">billingDescription</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(billing.billingDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(billing.billingDescription) }}
+                                    </div>
                                 </div>
-                </div>
-                <div  class="formSep form-group">
-                <label class="col-sm-3 control-label" ><span class="label label-primary">email </span></label>
-                                <div class="col-sm-7">
-                                    {{ form_widget(stakeholder.email,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                    {{ form_errors(stakeholder.email) }}
+                                <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">billingAmount</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(billing.billingAmount,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                        {{ form_errors(billing.billingAmount) }}
+                                    </div>
                                 </div>
-                </div>
-                <div  class="form-group">
-                <label class="col-sm-3 control-label" ><span class="label label-primary">phoneNumber </span></label>
-                                <div class="col-sm-7">
-                                        {{ form_widget(stakeholder.phoneNumber,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                        {{ form_errors(stakeholder.phoneNumber) }}
+                                <div  class="formSep form-group">
+                                <label class="col-sm-3 control-label" ><span class="label label-primary">billingPlanedDate</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(billing.billingPlanedDate) }}
+                                        {{ form_errors(billing.billingPlanedDate) }}
+                                    </div>
                                 </div>
-                </div>
-
-                {% endfor %}
-
-
-                    <br>
-
-            </fieldset>
-            <fieldset title="Project Budget 1">
-                <legend class="hide">....</legend>
-
-
-                <h4> 1- Incomes (€)</h4>
-
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">budget</span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.budget,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.budget) }}
-                        </div>
-                    </div>
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">incomesManDayAffectation </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.incomesManDayAffection,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.incomesManDayAffection) }}
-                        </div>
-                    </div>
-
-                    <h4> 2. Expenses (€)</h4>
-
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">agreedWageExpenses </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.agreedWageExpenses,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.agreedWageExpenses) }}
-                        </div>
-                    </div>
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">plannedExpensesBudget </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.plannedExpensesBudget,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.plannedExpensesBudget) }}
-                        </div>
-                    </div>
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">targetProfitability </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.targetProfitability,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.targetProfitability) }}
-                        </div>
-                    </div>
-                    <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">thresholdProfitability </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.thresholdProfitability,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.thresholdProfitability) }}
-                        </div>
-                    </div>
-                    <div  class=" form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">expensesManDayAffectation </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.expensesManDayAffection,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.expensesManDayAffection) }}
-                        </div>
-                    </div><br><br>
-
-            </fieldset>
-            <fieldset title="Project Budget 2">
-                <legend class="hide">....</legend>
-
-
-                {% for budget in form.budgets %}
-                <div  class="formSep form-group">
-
-                    <label class="col-sm-3 control-label" ><span class="label label-primary">profile </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(budget.profile,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(budget.profile) }}
-                        </div>
-                </div>
-                <div  class="formSep form-group">
-                    <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedDurationBudget </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(budget.estimatedDurationBudget,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(budget.estimatedDurationBudget) }}
-                        </div>
-                </div>
-                <div  class="formSep form-group">
-                <label class="col-sm-3 control-label" ><span class="label label-primary">estimatedCost </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(budget.estimatedCost,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(budget.estimatedCost) }}
-                        </div>
-                </div>
-                <div  class="formSep form-group">
-                <label class="col-sm-3 control-label" ><span class="label label-primary">budgetComments </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(budget.budgetComments,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(budget.budgetComments) }}
-                        </div>
-                </div>
-                <div  class="form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">projectBudgetType </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(budget.projectBudgetType,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(budget.projectBudgetType) }}
-                        </div>
-                </div>
-                    {% endfor %}
-                    <br>
-                    <br>
-
-            </fieldset>
-            <fieldset title="Billing">
-                <legend class="hide">....</legend>
-
-
-                <div  class="formSep form-group">
-                        <label class="col-sm-3 control-label" ><span class="label label-primary">billingResponsible </span></label>
-                        <div class="col-sm-7">
-                            {{ form_widget(form.billingResponsible,  {'attr': {'required':'required','class':'form-control'} }) }}
-                            {{ form_errors(form.billingResponsible) }}
-                        </div>
-                    </div>
-
-                {% for billing in form.billings %}
-                <div  class="formSep form-group">
-                <label class="col-sm-3 control-label" ><span class="label label-primary">billingDescription</span></label>
-                    <div class="col-sm-7">
-                        {{ form_widget(billing.billingDescription,  {'attr': {'required':'required','class':'form-control'} }) }}
-                        {{ form_errors(billing.billingDescription) }}
-                    </div>
-                </div>
-                <div  class="formSep form-group">
-                <label class="col-sm-3 control-label" ><span class="label label-primary">billingAmount</span></label>
-                    <div class="col-sm-7">
-                        {{ form_widget(billing.billingAmount,  {'attr': {'required':'required','class':'form-control'} }) }}
-                        {{ form_errors(billing.billingAmount) }}
-                    </div>
-                </div>
-                <div  class="formSep form-group">
-                <label class="col-sm-3 control-label" ><span class="label label-primary">billingPlanedDate</span></label>
-                    <div class="col-sm-7">
-                        {{ form_widget(billing.billingPlanedDate) }}
-                        {{ form_errors(billing.billingPlanedDate) }}
-                    </div>
-                </div>
-                <div  class="form-group">
-                    <label class="col-sm-3 control-label" ><span class="label label-primary">billingDeliveredDate</span></label>
-                    <div class="col-sm-7">
-                        {{ form_widget(billing.billingDeliveredDate) }}
-                        {{ form_errors(billing.billingDeliveredDate) }}
-                    </div>
-                </div>
-                {% endfor %}
-
-
-            </fieldset>
-
-            <button type="submit" class="finish btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Send registration</button>
+                                <div  class="form-group">
+                                    <label class="col-sm-3 control-label" ><span class="label label-primary">billingDeliveredDate</span></label>
+                                    <div class="col-sm-7">
+                                        {{ form_widget(billing.billingDeliveredDate) }}
+                                        {{ form_errors(billing.billingDeliveredDate) }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                    </fieldset>
+                        <button type="submit" class="finish btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Send registration</button>
                     {{ form_end(form) }}
 
-            {% if charter.id is not null %}
-            <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> Go to charter</a>
-            {% endif %}
+                    {% if charter.id is not null %}
+                    <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> Go to charter</a>
+                    {% endif %}
 
-                </div>
             </div>
         </div>
     </div>
-    </div>
-
-
     <script>
         window.onload = function() {
             $('#simple_wizard-title-'+'{{step-1}}').trigger('click');

@@ -37,12 +37,17 @@ class CharterType extends AbstractType
             ->add('projectDescription', TextareaType::class)
             ->add('projectRepository', TextareaType::class)
             ->add('objectives', TextareaType::class)
-            ->add('requirements',customRequirementTypesCollectionType::class, array(
+            ->add('requirements',CollectionType::class, array(
                 'entry_type' => RequirementType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'entry_options' => array('label' => false)
-                ))
+                'entry_options' => array('label' => false),
+                'prototype' => true,
+                'by_reference' => false,
+                'attr' => array(
+                    'class' => 'collection-selector',
+                ),
+            ))
             ->add('deliverables',CollectionType::class, array(
                 'entry_type' => DeliverableType::class,
                 'allow_add' => true,
