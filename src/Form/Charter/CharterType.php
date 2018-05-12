@@ -1,19 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anis
- * Date: 05/04/18
- * Time: 11:23
- */
 
 namespace App\Form\Charter;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Doctrine\Bundle\MongoDBBundle\Form\Type\DocumentType;
 
 class CharterType extends AbstractType
 {
@@ -28,7 +20,6 @@ class CharterType extends AbstractType
             ->add('projectInternalRefrances')
             ->add('finalClient')
             ->add('client')
-            ->add('projectDescription', TextareaType::class)
             ->add('projectRepository', TextareaType::class)
             ->add('objectives', TextareaType::class)
             ->add('requirements',CollectionType::class, array(

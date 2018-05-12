@@ -26,7 +26,6 @@
                     </div>
                     <div class="col-sm-6 col-md-6">
 
-
                         <h3> 2. Expenses (€)</h3>
 
                     <p><strong class="text-muted">PMO agreed Wage expenses : </strong>{{ charter.agreedWageExpenses }}</p>
@@ -58,8 +57,11 @@
                                         <td>{{ budget.estimatedDurationBudget }}</td>
                                         <td>{{ budget.estimatedCost }}</td>
                                         <td>{{ budget.budgetComments }}</td>
-                                        <td>{{ budget.projectBudgetType }}</td>
-
+                                        {% if budget.expenses == 1 %}
+                                            <td> expenses </td>
+                                        {% elseif budget.incomes == 1 %}
+                                            <td> incomes </td>
+                                        {% endif  %}
                                     </tr>
                                 {% endfor %}
                                 </tbody>
@@ -121,7 +123,6 @@
 
     {# pour afficher le modal de négociation pour valider ou modifier budget #decision #}
     {{ render(controller('App\\Controller\\NegociationController::showAction', {'id':charter.id})) }}
-
 
 {% endblock %}
 

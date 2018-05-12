@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anis
- * Date: 28/03/18
- * Time: 10:30
- */
 
 namespace App\Form;
 use Doctrine\Bundle\MongoDBBundle\Form\Type\DocumentType;

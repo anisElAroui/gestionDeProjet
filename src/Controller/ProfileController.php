@@ -19,7 +19,7 @@ class ProfileController extends Controller
 {
 
     /**
-     * @Route("project/user", name="profile_show")
+     * @Route("profile", name="profile_show")
      * @Method({"GET"})
      */
     public function showAction()
@@ -35,7 +35,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("project/user/edit", name="profile_edit")
+     * @Route("profile/edit", name="profile_edit")
      * @Method({"GET","POST"})
      */
     public function editAction(Request $request)

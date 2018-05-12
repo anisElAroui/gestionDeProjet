@@ -1,19 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anis
- * Date: 10/04/18
- * Time: 22:55
- */
 
 namespace App\Form\Charter;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class BudgetType extends AbstractType
 {
@@ -28,12 +21,8 @@ class BudgetType extends AbstractType
             ->add('estimatedDurationBudget',MoneyType::class, array('attr' => array('class' => 'form-control'), 'required' => true))
             ->add('estimatedCost',MoneyType::class, array('attr' => array('class' => 'form-control'), 'required' => true))
             ->add('budgetComments',TextType::class, array('attr' => array('class' => 'form-control')))
-            ->add('projectBudgetType',ChoiceType::class, array(
-                'choices'  => array(
-                    'incomes' => null,
-                    'expenses' => null,
-                ),), array('attr' => array('class' => 'form-control'), 'required' => true));
-
+            ->add('expenses',CheckboxType::class,array('required' => false))
+            ->add('incomes',CheckboxType::class,array('required' => false));
     }
 
     /**

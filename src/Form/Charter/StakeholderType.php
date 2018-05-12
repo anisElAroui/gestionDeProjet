@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anis
- * Date: 03/04/18
- * Time: 15:39
- */
 
 namespace App\Form\Charter;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;

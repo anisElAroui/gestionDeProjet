@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anis
- * Date: 02/05/18
- * Time: 10:01
- */
 
 namespace App\Form;
 use Symfony\Component\Form\AbstractType;
@@ -35,7 +29,7 @@ class RiskOpportunityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Model\RiskOpportunity'
+            'data_class' => 'App\Document\RiskOpportunity'
         ));
     }
 }

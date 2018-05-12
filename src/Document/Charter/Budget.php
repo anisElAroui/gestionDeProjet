@@ -20,10 +20,16 @@ class Budget
      * @MongoDB\Id
      */
     protected $id;
+
     /**
-     * @MongoDB\Field(type="string")
+     * @MongoDB\Field(type="boolean")
      */
-    protected $projectBudgetType;
+    protected $expenses;
+
+    /**
+     * @MongoDB\Field(type="boolean")
+     */
+    protected $incomes;
 
     /**
      * @MongoDB\Field(type="string")
@@ -55,17 +61,33 @@ class Budget
     /**
      * @return mixed
      */
-    public function getProjectBudgetType()
+    public function getExpenses()
     {
-        return $this->projectBudgetType;
+        return $this->expenses;
     }
 
     /**
-     * @param mixed $projectBudgetType
+     * @param mixed $expenses
      */
-    public function setProjectBudgetType($projectBudgetType): void
+    public function setExpenses($expenses): void
     {
-        $this->projectBudgetType = $projectBudgetType;
+        $this->expenses = $expenses;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIncomes()
+    {
+        return $this->incomes;
+    }
+
+    /**
+     * @param mixed $incomes
+     */
+    public function setIncomes($incomes): void
+    {
+        $this->incomes = $incomes;
     }
 
     /**

@@ -66,6 +66,7 @@ class ProjectController extends Controller
     {
         $charter = new Charter();
         $charter->setProjectName($project->getProjectName());
+        $charter->setProjectDescription($project->getDescription());
         $charter->setProjectManager($project->getProjectManager());
         $charter->setSteps(0);
         return $charter;

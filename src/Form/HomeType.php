@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anis
- * Date: 12/05/18
- * Time: 00:26
- */
 
 namespace App\Form;
-use function PHPSTORM_META\type;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;

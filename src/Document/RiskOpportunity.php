@@ -6,7 +6,7 @@
  * Time: 09:30
  */
 
-namespace App\Model;
+namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
