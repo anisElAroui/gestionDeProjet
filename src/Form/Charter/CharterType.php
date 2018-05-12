@@ -25,12 +25,6 @@ class CharterType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('projectName')
-            ->add('projectManager', DocumentType::class, array(
-                'class'        => 'App\Document\User',
-                'choice_label' => 'username',
-                'multiple'     => false,
-            ))
             ->add('projectInternalRefrances')
             ->add('finalClient')
             ->add('client')
@@ -43,7 +37,6 @@ class CharterType extends AbstractType
                 'allow_delete' => true,
                 'entry_options' => array('label' => false),
                 'prototype' => true,
-                'by_reference' => false,
                 'attr' => array(
                     'class' => 'collection-selector',
                 ),

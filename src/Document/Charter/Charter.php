@@ -183,12 +183,16 @@ class Charter
      */
     protected $billings;
 
-
     /**
      * @MongoDB\Field(type="int")
      */
-
     protected $steps;
+
+    /**
+     *
+     * @MongoDB\ReferenceOne(targetDocument="App\Document\Project", storeAs="id")
+     */
+    protected $projectId;
 
     /**
      * Charter constructor.
@@ -203,8 +207,6 @@ class Charter
         $this->stakeholders = new ArrayCollection();
         $this->billings = new ArrayCollection();
         $this->budgets = new ArrayCollection();
-
-
     }
 
     /**
@@ -641,6 +643,22 @@ class Charter
     public function setSteps($steps): void
     {
         $this->steps = $steps;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProjectId()
+    {
+        return $this->projectId;
+    }
+
+    /**
+     * @param mixed $projectId
+     */
+    public function setProjectId($projectId): void
+    {
+        $this->projectId = $projectId;
     }
 
 }

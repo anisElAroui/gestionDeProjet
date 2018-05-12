@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class AccueilController extends Controller
+class HomeController extends Controller
 {
 
     /**
@@ -23,7 +23,6 @@ class AccueilController extends Controller
     public function indexAction(Request $request)
     {
         $charters = $this->get('doctrine_mongodb')->getRepository('App\Document\Charter\Charter')->findAll();
-
         return $this->render('Accueil/index.html.twig', ['charters' => $charters,]);
     }
 
@@ -34,9 +33,7 @@ class AccueilController extends Controller
     public function showAction(Request $request, $id)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
-
         $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
-
         $deleteForm = $this->createDeleteForm($id);
 
         $deleteForm->handleRequest($request);
@@ -64,19 +61,18 @@ class AccueilController extends Controller
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
         $charter = $dm->getRepository('App\Document\Charter\Charter')->findOneBy(array('id' => $id));
-
-        $editForm = $this->createForm('App\Form\AccueilType', $charter);
+        $project = $dm->getRepository('App\Document\Project')->findOneBy(array('charterId' => $charter));
+        $editForm = $this->createForm('App\Form\HomeType', $project);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $dm->persist($charter);
+            $dm->persist($project);
             $dm->flush();
 
             return $this->redirectToRoute('project_show', array('id' => $id));
         }
 
         return $this->render('Accueil/edit.html.twig', array(
-            'charter' => $charter,
             'edit_form' => $editForm->createView(),
         ));
     }

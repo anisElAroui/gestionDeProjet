@@ -48,19 +48,13 @@
                                             <td><a href="{{ path('project_show', { 'id': charter.id }) }}">{{ charter.id }}</a></td>
                                             <td>{{ charter.projectName }}</td>
                                             <td>{{ charter.projectManager }}</td>
+                                            <td>{{ charter.plannedExpensesBudget+charter.agreedWageExpenses }}</td>
                                             <td>{{ charter.budget }}</td>
-                                            {#<td>{{ charter.incomes }}</td>#}
-                                            <td></td>
-                                            <td>{{ charter.plannedExpensesBudget }}</td>
-                                            {#<td>{{ charter.plannedEndDate |date('Y-m-d')}}</td>#}
-                                            <td></td>
-                                            {#<td>{{ charter.realStartDate |date('Y-m-d')}}</td>#}
-                                            <td></td>
-                                            {#<td>{{ charter.done }}</td>#}
-                                            <td></td>
-                                            {#<td>{{ charter.endDate |date('Y-m-d') }}</td>#}
-                                            <td></td>
-
+                                            <td>{{ charter.projectId.expenses }}</td>
+                                            <td>{{ charter.projectId.plannedEndDate |date('Y-m-d')}}</td>
+                                            <td>{{ charter.projectId.realStartDate |date('Y-m-d')}}</td>
+                                            <td>{{ charter.projectId.done }}</td>
+                                            <td>{{ charter.projectId.endDate |date('Y-m-d') }}</td>
                                             <td>
                                                 <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
 

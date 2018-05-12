@@ -75,7 +75,7 @@
                                     <td>{{ notification.projectName }}</td>
                                     {# if PM #}
                                     {% if notification.description == "prepare charter" %}
-                                    <td><a href="{{ path('charter_new') }}">{{ notification.description }}</a></td>
+                                    <td><a href="{{ path('charter_edit', { 'id': notification.charterId }) }}">{{ notification.description }}</a></td>
                                     {# if PMO #}
                                     {% elseif notification.description == "complete charter" %}
                                         <td><a href="{{ path('charter_edit', { 'id': notification.charterId }) }}">{{ notification.description }}</a></td>

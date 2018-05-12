@@ -22,38 +22,33 @@
 
                                 <tr>
                                     <th>budget</th>
-                                    <td>{{ charter.budget }}</td>
+                                    <td>{{ charter.plannedExpensesBudget+charter.agreedWageExpenses }}</td>
                                 </tr>
                                 <tr>
                                     <th>incomes</th>
-                                    <td></td>
-                                    {#<td>{{ charter.incomes }}</td>#}
+                                    <td>{{ charter.budget }}</td>
                                 </tr>
                                 <tr>
                                     <th>Expenses</th>
-                                    <td>{{ charter.plannedExpensesBudget }}</td>
+                                    <td>{{ charter.projectId.expenses }}</td>
                                 </tr>
 
                                 <tr>
                                     <th>realStartDate</th>
-                                    <td></td>
-                                    {#<td>{{ charter.realStartDate |date('Y-m-d') }}</td>#}
+                                    <td>{{ charter.projectId.realStartDate |date('Y-m-d') }}</td>
                                 </tr>
                                 <tr>
                                     <th>plannedEndDate</th>
-                                    <td></td>
-                                    {#<td>{{ charter.plannedEndDate |date('Y-m-d')}}</td>#}
+                                    <td>{{ charter.projectId.plannedEndDate |date('Y-m-d')}}</td>
                                 </tr>
 
                                 <tr>
                                     <th>done</th>
-                                    <td></td>
-                                    {#<td>{{ charter.done }}</td>#}
+                                    <td>{{ charter.projectId.done }}</td>
                                 </tr>
                                 <tr>
                                     <th>endDate</th>
-                                    <td></td>
-                                    {#<td>{{ charter.endDate|date('Y-m-d') }}</td>#}
+                                    <td>{{ charter.projectId.endDate|date('Y-m-d') }}</td>
                                 </tr>
                             </tbody>
                         </table>

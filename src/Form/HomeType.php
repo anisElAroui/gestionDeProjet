@@ -2,17 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: anis
- * Date: 28/03/18
- * Time: 10:30
+ * Date: 12/05/18
+ * Time: 00:26
  */
 
 namespace App\Form;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
-class AccueilType extends AbstractType
+class HomeType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -21,12 +21,11 @@ class AccueilType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('projectName')
-            ->add('projectManager')
-            ->add('budget')
-            ->add('plannedExpensesBudget')
-
-
+            ->add('expenses')
+            ->add('realStartDate',DateType::class)
+            ->add('plannedEndDate',DateType::class)
+            ->add('done')
+            ->add('endDate',DateType::class)
         ;
     }
 
@@ -36,7 +35,7 @@ class AccueilType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Document\Charter\Charter'
+            'data_class' => 'App\Document\Project'
         ));
     }
 }

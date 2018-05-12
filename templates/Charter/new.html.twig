@@ -14,7 +14,7 @@
     <!-- wizard functions -->
     <script src="{{ asset('js/pages/gebo_wizard.js') }}"></script>
 
-    <script src="{{ asset('forms/js/jquery.collection.js') }}"></script>
+    <script src="{{ asset('js/forms/jquery.collection.js') }}"></script>
     <script type="text/javascript">
         $('.collection-selector').collection();
     </script>
@@ -106,15 +106,13 @@
                             <div  class="formSep form-group">
                                 <label class="col-sm-3 control-label" ><span class="label label-primary">Project Name</span></label>
                                     <div class="col-sm-7">
-                                        {{ form_widget(form.projectName,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                        {{ form_errors(form.projectName) }}
+                                        {{ charter.projectName }}
                                     </div>
                             </div>
                             <div  class="formSep form-group">
                                 <label class="col-sm-3 control-label" ><span class="label label-primary">Project Manager</span></label>
                                     <div class="col-sm-7">
-                                        {{ form_widget(form.projectManager,  {'attr': {'required':'required','class':'form-control'} }) }}
-                                        {{ form_errors(form.projectManager) }}
+                                        {{ charter.projectManager }}
                                     </div>
                             </div>
                             <div  class="formSep form-group">
@@ -180,7 +178,7 @@
 
                                         {#{% endfor %}#}
                                     {#</ul>#}
-                                    {{ form_widget(form.requirements,  {'attr': {'required':'required','class':'form-control'} }) }}
+                                    {{ form_widget(form.requirements) }}
                                     {{ form_errors(form.requirements) }}
                                 </div>
                             </div>
@@ -442,7 +440,7 @@
                             {% endfor %}
                     </fieldset>
                         <button type="submit" class="finish btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Send registration</button>
-                    {{ form_end(form) }}
+                    {{ form_end(form) }}<br>
 
                     {% if charter.id is not null %}
                     <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> Go to charter</a>

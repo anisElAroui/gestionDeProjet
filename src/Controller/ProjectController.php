@@ -8,6 +8,15 @@
 
 namespace App\Controller;
 
+use App\Document\Charter\Assumption;
+use App\Document\Charter\Billing;
+use App\Document\Charter\Budget;
+use App\Document\Charter\Charter;
+use App\Document\Charter\Constraint;
+use App\Document\Charter\Deliverables;
+use App\Document\Charter\Milestone;
+use App\Document\Charter\Requirement;
+use App\Document\Charter\Stakeholder;
 use App\Document\Notification;
 use App\Document\Project;
 use App\Document\User;
@@ -32,10 +41,16 @@ class ProjectController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $dm = $this->get('doctrine_mongodb')->getManager();
 
-            $receiver = $project->getProjectManager();
-            $notification = $this->sendNotification($project, "prepare charter",$receiver,"Charter");
+            $charter=$this->createCharter($project);
+            $dm->persist($charter);
 
+            $receiver = $project->getProjectManager();
+            $notification = $this->sendNotification($project,$charter, "prepare charter",$receiver,"Charter");
+
+            $project->setCharterId($charter);
             $dm->persist($project);
+            $charter->setProjectId($project);
+            $dm->persist($charter);
             $dm->persist($notification);
             $dm->flush();
 
@@ -47,7 +62,33 @@ class ProjectController extends Controller
         ));
     }
 
-    public function sendNotification(Project $project,String $description,User $receiver,String $type)
+    public function createCharter(Project $project)
+    {
+        $charter = new Charter();
+        $charter->setProjectName($project->getProjectName());
+        $charter->setProjectManager($project->getProjectManager());
+        $requirement = new Requirement();
+        $deliverables = new Deliverables();
+        $milestone = new Milestone();
+        $constraint = new Constraint();
+        $assumption = new Assumption();
+        $stakeholder = new Stakeholder();
+        $budget = new Budget();
+        $billing = new Billing();
+
+        $charter->addRequirement($requirement);
+        $charter->addDeliverables($deliverables);
+        $charter->addMilestones($milestone);
+        $charter->addConstraints($constraint);
+        $charter->addAssumptions($assumption);
+        $charter->addStakeholders($stakeholder);
+        $charter->addBudgets($budget);
+        $charter->addBillings($billing);
+        $charter->setSteps(0);
+        return $charter;
+    }
+
+    public function sendNotification(Project $project,Charter $charter,String $description,User $receiver,String $type)
     {
         $notification = new Notification();
         $notification->setReceiver($project->getProjectManager());
@@ -58,6 +99,7 @@ class ProjectController extends Controller
         $date = new \DateTime();
         $notification->setCreatedAt($date);
         $notification->setReceiver($receiver);
+        $notification->setCharterId($charter->getId());
 
         return $notification;
     }

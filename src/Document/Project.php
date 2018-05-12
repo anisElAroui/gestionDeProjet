@@ -54,9 +54,36 @@ class Project
     protected $poleMobile;
 
     /**
+     * @MongoDB\Field(type="float")
+     */
+    protected $expenses;
+
+    /**
+     * @MongoDB\Field(type="float")
+     */
+    protected $done;
+
+    /**
      * @MongoDB\Field(type="date")
      */
-    protected $createdAt;
+    protected $realStartDate;
+
+    /**
+     * @MongoDB\Field(type="date")
+     */
+    protected $plannedEndDate;
+
+    /**
+     * @MongoDB\Field(type="date")
+     */
+    protected $endDate;
+
+    /**
+     * @var integer $charterId
+     *
+     * @MongoDB\ReferenceOne(targetDocument="App\Document\Charter\Charter", storeAs="id")
+     */
+    protected $charterId;
 
     /**
      * Project constructor.
@@ -180,17 +207,97 @@ class Project
     /**
      * @return mixed
      */
-    public function getCreatedAt()
+    public function getExpenses()
     {
-        return $this->createdAt;
+        return $this->expenses;
     }
 
     /**
-     * @param mixed $createdAt
+     * @param mixed $expenses
      */
-    public function setCreatedAt($createdAt): void
+    public function setExpenses($expenses): void
     {
-        $this->createdAt = $createdAt;
+        $this->expenses = $expenses;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDone()
+    {
+        return $this->done;
+    }
+
+    /**
+     * @param mixed $done
+     */
+    public function setDone($done): void
+    {
+        $this->done = $done;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRealStartDate()
+    {
+        return $this->realStartDate;
+    }
+
+    /**
+     * @param mixed $realStartDate
+     */
+    public function setRealStartDate($realStartDate): void
+    {
+        $this->realStartDate = $realStartDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlannedEndDate()
+    {
+        return $this->plannedEndDate;
+    }
+
+    /**
+     * @param mixed $plannedEndDate
+     */
+    public function setPlannedEndDate($plannedEndDate): void
+    {
+        $this->plannedEndDate = $plannedEndDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param mixed $endDate
+     */
+    public function setEndDate($endDate): void
+    {
+        $this->endDate = $endDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCharterId()
+    {
+        return $this->charterId;
+    }
+
+    /**
+     * @param mixed $charterId
+     */
+    public function setCharterId($charterId): void
+    {
+        $this->charterId = $charterId;
     }
 
 }
