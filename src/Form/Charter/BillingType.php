@@ -9,6 +9,8 @@
 namespace App\Form\Charter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,8 +23,8 @@ class BillingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('billingDescription')
-            ->add('billingAmount')
+            ->add('billingDescription',TextType::class, array('attr' => array('class' => 'form-control'), 'required' => true))
+            ->add('billingAmount',MoneyType::class, array('attr' => array('class' => 'form-control'), 'required' => true))
             ->add('billingPlanedDate',DateType::class)
             ->add('billingDeliveredDate',DateType::class);
 

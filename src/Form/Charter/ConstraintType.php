@@ -21,7 +21,7 @@ class ConstraintType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('constraints', TextareaType::class);
+            ->add('constraints', TextareaType::class, array('attr' => array('class' => 'form-control'), 'required' => true));
 
   }
 

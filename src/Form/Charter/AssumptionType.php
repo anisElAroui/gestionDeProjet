@@ -22,7 +22,7 @@ class AssumptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('assumptions', TextareaType::class);
+            ->add('assumptions', TextareaType::class, array('attr' => array('class' => 'form-control'), 'required' => true));
 
 
     }

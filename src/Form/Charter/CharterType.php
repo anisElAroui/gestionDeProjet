@@ -39,29 +39,58 @@ class CharterType extends AbstractType
                 'prototype' => true,
                 'attr' => array(
                     'class' => 'collection-selector',
-                ),
-            ))
+                    ),
+                ))
             ->add('deliverables',CollectionType::class, array(
                 'entry_type' => DeliverableType::class,
                 'allow_add' => true,
-            ))
+                'allow_delete' => true,
+                'entry_options' => array('label' => false),
+                'prototype' => true,
+                'attr' => array(
+                    'class' => 'collection-selector',
+                    ),
+                ))
             ->add('milestones',CollectionType::class, array(
                 'entry_type' => MilestoneType::class,
                 'allow_add' => true,
-            ))
+                'allow_delete' => true,
+                'entry_options' => array('label' => false),
+                'prototype' => true,
+                'attr' => array(
+                    'class' => 'collection-selector',
+                    ),
+                ))
             ->add('constraints',CollectionType::class, array(
                 'entry_type' => ConstraintType::class,
                 'allow_add' => true,
-            ))
+                'allow_delete' => true,
+                'entry_options' => array('label' => false),
+                'prototype' => true,
+                'attr' => array(
+                    'class' => 'collection-selector',
+                    ),
+                ))
             ->add('assumptions',CollectionType::class, array(
                 'entry_type' => AssumptionType::class,
                 'allow_add' => true,
-            ))
+                'allow_delete' => true,
+                'entry_options' => array('label' => false),
+                'prototype' => true,
+                'attr' => array(
+                    'class' => 'collection-selector',
+                    ),
+                ))
             ->add('stakeholders',CollectionType::class, array(
                 'entry_type' => StakeholderType::class,
                 'allow_add' => true,
-                'by_reference'=> true
-            ))
+                'allow_delete' => true,
+                'entry_options' => array('label' => false),
+                'prototype' => true,
+                'attr' => array(
+                    'class' => 'collection-selector',
+                    ),
+                ))
             ->add('budget')
             ->add('incomesManDayAffection')
             ->add('agreedWageExpenses')
@@ -72,13 +101,24 @@ class CharterType extends AbstractType
             ->add('budgets',CollectionType::class, array(
                 'entry_type' => BudgetType::class,
                 'allow_add' => true,
-            ))
+                'allow_delete' => true,
+                'entry_options' => array('label' => false),
+                'prototype' => true,
+                'attr' => array(
+                    'class' => 'collection-selector',
+                    ),
+                ))
             ->add('billingResponsible')
             ->add('billings',CollectionType::class, array(
                 'entry_type' => BillingType::class,
                 'allow_add' => true,
-            ))
-
+                'allow_delete' => true,
+                'entry_options' => array('label' => false),
+                'prototype' => true,
+                'attr' => array(
+                    'class' => 'collection-selector',
+                    ),
+                ))
         ;
     }
 

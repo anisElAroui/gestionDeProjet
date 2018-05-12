@@ -10,7 +10,6 @@ namespace App\Model;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
-
 /**
  * @MongoDB\Document
  *
@@ -23,6 +22,7 @@ class RiskOpportunity
      * @MongoDB\Id(strategy="INCREMENT")
      */
     protected $id;
+
     /**
      * @MongoDB\Field(type="string")
      */

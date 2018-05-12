@@ -9,6 +9,7 @@
 namespace App\Form\Charter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,10 +22,10 @@ class MilestoneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('executiveMilestones')
-            ->add('estimatedDuration')
-            ->add('estimatedCompletionTimeframe',DateType::class)
-            ->add('comments');
+            ->add('executiveMilestones',TextType::class, array('attr' => array('class' => 'form-control'), 'required' => true))
+            ->add('estimatedDuration',TextType::class, array('attr' => array('class' => 'form-control'), 'required' => true))
+            ->add('estimatedCompletionTimeframe',DateType::class, array('required' => true))
+            ->add('comments',TextType::class, array('attr' => array('class' => 'form-control'), 'required' => true));
     }
 
     /**

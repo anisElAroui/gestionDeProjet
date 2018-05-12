@@ -67,23 +67,6 @@ class ProjectController extends Controller
         $charter = new Charter();
         $charter->setProjectName($project->getProjectName());
         $charter->setProjectManager($project->getProjectManager());
-        $requirement = new Requirement();
-        $deliverables = new Deliverables();
-        $milestone = new Milestone();
-        $constraint = new Constraint();
-        $assumption = new Assumption();
-        $stakeholder = new Stakeholder();
-        $budget = new Budget();
-        $billing = new Billing();
-
-        $charter->addRequirement($requirement);
-        $charter->addDeliverables($deliverables);
-        $charter->addMilestones($milestone);
-        $charter->addConstraints($constraint);
-        $charter->addAssumptions($assumption);
-        $charter->addStakeholders($stakeholder);
-        $charter->addBudgets($budget);
-        $charter->addBillings($billing);
         $charter->setSteps(0);
         return $charter;
     }

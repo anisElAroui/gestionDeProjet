@@ -9,6 +9,8 @@
 namespace App\Form\Charter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -22,15 +24,15 @@ class BudgetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('profile')
-            ->add('estimatedDurationBudget')
-            ->add('estimatedCost')
-            ->add('budgetComments')
+            ->add('profile',TextType::class, array('attr' => array('class' => 'form-control'), 'required' => true))
+            ->add('estimatedDurationBudget',MoneyType::class, array('attr' => array('class' => 'form-control'), 'required' => true))
+            ->add('estimatedCost',MoneyType::class, array('attr' => array('class' => 'form-control'), 'required' => true))
+            ->add('budgetComments',TextType::class, array('attr' => array('class' => 'form-control')))
             ->add('projectBudgetType',ChoiceType::class, array(
                 'choices'  => array(
                     'incomes' => null,
                     'expenses' => null,
-                ),));
+                ),), array('attr' => array('class' => 'form-control'), 'required' => true));
 
     }
 
