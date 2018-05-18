@@ -25,6 +25,7 @@ class ProjectAddVoter extends Voter
     {
         $user = $token->getUser();
 
+        //return true permet de verifier la permission
         return $user->getRoles()[0] === $attribute;
     }
 }

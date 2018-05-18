@@ -22,7 +22,11 @@ class HomeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $charters = $this->get('doctrine_mongodb')->getRepository('App\Document\Charter\Charter')->findAll();
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $charters = $this->get('doctrine_mongodb')->getRepository('App\Document\Charter\Charter')->findAll();
+        }else{
+            $charters = $this->get('doctrine_mongodb')->getRepository('App\Document\Charter\Charter')->findBy(array('projectManager'=>$this->getUser()->getUserName()));
+        }
         return $this->render('Accueil/index.html.twig', ['charters' => $charters,]);
     }
 

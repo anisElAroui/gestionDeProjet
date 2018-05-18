@@ -1,10 +1,8 @@
 {% extends 'base.html.twig' %}
 
     {% block stylesheets %}
-
         <link rel="stylesheet" href="{{ asset(' https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css ') }}">
         <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap4.min.css') }}">
-
     {% endblock %}
 
     {% block breadCrumb %}
@@ -12,14 +10,12 @@
     {% endblock %}
 
     {% block main_content %}
-
         <div class="container">
             <div class="row">
                 <div class="box">
                     <div class="tac col-lg-12" >
 
                         <h1>Projects </h1><br>
-
                         {% if is_granted('ROLE_ADMIN') %}
                         <a class="btn btn-success " href="{{ path('add_new_project') }}"><i class="glyphicon glyphicon-plus"></i> Add a new project</a><br><br><br>
                         {% endif %}
@@ -30,38 +26,38 @@
 
                                 <table id="example" class="table table-striped table-bordered nowrap "  >
                                     <thead>
-                                    <tr>
-                                        <th>  Id </th>
-                                        <th>  projectName</th>
-                                        <th>  project manager </th>
-                                        <th>  budget</th>
-                                        <th>  incomes</th>
-                                        <th>  Expenses</th>
-                                        <th>  plannedEndDate</th>
-                                        <th>  realStartDate</th>
-                                        <th>  done</th>
-                                        <th>  endDate</th>
-                                        <th>  Actions </th>
-                                    </tr>
+                                        <tr>
+                                            <th>  Id </th>
+                                            <th>  projectName</th>
+                                            <th>  project manager </th>
+                                            <th>  budget</th>
+                                            <th>  incomes</th>
+                                            <th>  Expenses</th>
+                                            <th>  plannedEndDate</th>
+                                            <th>  realStartDate</th>
+                                            <th>  done</th>
+                                            <th>  endDate</th>
+                                            <th>  Actions </th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    {% for charter in charters %}
-                                        <tr>
-                                            <td><a href="{{ path('project_show', { 'id': charter.id }) }}">{{ charter.id }}</a></td>
-                                            <td>{{ charter.projectName }}</td>
-                                            <td>{{ charter.projectManager }}</td>
-                                            <td>{{ charter.plannedExpensesBudget+charter.agreedWageExpenses }}</td>
-                                            <td>{{ charter.budget }}</td>
-                                            <td>{{ charter.projectId.expenses }}</td>
-                                            <td>{{ charter.projectId.plannedEndDate |date('Y-m-d')}}</td>
-                                            <td>{{ charter.projectId.realStartDate |date('Y-m-d')}}</td>
-                                            <td>{{ charter.projectId.done }}</td>
-                                            <td>{{ charter.projectId.endDate |date('Y-m-d') }}</td>
-                                            <td>
-                                                <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
+                                        {% for charter in charters %}
+                                            <tr>
+                                                <td><a href="{{ path('project_show', { 'id': charter.id }) }}">{{ charter.id }}</a></td>
+                                                <td>{{ charter.projectName }}</td>
+                                                <td>{{ charter.projectManager }}</td>
+                                                <td>{{ charter.plannedExpensesBudget+charter.agreedWageExpenses }}</td>
+                                                <td>{{ charter.budget }}</td>
+                                                <td>{{ charter.projectId.expenses }}</td>
+                                                <td>{{ charter.projectId.plannedEndDate |date('Y-m-d')}}</td>
+                                                <td>{{ charter.projectId.realStartDate |date('Y-m-d')}}</td>
+                                                <td>{{ charter.projectId.done }}</td>
+                                                <td>{{ charter.projectId.endDate |date('Y-m-d') }}</td>
+                                                <td>
+                                                    <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             {%endif%}
