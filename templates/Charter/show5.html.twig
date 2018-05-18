@@ -103,11 +103,13 @@
                     </ul>
 
                     {#afficher ce bouton que pour les PM#}
+                    {% if is_granted('ROLE_PM') %}
                     <a data-toggle="modal" data-backdrop="static" href="#Negociation" class="btn btn-info pull-right" ><i class="glyphicon glyphicon-eye-open"></i> Negociation</a>
-
+                    {% endif %}
                     {#afficher ce bouton que pour les PMO#}
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a data-toggle="modal" data-backdrop="static" href="#decision" class="btn btn-info pull-left" ><i class="glyphicon glyphicon-eye-open"></i> Decision</a>
-
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -115,14 +117,14 @@
 
     {% if negociation.charterId is not defined %}
         {# pour afficher le modal de négociation du budget decision #Negociation #}
-        {{ render(controller('App\\Controller\\NegociationController::newAction', {'id':charter.id})) }}
+        {{ is_granted('ROLE_PM') ? render(controller('App\\Controller\\NegociationController::newAction', {'id':charter.id})) }}
     {% else %}
         {#pour afficher le modal de négociation à éditer#}
-        {{ render(controller('App\\Controller\\NegociationController::editAction', {'id':charter.id })) }}
+        {{ is_granted('ROLE_PM') ? render(controller('App\\Controller\\NegociationController::editAction', {'id':charter.id })) }}
     {% endif %}
 
-    {# pour afficher le modal de négociation pour valider ou modifier budget #decision #}
-    {{ render(controller('App\\Controller\\NegociationController::showAction', {'id':charter.id})) }}
+        {# pour afficher le modal de négociation pour valider ou modifier budget #decision #}
+        {{ is_granted('ROLE_ADMIN') ? render(controller('App\\Controller\\NegociationController::showAction', {'id':charter.id})) }}
 
 {% endblock %}
 

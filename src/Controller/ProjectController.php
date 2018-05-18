@@ -6,6 +6,7 @@ use App\Document\Charter\Charter;
 use App\Document\Notification;
 use App\Document\Project;
 use App\Document\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,6 +17,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/project/add", name="add_new_project")
+     * @IsGranted({"ROLE_ADMIN"})
      * @Method({"POST","GET"})
      */
     public function addAction(Request $request,\Swift_Mailer $mailer)

@@ -3,6 +3,7 @@
 namespace App\Controller;
 use App\Document\Charter\Charter;
 use App\Document\Negociation;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -42,12 +43,12 @@ class NegociationController extends Controller
             'form' => $form->createView(),
             'negociation' => $negociation,
             'charter'=>$charter
-
         ));
     }
 
     /**
      * @Route("/project/{id}/charter/show5/negoction/show", name="negociation_show")
+     * @IsGranted({"ROLE_ADMIN"})
      * @Method({"GET"})
      */
     public function showAction(Request $request,$id)

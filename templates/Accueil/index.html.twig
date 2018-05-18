@@ -18,10 +18,11 @@
                 <div class="box">
                     <div class="tac col-lg-12" >
 
-                        <h1 class="pull-left">Projects </h1>
+                        <h1>Projects </h1><br>
 
-                        <a class="btn btn-success pull-right " href="{{ path('add_new_project') }}"><i class="glyphicon glyphicon-plus"></i> Add a new project</a><br><br><br>
-
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-success " href="{{ path('add_new_project') }}"><i class="glyphicon glyphicon-plus"></i> Add a new project</a><br><br><br>
+                        {% endif %}
 
                         <div class="table-responsive">
 
