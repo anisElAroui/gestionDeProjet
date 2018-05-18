@@ -2,6 +2,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+#    px.ldap.user_hydrator.class: App\Ldap\UserHydrator
+#    px.ldap.manager_hydrator.class: App\Ldap\LdapManager
 
 services:
     # default configuration for services in *this* file
@@ -26,3 +28,15 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+#    px.ldap.user_hydrator:
+#        class: '%px.ldap.user_hydrator.class%'
+#
+#    px.ldap.manager_hydrator:
+#        class: '%px.ldap.manager_hydrator.class%'
+
+
+    app.mailer:
+        class: App\Mailer\Mailer
+        public: true
+        arguments: ["@mailer", "@templating"]

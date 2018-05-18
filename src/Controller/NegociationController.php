@@ -1,16 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anis
- * Date: 05/05/18
- * Time: 21:01
- */
 
 namespace App\Controller;
-
 use App\Document\Charter\Charter;
 use App\Document\Negociation;
-use App\Document\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -26,22 +18,18 @@ class NegociationController extends Controller
     public function newAction(Request $request,$id)
     {
         $negociation = new Negociation();
-
         $form = $this->createForm('App\Form\NegociationType', $negociation,array(
             'action' => $this->generateUrl('negociation',['id'=>$id]),
             'method' => 'GET',
         ));
-
         $form->handleRequest($request);
-
         $dm = $this->get('doctrine_mongodb')->getManager();
         $charter = $dm->getRepository("App\Document\Charter\Charter")->find($id);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
-            // si PM a envoyé la negociation enlever notif et envoyer notif au PMO (les 2 avec un send)
-                $receiver = $this->getUser(); // changer le receiver par PMO
-                $notification = $this->sendNotification($charter, "budget decision", $receiver, "Negociation");
+            // envoyer au PMO la décision du PM
+            $receiver = "karimBorni"; // changer le receiver par PMO
+            $notification = $this->sendNotification($charter, "budget decision", $receiver, "Negociation");
 
             $negociation->setCharterId($charter);
             $dm->persist($notification);
@@ -75,12 +63,9 @@ class NegociationController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // si PMO a envoyé la decision enlever notif et envoyer notif au PM (les 2 avec un send)
-                $receiver = $this->getUser(); // changer le receiver par PM
-                // cdt si  project validated car budget edit se trouve dans editAction en boucle
-                $notification = $this->sendNotification($charter, "project validated", $receiver, "Charter");
-
+            // si PMO a valider le projet
+            $receiver = $charter->getProjectManager(); // PM
+            $notification = $this->sendNotification($charter, "project validated", $receiver, "Charter");
 
             $dm->persist($notification);
             $dm->flush();
@@ -110,13 +95,11 @@ class NegociationController extends Controller
         $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-            $receiver = $this->getUser(); // changer le receiver par PMO
-            $notification = $this->sendNotification($charter, "budget decision", $receiver, "Negociation");
-//            dump($negociation);die;
-            $dm->persist($notification);
-            $dm->persist($negociation);
-            $dm->flush();
-
+                $receiver = "karimBorni"; // changer le receiver par PMO
+                $notification = $this->sendNotification($charter, "budget decision", $receiver, "Negociation");
+                $dm->persist($notification);
+                $dm->persist($negociation);
+                $dm->flush();
             return $this->redirectToRoute('charter_show5', array('id' => $id));
         }
         return $this->render('Negociation/edit.html.twig', array(
@@ -124,13 +107,11 @@ class NegociationController extends Controller
         ));
     }
 
-
-    public function sendNotification(Charter $charter,String $description,User $receiver,String $type)
+    public function sendNotification(Charter $charter,String $description,$receiver,String $type)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
 
-        $user = $this->getUser();
-        $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('projectName' => $charter->getProjectName(),'receiver' => $user->getUsername()));
+        $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('charterId'=>$charter->getId()));
         $notification->setFlag(true);
         $notification->setDescription($description);
         $notification->setCharterId($charter->getId());

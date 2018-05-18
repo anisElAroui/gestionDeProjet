@@ -32,11 +32,6 @@ class User extends BaseUser implements LdapUserInterface
      */
     protected $dn;
 
-    /**
-     * @MongoDB\Field(type="string")
-     */
-    protected $role;
-
     public function __construct()
     {
         parent::__construct();
@@ -76,24 +71,6 @@ class User extends BaseUser implements LdapUserInterface
     public function setLastName($lastName): void
     {
         $this->lastName = $lastName;
-    }
-
-    /**
-     * Get role
-     *
-     * @return string $role
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param mixed $role
-     */
-    public function setRole($role): void
-    {
-        $this->role = $role;
     }
 
     /**

@@ -1,22 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anis
- * Date: 27/03/18
- * Time: 10:57
- */
 
 namespace App\Controller;
 
-use App\Document\Charter\Assumption;
-use App\Document\Charter\Billing;
-use App\Document\Charter\Budget;
 use App\Document\Charter\Charter;
-use App\Document\Charter\Constraint;
-use App\Document\Charter\Deliverables;
-use App\Document\Charter\Milestone;
-use App\Document\Charter\Requirement;
-use App\Document\Charter\Stakeholder;
 use App\Document\Notification;
 use App\Document\Project;
 use App\Document\User;
@@ -32,7 +18,7 @@ class ProjectController extends Controller
      * @Route("/project/add", name="add_new_project")
      * @Method({"POST","GET"})
      */
-    public function addAction(Request $request)
+    public function addAction(Request $request,\Swift_Mailer $mailer)
     {
         $project = new Project();
         $form = $this->createForm('App\Form\ProjectType', $project);
@@ -46,6 +32,9 @@ class ProjectController extends Controller
 
             $receiver = $project->getProjectManager();
             $notification = $this->sendNotification($project,$charter, "prepare charter",$receiver,"Charter");
+
+            $mailer=$this->get('app.mailer');
+            $mailer->sendEmail('create charter','proxym.gestion.projet@gmail.com','anis.el.aroui@gmail.com',$charter);
 
             $project->setCharterId($charter);
             $dm->persist($project);
@@ -87,4 +76,5 @@ class ProjectController extends Controller
 
         return $notification;
     }
+
 }

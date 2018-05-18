@@ -17,8 +17,6 @@ class AssumptionType extends AbstractType
     {
         $builder
             ->add('assumptions', TextareaType::class, array('attr' => array('class' => 'form-control'), 'required' => true));
-
-
     }
 
     /**

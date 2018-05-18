@@ -35,8 +35,8 @@ class CharterController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             if($step == 6){
-                $receiver = $this->getUser(); // à changer selon le receiver= PMO
-                $notification = $this->sendNotification($charter, "complete charter",$receiver,"Charter");
+                $receiver = 'karimBorni'; // à changer selon le role receiver= PMO
+                $notification = $this->sendNotification($charter, 'complete charter',$receiver,'Charter');
                 $dm->persist($notification);
             }
 
@@ -46,18 +46,16 @@ class CharterController extends Controller
             // lors du submit de la dernière étape ou plus
             if ($step >= 9){
                 // on aura des notifs à envoyer que au PM lorsque le PMO change de budget
-                // si le user a le role de PMO et non pas le role de PM ( à changer cdt à != ou selon le role )
-                if ($this->getUser() == $charter->getProjectManager()) {
+                // si le user a le role de PMO et non pas le role de PM
+                if ($this->getUser()->getUsername() == 'karimBorni') {
                     $receiver = $charter->getProjectManager(); // PM
-                    $notification = $this->sendNotification($charter, "budget negociation", $receiver, "Negociation");
-                    // envoyer notif au PM pour la negociation
+                    $notification = $this->sendNotification($charter, 'budget negociation', $receiver, 'Negociation');
                     $dm->persist($notification);
                     $dm->flush();
                 }
-
                 return $this->redirectToRoute('charter_show', array('id' => $id));
             }
-            // lors des autres submit
+            // lors des autres submit < 9
             return $this->redirectToRoute('charter_edit', array('id' => $id));
         }
 
@@ -144,8 +142,7 @@ class CharterController extends Controller
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
 
-        $user = $this->getUser();
-        $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('projectName' => $charter->getProjectName(),'receiver' => $user->getUsername()));
+        $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('charterId'=>$charter->getId()));
         $notification->setFlag(true);
         $notification->setDescription($description);
         $notification->setCreatedAt(new \DateTime());

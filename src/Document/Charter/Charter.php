@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anis
- * Date: 05/04/18
- * Time: 09:16
- */
 
 namespace App\Document\Charter;
-
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @MongoDB\Document(repositoryClass="App\Repository\CharterRepository")
  *
@@ -118,7 +112,7 @@ class Charter
     protected $assumptions;
 
     /**
-     * @MongoDB\ReferenceMany(targetDocument="Stakeholder",  cascade={"persist","remove"},simple=true)
+     * @MongoDB\ReferenceMany(targetDocument="Stakeholder",cascade={"persist","remove"},simple=true)
      * @Assert\NotBlank(groups={"step6"})
      */
     protected $stakeholders;
