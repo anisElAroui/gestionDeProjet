@@ -3,21 +3,15 @@
 namespace App\Security\Voter;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProjectAddVoter extends Voter
 {
 
-//    private $decisionManager;
-//      // injection de dépendances
-//    public function __construct(AccessDecisionManagerInterface $decisionManager)
-//    {
-//        $this->decisionManager = $decisionManager;
-//    }
-
     protected function supports($attribute, $subject)
     {
+        // lorsque le paramettre de @isGranted = ROLE_ADMIN
         return $attribute === 'ROLE_ADMIN';
     }
 
@@ -25,7 +19,8 @@ class ProjectAddVoter extends Voter
     {
         $user = $token->getUser();
 
-        //return true permet de verifier la permission
+
+        //return true si le role = attribute
         return $user->getRoles()[0] === $attribute;
     }
 }

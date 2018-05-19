@@ -35,7 +35,6 @@
 
                     {{ form_start(form, {'attr': {'novalidate': 'novalidate','id':'simple_wizard','class': 'stepy-wizzard form-horizontal' }}) }}
                     {{ form_widget(form._token) }}
-                        {% if is_granted('ROLE_USER') %}
                         <fieldset title="Project and Product Overview">
                             <legend class="hide">....</legend>
                                 <div  class=" formSep form-group">
@@ -160,7 +159,7 @@
                                     </div>
                                 </div>
                         </fieldset>
-                        {% else %}
+                    {% if is_granted('ROLE_ADMIN') %}
                         <fieldset title="Project Budget 1">
                             <legend class="hide">....</legend>
                                 <h4> 1- Incomes (€)</h4>

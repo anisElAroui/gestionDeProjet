@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 use App\Document\Charter\Charter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,6 +20,7 @@ class CharterController extends Controller
     /**
      *
      * @Route("/charter/edit/{id}", name="charter_edit")
+     * @IsGranted({"ROLE_PM"})
      * @Method({"GET","POST"})
      */
     public function editAction(Request $request, $id)
@@ -29,19 +31,22 @@ class CharterController extends Controller
 
         $charter->setSteps($charter->getSteps()+1);
         $step=$charter->getSteps();
-        $form = $this->createForm('App\Form\Charter\CharterType', $charter, array('validation_groups' => ['step'.$step]));
+        $form = $this->createForm('App\Form\Charter\CharterType', $charter, array('validation_groups' => ['step'.$step],'role' => $this->getUser()->getRoles()));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $dm->persist($charter);
+            $dm->flush();
             if($step == 6){
                 $receiver = 'karimBorni'; // à changer selon le role receiver= PMO
                 $notification = $this->sendNotification($charter, 'complete charter',$receiver,'Charter');
                 $dm->persist($notification);
+                $dm->flush();
+                return $this->redirectToRoute('charter_show', array('id' => $id));
             }
 
-                $dm->persist($charter);
-                $dm->flush();
+//                $dm->persist($charter);
+//                $dm->flush();
 
             // lors du submit de la dernière étape ou plus
             if ($step >= 9){

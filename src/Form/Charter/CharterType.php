@@ -81,36 +81,38 @@ class CharterType extends AbstractType
                 'attr' => array(
                     'class' => 'collection-selector',
                     ),
-                ))
-            ->add('budget')
-            ->add('incomesManDayAffection')
-            ->add('agreedWageExpenses')
-            ->add('plannedExpensesBudget')
-            ->add('targetProfitability')
-            ->add('thresholdProfitability')
-            ->add('expensesManDayAffection')
-            ->add('budgets',CollectionType::class, array(
-                'entry_type' => BudgetType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'entry_options' => array('label' => false),
-                'prototype' => true,
-                'attr' => array(
-                    'class' => 'collection-selector',
+                ));
+        if (in_array('ROLE_ADMIN', $options['role']))  {
+            $builder
+                ->add('budget')
+                ->add('incomesManDayAffection')
+                ->add('agreedWageExpenses')
+                ->add('plannedExpensesBudget')
+                ->add('targetProfitability')
+                ->add('thresholdProfitability')
+                ->add('expensesManDayAffection')
+                ->add('budgets', CollectionType::class, array(
+                    'entry_type' => BudgetType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'entry_options' => array('label' => false),
+                    'prototype' => true,
+                    'attr' => array(
+                        'class' => 'collection-selector',
                     ),
                 ))
-            ->add('billingResponsible')
-            ->add('billings',CollectionType::class, array(
-                'entry_type' => BillingType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'entry_options' => array('label' => false),
-                'prototype' => true,
-                'attr' => array(
-                    'class' => 'collection-selector',
+                ->add('billingResponsible')
+                ->add('billings', CollectionType::class, array(
+                    'entry_type' => BillingType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'entry_options' => array('label' => false),
+                    'prototype' => true,
+                    'attr' => array(
+                        'class' => 'collection-selector',
                     ),
-                ))
-        ;
+                ));
+        }
     }
 
     /**
@@ -120,6 +122,7 @@ class CharterType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'App\Document\Charter\Charter',
+            'role' => ['ROLE_USER']
         ));
     }
 
