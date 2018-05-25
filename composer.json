@@ -5,6 +5,7 @@
         "php": "^7.2",
         "ext-iconv": "*",
         "alcaeus/mongo-php-adapter": "^1.1",
+        "cmen/google-charts-bundle": "^3.0",
         "doctrine/mongodb": "^1.6",
         "doctrine/mongodb-odm-bundle": "^3.4",
         "dol/ldap-bundle": "^2.0",
