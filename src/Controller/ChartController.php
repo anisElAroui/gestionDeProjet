@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anis
- * Date: 09/05/18
- * Time: 10:02
- */
 
 namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,7 +14,11 @@ class ChartController extends Controller
      * @Route("project/charts", name="chart_index")
      * @Method({"GET"})
      */
-    public function indexAction()
+    public function indexAction(){
+        return $this->render('Chart/index.html.twig');
+    }
+
+    public function pieAction()
     {
         $done = 0;
         $total = 0;
@@ -67,7 +65,14 @@ class ChartController extends Controller
         $pc->getOptions()->setWidth(600);
         $pc->getOptions()->setHeight(500);
 
+        return $this->render('Chart/pie.html.twig', array('piechart' => $pieChart,'pie' => $pc));
+    }
+
+    public function colAction(){
+
         $col = new ColumnChart();
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $projects = $dm->getRepository('App\Document\Project')->findAll();
         $array = array();
         $array[] = ['Project name', 'Budget', 'Expenses'];
         foreach ( $projects as $project) {
@@ -75,12 +80,12 @@ class ChartController extends Controller
         }
 
         $col->getData()->setArrayToDataTable(
-                $array
-            );
+            $array
+        );
 
         $col->getOptions()
             ->setTitle('Budget/Expenses By project')
-            ->setWidth(1200)
+            ->setWidth(1150)
             ->setHeight(500);
         $col->getOptions()
             ->getHAxis()
@@ -89,6 +94,11 @@ class ChartController extends Controller
         $col->getOptions()
             ->getVAxis()
             ->setTitle('Money (Million)');
+
+        return $this->render('Chart/col.html.twig', array('col' => $col));
+    }
+
+    public function columnAction(){
 
         $column = new ColumnChart();
         $array = array();
@@ -99,6 +109,8 @@ class ChartController extends Controller
         $budget2017 = 0;
         $expenses2016 = 0;
         $budget2016 = 0;
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $projects = $dm->getRepository('App\Document\Project')->findAll();
         foreach ( $projects as $project) {
             if ($project->getRealStartDate() !== null){
                 if (strpos( $project->getRealStartDate()->format('Y-m-d'), "2018") !== false){
@@ -121,11 +133,11 @@ class ChartController extends Controller
         $array[] = ['2018', $budget2018, $expenses2018];
 
         $column->getData()->setArrayToDataTable(
-                $array
+            $array
         );
         $column->getOptions()
             ->setTitle('Budget/Expenses By year')
-            ->setWidth(1200)
+            ->setWidth(1150)
             ->setHeight(500)
             ->setColors(['blue','red']);
         $column->getOptions()
@@ -136,7 +148,7 @@ class ChartController extends Controller
             ->getVAxis()
             ->setTitle('Money (Million)');
 
-        return $this->render('Chart/index.html.twig', array('piechart' => $pieChart,'pie' => $pc, 'col' => $col,'column' => $column));
+        return $this->render('Chart/column.html.twig', array('column' => $column));
     }
 
 }

@@ -1,0 +1,17 @@
+{% block main_content %}
+
+    <div class="col-sm-6 col-md-6">
+        <div id="div_piechart"></div>
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <div id="div_pie"></div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        {{ gc_draw([piechart,pie], ['div_piechart','div_pie']) }}
+    </script>
+{% endblock %}

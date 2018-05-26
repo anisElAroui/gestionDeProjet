@@ -103,7 +103,7 @@
                     </ul>
 
                     {#afficher ce bouton que pour les PM#}
-                    {% if is_granted('ROLE_PM') %}
+                    {% if is_granted('ROLE_ADMIN') == false%}
                     <a data-toggle="modal" data-backdrop="static" href="#Negociation" class="btn btn-info pull-right" ><i class="glyphicon glyphicon-eye-open"></i> Negociation</a>
                     {% endif %}
                     {#afficher ce bouton que pour les PMO#}
