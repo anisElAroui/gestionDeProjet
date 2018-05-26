@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="280602fe-82b5-423c-8afc-e851a8eb5f6d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/config/packages/cmen_google_charts.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/cmen_google_charts.yaml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ChartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ChartController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CharterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CharterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Document/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Document/Project.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Accueil/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Accueil/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Chart/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Chart/index.html.twig" afterDir="false" />
     </list>
@@ -25,15 +23,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ChartController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChartController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/ChartController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="75" column="11" selection-start-line="75" selection-start-column="11" selection-end-line="78" selection-end-column="11" />
+            <state relative-caret-position="271">
+              <caret line="118" column="39" selection-start-line="118" selection-start-column="39" selection-end-line="118" selection-end-column="39" />
               <folding>
                 <element signature="e#112#169#0#PHP" expanded="true" />
                 <element signature="e#754#776#1#PHP" expanded="true" />
-                <element signature="e#4148#4171#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -42,29 +39,47 @@
       <file leaf-file-name="Project.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Document/Project.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="257" column="20" selection-start-line="257" selection-start-column="20" selection-end-line="257" selection-end-column="39" />
+            <state relative-caret-position="305">
+              <caret line="225" column="5" selection-start-line="225" selection-start-column="5" selection-end-line="225" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Charter.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Document/Charter/Charter.php">
+      <file leaf-file-name="CharterController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/CharterController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="188" column="24" selection-start-line="188" selection-start-column="15" selection-end-line="188" selection-end-column="24" />
+            <state relative-caret-position="91">
+              <caret line="56" column="28" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
+              <folding>
+                <element signature="e#5765#5787#1#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/Chart/index.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-17">
+              <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/Charter/new.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2790">
+              <caret line="161" selection-start-line="161" selection-end-line="161" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/Chart/index.html.twig">
+        <entry file="file://$PROJECT_DIR$/templates/Accueil/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
-              <folding>
-                <element signature="e#12#26#0#Twig" expanded="true" />
-              </folding>
+            <state relative-caret-position="378">
+              <caret line="48" column="69" selection-start-line="48" selection-start-column="69" selection-end-line="48" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -146,8 +161,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Repository/CharterRepository.php" />
-        <option value="$PROJECT_DIR$/src/Form/RiskOpportunityType.php" />
         <option value="$PROJECT_DIR$/src/Form/ReportType.php" />
         <option value="$PROJECT_DIR$/src/Form/ProjectType.php" />
         <option value="$PROJECT_DIR$/src/Form/NegociationType.php" />
@@ -190,13 +203,15 @@
         <option value="$PROJECT_DIR$/src/Controller/HomeController.php" />
         <option value="$PROJECT_DIR$/src/Form/Charter/CharterType.php" />
         <option value="$PROJECT_DIR$/templates/Charter/new.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/CharterController.php" />
         <option value="$PROJECT_DIR$/src/Security/Voter/CharterCreateVoter.php" />
         <option value="$PROJECT_DIR$/src/Security/Voter/ProjectAddVoter.php" />
         <option value="$PROJECT_DIR$/config/packages/cmen_google_charts.yaml" />
+        <option value="$PROJECT_DIR$/templates/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/Document/Project.php" />
         <option value="$PROJECT_DIR$/templates/Accueil/index.html.twig" />
-        <option value="$PROJECT_DIR$/templates/Chart/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/CharterController.php" />
         <option value="$PROJECT_DIR$/src/Controller/ChartController.php" />
+        <option value="$PROJECT_DIR$/templates/Chart/index.html.twig" />
       </list>
     </option>
   </component>
@@ -395,6 +410,18 @@
             <path>
               <item name="User" type="b2602c69:ProjectViewProjectNode" />
               <item name="User" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="Chart" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="User" type="b2602c69:ProjectViewProjectNode" />
+              <item name="User" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="Charter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="User" type="b2602c69:ProjectViewProjectNode" />
+              <item name="User" type="462c0819:PsiDirectoryNode" />
               <item name="vendor" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -572,11 +599,13 @@
       <workItem from="1526675112100" duration="9146000" />
       <workItem from="1526720957757" duration="916000" />
       <workItem from="1527235650105" duration="19709000" />
+      <workItem from="1527281749538" duration="10283000" />
+      <workItem from="1527333237041" duration="10370000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="921484000" />
+    <option name="totallyTimeSpent" value="942137000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
@@ -846,40 +875,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/cmen_google_charts.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="22" selection-start-line="1" selection-start-column="22" selection-end-line="1" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Charter/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="161" selection-start-line="161" selection-end-line="161" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/cmen_google_charts.yaml" />
     <entry file="file://$PROJECT_DIR$/templates/Charter/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="7" column="24" selection-start-line="7" selection-end-line="8" />
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Accueil/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1311">
-          <caret line="85" selection-start-line="85" selection-end-line="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1349" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/NotificationController.php">
@@ -893,9 +894,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="13" column="59" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
-          <folding>
-            <element signature="e#38#110#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -906,23 +904,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/CharterController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="29" column="37" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="37" />
-          <folding>
-            <element signature="e#783#813#1#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ProjectController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="313">
           <caret line="19" column="21" selection-start-line="19" selection-end-line="20" />
-          <folding>
-            <element signature="e#34#67#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -930,6 +915,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="63" column="20" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="54" column="11" selection-start-line="54" selection-start-column="11" selection-end-line="54" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Document/Charter/Charter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-36">
+          <caret line="468" column="20" selection-start-line="468" selection-start-column="20" selection-end-line="468" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -942,37 +941,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Document/Project.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="257" column="20" selection-start-line="257" selection-start-column="20" selection-end-line="257" selection-end-column="39" />
+        <state relative-caret-position="305">
+          <caret line="225" column="5" selection-start-line="225" selection-start-column="5" selection-end-line="225" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Document/Charter/Charter.php">
+    <entry file="file://$PROJECT_DIR$/templates/Accueil/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="188" column="24" selection-start-line="188" selection-start-column="15" selection-end-line="188" selection-end-column="24" />
+        <state relative-caret-position="378">
+          <caret line="48" column="69" selection-start-line="48" selection-start-column="69" selection-end-line="48" selection-end-column="69" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Chart/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/Controller/CharterController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
+        <state relative-caret-position="91">
+          <caret line="56" column="28" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
           <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
+            <element signature="e#5765#5787#1#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/ChartController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="75" column="11" selection-start-line="75" selection-start-column="11" selection-end-line="78" selection-end-column="11" />
+        <state relative-caret-position="271">
+          <caret line="118" column="39" selection-start-line="118" selection-start-column="39" selection-end-line="118" selection-end-column="39" />
           <folding>
             <element signature="e#112#169#0#PHP" expanded="true" />
             <element signature="e#754#776#1#PHP" expanded="true" />
-            <element signature="e#4148#4171#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Charter/new.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2790">
+          <caret line="161" selection-start-line="161" selection-end-line="161" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Chart/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
         </state>
       </provider>
     </entry>

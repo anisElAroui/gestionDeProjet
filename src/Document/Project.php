@@ -56,6 +56,11 @@ class Project
     /**
      * @MongoDB\Field(type="float")
      */
+    protected $budget;
+
+    /**
+     * @MongoDB\Field(type="float")
+     */
     protected $expenses;
 
     /**
@@ -202,6 +207,22 @@ class Project
     public function setPoleMobile($poleMobile): void
     {
         $this->poleMobile = $poleMobile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBudget()
+    {
+        return $this->budget;
+    }
+
+    /**
+     * @param mixed $budget
+     */
+    public function setBudget($budget): void
+    {
+        $this->budget = $budget;
     }
 
     /**

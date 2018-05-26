@@ -68,28 +68,20 @@ class ChartController extends Controller
         $pc->getOptions()->setHeight(500);
 
         $col = new ColumnChart();
-            $col->getData()->setArrayToDataTable(
-                [
-                    ['Project name', 'Budget', 'Expenses'],
-                ]
-            );
-//        foreach ( $projects as $project) {
-//            data.addRow(['A', 123, 40]);
-//            [$project->getProjectName(), 4000, $project->getExpenses()]
-//        }
+        $array = array();
+        $array[] = ['Project name', 'Budget', 'Expenses'];
+        foreach ( $projects as $project) {
+            $array[] = [$project->getProjectName(), $project->getBudget(), $project->getExpenses()];
+        }
 
+        $col->getData()->setArrayToDataTable(
+                $array
+            );
 
         $col->getOptions()
             ->setTitle('Budget/Expenses By project')
             ->setWidth(1200)
             ->setHeight(500);
-        $col->getOptions()
-            ->getAnnotations()
-            ->setAlwaysOutside(true)
-            ->getTextStyle()
-            ->setAuraColor('none')
-            ->setFontSize(14)
-            ->setColor('#000');
         $col->getOptions()
             ->getHAxis()
             ->setTitle('Project name')
@@ -99,27 +91,43 @@ class ChartController extends Controller
             ->setTitle('Money (Million)');
 
         $column = new ColumnChart();
+        $array = array();
+        $array[] = ['Year', 'Budget', 'Expenses'];
+        $expenses2018 = 0;
+        $budget2018 = 0;
+        $expenses2017 = 0;
+        $budget2017 = 0;
+        $expenses2016 = 0;
+        $budget2016 = 0;
+        foreach ( $projects as $project) {
+            if ($project->getRealStartDate() !== null){
+                if (strpos( $project->getRealStartDate()->format('Y-m-d'), "2018") !== false){
+                    $expenses2018 = $expenses2018 + $project->getExpenses();
+                    $budget2018 = $budget2018 + $project->getBudget();
+                }
+                if (strpos( $project->getRealStartDate()->format('Y-m-d'), "2017") !== false){
+                    $expenses2017 = $expenses2017 + $project->getExpenses();
+                    $budget2017 = $budget2017 + $project->getBudget();
+                }
+                if (strpos( $project->getRealStartDate()->format('Y-m-d'), "2016") !== false){
+                    $expenses2016 = $expenses2016 + $project->getExpenses();
+                    $budget2016 = $budget2016 + $project->getBudget();
+                }
+            }
+        }
+
+        $array[] = ['2016', $budget2016, $expenses2016];
+        $array[] = ['2017', $budget2017, $expenses2017];
+        $array[] = ['2018', $budget2018, $expenses2018];
+
         $column->getData()->setArrayToDataTable(
-            [
-                ['Year', 'Budget', 'Expenses'],
-                ['2015', 2000, 500],
-                ['2016', 2000, 500],
-                ['2017', 2000, 500],
-                ['2018', 3000, 200]
-            ]
+                $array
         );
         $column->getOptions()
             ->setTitle('Budget/Expenses By year')
             ->setWidth(1200)
             ->setHeight(500)
             ->setColors(['blue','red']);
-        $column->getOptions()
-            ->getAnnotations()
-            ->setAlwaysOutside(true)
-            ->getTextStyle()
-            ->setAuraColor('none')
-            ->setFontSize(14)
-            ->setColor('#000');
         $column->getOptions()
             ->getHAxis()
             ->setTitle('Year')

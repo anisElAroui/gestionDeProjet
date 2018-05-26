@@ -30,8 +30,8 @@
                                             <th>  Id </th>
                                             <th>  projectName</th>
                                             <th>  project manager </th>
-                                            <th>  budget</th>
                                             <th>  incomes</th>
+                                            <th>  budget</th>
                                             <th>  Expenses</th>
                                             <th>  plannedEndDate</th>
                                             <th>  realStartDate</th>
@@ -46,8 +46,8 @@
                                                 <td><a href="{{ path('project_show', { 'id': charter.id }) }}">{{ charter.id }}</a></td>
                                                 <td>{{ charter.projectName }}</td>
                                                 <td>{{ charter.projectManager }}</td>
-                                                <td>{{ charter.plannedExpensesBudget+charter.agreedWageExpenses }}</td>
                                                 <td>{{ charter.budget }}</td>
+                                                <td>{{ charter.plannedExpensesBudget+charter.agreedWageExpenses }}</td>
                                                 <td>{{ charter.projectId.expenses }}</td>
                                                 <td>{{ charter.projectId.plannedEndDate |date('Y-m-d')}}</td>
                                                 <td>{{ charter.projectId.realStartDate |date('Y-m-d')}}</td>

@@ -56,6 +56,8 @@ class CharterController extends Controller
                     $receiver = $charter->getProjectManager(); // PM
                     $notification = $this->sendNotification($charter, 'budget negociation', $receiver, 'Negociation');
                     $dm->persist($notification);
+                    // persiste project budget
+                    $dm->persist($this->defineBudget($charter));
                     $dm->flush();
                 }
                 return $this->redirectToRoute('charter_show', array('id' => $id));
@@ -155,6 +157,15 @@ class CharterController extends Controller
         $notification->setReceiver($receiver);
 
         return $notification;
+    }
+
+    public function defineBudget(Charter $charter)
+    {
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $project = $dm->getRepository("App\Document\Project")->findOneBy(array('charterId'=>$charter->getId()));
+        $project->setBudget($charter->getPlannedExpensesBudget()+$charter->getAgreedWageExpenses());
+
+        return $project;
     }
 
 }
