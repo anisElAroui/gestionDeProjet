@@ -50,6 +50,11 @@ class User extends BaseUser implements LdapUserInterface
     /**
      * @MongoDB\Field(type="string")
      */
+    protected $image;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
     protected $dn;
 
     public function __construct()
@@ -175,5 +180,21 @@ class User extends BaseUser implements LdapUserInterface
     public function setFemale($female): void
     {
         $this->female = $female;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
     }
 }

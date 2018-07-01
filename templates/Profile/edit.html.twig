@@ -21,7 +21,7 @@
                         <div class="fileupload fileupload-new" data-provides="fileupload">
                             <div class="fileupload-new thumbnail" style="width: 80px; height: 80px;"><img src="http://www.placehold.it/80x80/EFEFEF/AAAAAA" /></div>
                             <div class="fileupload-preview fileupload-exists thumbnail" style="width: 80px; height: 80px;"></div>
-                            <span class="btn btn-default btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+                            {{ form_widget((edit_form.image)) }}
                             <a href="#" class="btn btn-link fileupload-exists" data-dismiss="fileupload">Remove</a>
                         </div>
                     </div>
