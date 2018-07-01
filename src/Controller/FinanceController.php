@@ -67,7 +67,7 @@ class FinanceController extends Controller
     public function showAction(Request $request, $id1, $id2)
     {
         $dm = $this->get('doctrine_mongodb')->getManager();
-        $finance = $dm->getRepository('App\Document\Finance')->find( $id2);
+        $finance = $dm->getRepository('App\Document\Finance')->find($id2);
         $charter = $dm->getRepository('App\Document\Charter\Charter')->find($id1);
 
         $deleteForm = $this->createDeleteForm($id1,$id2);

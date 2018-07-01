@@ -15,7 +15,7 @@
                             </li>
                             <li>
                                 <span class="item-key">Full name</span>
-                                <div class="vcard-item"></div>
+                                <div class="vcard-item">{{ user.FullName }}</div>
                             </li>
                             <li>
                                 <span class="item-key">Username</span>
@@ -27,22 +27,28 @@
                             </li>
                             <li>
                                 <span class="item-key">Gender</span>
-                                <div class="vcard-item">Male</div>
-                            </li>
-                            <li>
-                                <span class="item-key">Languages:</span>
                                 <div class="vcard-item">
-                                    <ul class="list_a">
-                                        <li>English</li>
-                                        <li>French</li>
-                                        <li>German</li>
-                                    </ul>
+                                    {% if user.male == true %}
+                                        Male
+                                    {% else %}
+                                        Female
+                                    {% endif %}
                                 </div>
                             </li>
+                            {#<li>#}
+                                {#<span class="item-key">Languages:</span>#}
+                                {#<div class="vcard-item">#}
+                                    {#<ul class="list_a">#}
+                                        {#<li>English</li>#}
+                                        {#<li>French</li>#}
+                                        {#<li>German</li>#}
+                                    {#</ul>#}
+                                {#</div>#}
+                            {#</li>#}
                             <li>
                                 <span class="item-key">Signature</span>
                                 <div class="vcard-item">
-                                    signature
+                                    {{ user.signature }}
                                 </div>
                             </li>
                         </ul><br>

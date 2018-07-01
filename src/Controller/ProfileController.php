@@ -25,9 +25,6 @@ class ProfileController extends Controller
     public function showAction()
     {
         $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
 
         return $this->render('Profile/show.html.twig', array(
             'user' => $user
@@ -42,20 +39,20 @@ class ProfileController extends Controller
     {
         $user = $this->getUser();
 
-//        $editForm = $this->createForm('App\Form\ReportType', $report);
-//        $editForm->handleRequest($request);
-//
-//        if ($editForm->isSubmitted() && $editForm->isValid()) {
-//            $dm = $this->get('doctrine_mongodb')->getManager();
-//            $dm->persist($report);
-//            $dm->flush();
-//
-//            return $this->redirectToRoute('profile_show');
-//        }
+        $editForm = $this->createForm('App\Form\UserType', $user);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $dm->persist($user);
+            $dm->flush();
+
+            return $this->redirectToRoute('profile_show');
+        }
 
 
         return $this->render('Profile/edit.html.twig', array(
-//            'form' => $editForm->createView(),
+            'edit_form' => $editForm->createView(),
             'user' => $user
         ));
     }

@@ -25,7 +25,27 @@ class User extends BaseUser implements LdapUserInterface
     /**
      * @MongoDB\Field(type="string")
      */
+    protected $FullName;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
+    protected $signature;
+
+    /**
+     * @MongoDB\Field(type="string")
+     */
     protected $lastName;
+
+    /**
+     * @MongoDB\Field(type="boolean")
+     */
+    protected $male;
+
+    /**
+     * @MongoDB\Field(type="boolean")
+     */
+    protected $female;
 
     /**
      * @MongoDB\Field(type="string")
@@ -91,5 +111,69 @@ class User extends BaseUser implements LdapUserInterface
     public function getDn()
     {
         return $this->dn;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFullName()
+    {
+        return $this->FullName;
+    }
+
+    /**
+     * @param mixed $FullName
+     */
+    public function setFullName($FullName): void
+    {
+        $this->FullName = $FullName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSignature()
+    {
+        return $this->signature;
+    }
+
+    /**
+     * @param mixed $signature
+     */
+    public function setSignature($signature): void
+    {
+        $this->signature = $signature;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMale()
+    {
+        return $this->male;
+    }
+
+    /**
+     * @param mixed $male
+     */
+    public function setMale($male): void
+    {
+        $this->male = $male;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFemale()
+    {
+        return $this->female;
+    }
+
+    /**
+     * @param mixed $female
+     */
+    public function setFemale($female): void
+    {
+        $this->female = $female;
     }
 }

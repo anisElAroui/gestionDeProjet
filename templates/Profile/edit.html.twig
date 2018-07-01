@@ -4,7 +4,8 @@
 <div class="row">
     <div class="col-sm-12 col-md-12">
         <h3 class="heading">User Profile</h3>
-        <form class="form-horizontal">
+        {{ form_start(edit_form, {'attr': {'class': 'form-horizontal' }}) }}
+
             <fieldset>
                 <div class="form-group">
                     <label class="control-label col-sm-2">Username</label>
@@ -28,7 +29,7 @@
                 <div class="form-group">
                     <label for="u_fname" class="control-label col-sm-2">Full name</label>
                     <div class="col-sm-8">
-                        <input id="u_fname" class="input-xlarge form-control" value="" type="text">
+                        {{ form_widget(edit_form.fullname,  {'attr': {'class':'form-control'} }) }}
                     </div>
                 </div>
                 <div class="form-group">
@@ -54,28 +55,28 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Language(s)</label>
-                    <div class="col-sm-8">
-                        <select name="user_languages" id="user_languages" multiple="" data-placeholder="Choose a language(s)..." class="form-control">
-                            <option selected="selected">English</option>
-                            <option>French</option>
-                            <option>German</option>
-                            <option>Italian</option>
-                            <option>Chinese</option>
-                            <option>Spanish</option>
-                        </select>
-                    </div>
-                </div>
+                {#<div class="form-group">#}
+                    {#<label class="control-label col-sm-2">Language(s)</label>#}
+                    {#<div class="col-sm-8">#}
+                        {#<select name="user_languages" id="user_languages" multiple="" data-placeholder="Choose a language(s)..." class="form-control">#}
+                            {#<option selected="selected">English</option>#}
+                            {#<option>French</option>#}
+                            {#<option>German</option>#}
+                            {#<option>Italian</option>#}
+                            {#<option>Chinese</option>#}
+                            {#<option>Spanish</option>#}
+                        {#</select>#}
+                    {#</div>#}
+                {#</div>#}
                 <div class="form-group">
                     <label class="control-label col-sm-2">Gender</label>
                     <div class="col-sm-8">
                         <label class="radio-inline">
-                            <input value="male" id="s_male" name="f_gender" checked="checked" type="radio">
+                            {{ form_widget((edit_form.male)) }}
                             Male
                         </label>
                         <label class="radio-inline">
-                            <input value="female" id="s_female" name="f_gender" type="radio">
+                            {{ form_widget((edit_form.female)) }}
                             Female
                         </label>
                     </div>
@@ -83,10 +84,7 @@
                 <div class="form-group">
                     <label for="u_signature" class="control-label col-sm-2">Signature</label>
                     <div class="col-sm-8">
-							<textarea rows="4" id="u_signature" class="form-control">
-                            Signature
-                            </textarea>
-                        <span class="help-block">Automatic resize</span>
+                        {{ form_widget(edit_form.signature,  {'attr': {'class':'form-control'} }) }}
                     </div>
                 </div>
                 <div class="form-group">
@@ -96,7 +94,7 @@
                     </div>
                 </div>
             </fieldset>
-        </form>
+        {{ form_end(edit_form) }}
     </div>
 </div>
 
