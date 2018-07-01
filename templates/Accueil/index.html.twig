@@ -15,9 +15,9 @@
                 <div class="box">
                     <div class="tac col-lg-12" >
 
-                        <h1>Projects </h1><br>
+                        {% trans %} <h1>Projects</h1> {% endtrans %} <br>
                         {% if is_granted('ROLE_ADMIN') %}
-                        <a class="btn btn-success " href="{{ path('add_new_project') }}"><i class="glyphicon glyphicon-plus"></i> Add a new project</a><br><br><br>
+                        <a class="btn btn-success " href="{{ path('add_new_project') }}"><i class="glyphicon glyphicon-plus"></i>{{ 'Add a new project'|trans|raw }} </a><br><br><br>
                         {% endif %}
 
                         <div class="table-responsive">
@@ -27,24 +27,34 @@
                                 <table id="example" class="table table-striped table-bordered nowrap "  >
                                     <thead>
                                         <tr>
-                                            <th>  Id </th>
-                                            <th>  projectName</th>
-                                            <th>  project manager </th>
-                                            <th>  incomes</th>
-                                            <th>  budget</th>
-                                            <th>  Expenses</th>
-                                            <th>  plannedEndDate</th>
-                                            <th>  realStartDate</th>
-                                            <th>  done</th>
-                                            <th>  endDate</th>
-                                            <th>  Actions </th>
+                                            <th>  {{ 'Id'|trans|raw }}              </th>
+                                            <th>  {{ 'Project Name'|trans|raw }}    </th>
+                                            <th>  {{ 'Project Manager'|trans|raw }} </th>
+                                            <th>  {{ 'Incomes'|trans|raw }}         </th>
+                                            <th>  {{ 'Budget'|trans|raw }}          </th>
+                                            <th>  {{ 'Expenses'|trans|raw }}        </th>
+                                            <th>  {{ 'Planned End Date'|trans|raw }}</th>
+                                            <th>  {{ 'Real Start Date'|trans|raw }} </th>
+                                            <th>  {{ 'Done'|trans|raw }}            </th>
+                                            <th>  {{ 'End Date'|trans|raw }}        </th>
+                                            <th>  {{ 'Actions'|trans|raw }}         </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for charter in charters %}
                                             <tr>
                                                 <td><a href="{{ path('project_show', { 'id': charter.id }) }}">{{ charter.id }}</a></td>
-                                                <td>{{ charter.projectName }}</td>
+                                                <td>
+                                                    {% if charter.projectId.validated %}
+                                                        <span class="act act-success">
+                                                            {{ charter.projectName }}
+                                                        </span>
+                                                    {% else %}
+                                                        <span class="act act-danger">
+                                                            {{ charter.projectName }}
+                                                        </span>
+                                                    {% endif %}
+                                                </td>
                                                 <td>{{ charter.projectManager }}</td>
                                                 <td>{{ charter.budget }}</td>
                                                 <td>{{ charter.plannedExpensesBudget+charter.agreedWageExpenses }}</td>
@@ -54,7 +64,7 @@
                                                 <td>{{ charter.projectId.done }}</td>
                                                 <td>{{ charter.projectId.endDate |date('Y-m-d') }}</td>
                                                 <td>
-                                                    <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
+                                                    <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> {{ 'show'|trans|raw }}</a>
                                                 </td>
                                             </tr>
                                         {% endfor %}

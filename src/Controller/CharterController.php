@@ -40,6 +40,9 @@ class CharterController extends Controller
             if($step == 6){
                 $receiver = 'karimBorni'; // à changer selon le role receiver= PMO
                 $notification = $this->sendNotification($charter, 'complete charter',$receiver,'Charter');
+                $mailer=$this->get('app.mailer');
+                $mailer->sendComplete('complete charter','proxym.gestion.projet@gmail.com','anis.el.aroui@gmail.com',$charter);
+
                 $dm->persist($notification);
                 $dm->flush();
                 return $this->redirectToRoute('charter_show', array('id' => $id));
@@ -54,8 +57,11 @@ class CharterController extends Controller
                 // si le user a le role de PMO et non pas le role de PM
                 if ($this->getUser()->getUsername() == 'karimBorni') {
                     $receiver = $charter->getProjectManager(); // PM
-                    $notification = $this->sendNotification($charter, 'budget negociation', $receiver, 'Negociation');
+                    $notification = $this->sendNotification($charter, 'budget negotiation', $receiver, 'Negociation');
                     $dm->persist($notification);
+                    $mailer=$this->get('app.mailer');
+                    $mailer->sendNegotiation('budget negotiation','proxym.gestion.projet@gmail.com','anis.el.aroui@gmail.com',$charter);
+
                     // persiste project budget
                     $dm->persist($this->defineBudget($charter));
                     $dm->flush();
@@ -150,7 +156,6 @@ class CharterController extends Controller
         $dm = $this->get('doctrine_mongodb')->getManager();
 
         $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('charterId'=>$charter->getId()));
-        $notification->setFlag(true);
         $notification->setDescription($description);
         $notification->setCreatedAt(new \DateTime());
         $notification->setType($type);

@@ -84,6 +84,11 @@ class Project
     protected $endDate;
 
     /**
+     * @MongoDB\Field(type="boolean")
+     */
+    protected $validated;
+
+    /**
      * @var integer $charterId
      *
      * @MongoDB\ReferenceOne(targetDocument="App\Document\Charter\Charter", storeAs="id")
@@ -311,6 +316,22 @@ class Project
     public function getCharterId()
     {
         return $this->charterId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValidated()
+    {
+        return $this->validated;
+    }
+
+    /**
+     * @param mixed $validated
+     */
+    public function setValidated($validated): void
+    {
+        $this->validated = $validated;
     }
 
     /**

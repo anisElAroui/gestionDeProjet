@@ -11,21 +11,21 @@
                         <div class="tac col-lg-12">
                             <h1>{{ charter.title }}</h1><br>
 
-                            <a class="btn btn-primary " href="{{ path('charter_edit', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit charter</a>
+                            <a class="btn btn-primary " href="{{ path('charter_edit', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i>{% trans %} edit charter {% endtrans %}</a>
                         </div>
                     </div>
-                    <h2 class="heading">Project scope</h2><br>
+                    {% trans %} <h2 class="heading">Project scope</h2> {% endtrans %}<br>
 
-                    <h3>1- Objectives</h3> <p>{{ charter.objectives }}</p>
+                    {% trans %} <h3>1- Objectives</h3> {% endtrans %} <p>{{ charter.objectives }}</p>
 
-                    <h3>2- High Level Requirements</h3>
+                    {% trans %} <h3>2- High Level Requirements</h3> {% endtrans %}
                     <div class="row">
                         <div class="tac col-lg-4">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>  High Level Requirements </th>
+                                <th> {% trans %}High Level Requirements{% endtrans %} </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -39,14 +39,14 @@
                     </div>
                         </div>
                     </div>
-                    <h3>3- Major Deliverables</h3>
+                    {% trans %}<h3>3- Major Deliverables</h3>{% endtrans %}
 
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th> Major Deliverables </th>
-                                <th> Deliverables Description </th>
+                                <th> {% trans %}Major Deliverables {% endtrans %} </th>
+                                <th> {% trans %}Deliverables Description {% endtrans %} </th>
 
                             </tr>
                             </thead>
@@ -63,10 +63,10 @@
 
                     <ul class="pager">
                         <li class="previous">
-                            <a href="{{ path('charter_show', {'id': charter.id}) }}"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+                            <a href="{{ path('charter_show', {'id': charter.id}) }}"><i class="glyphicon glyphicon-chevron-left"></i> {{ 'Previous'|trans|raw }}</a>
                         </li>
                         <li class="next">
-                            <a href="{{ path('charter_show3', {'id': charter.id}) }}">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
+                            <a href="{{ path('charter_show3', {'id': charter.id}) }}">{{ 'Next'|trans|raw }} <i class="glyphicon glyphicon-chevron-right"></i></a>
                         </li>
                     </ul>
 

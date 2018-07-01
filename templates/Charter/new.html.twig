@@ -29,7 +29,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-12">
-                <h2 class="heading">Charter creation</h2>
+                {% trans %}<h2 class="heading">Charter creation</h2>{% endtrans %}
 
                     {% form_theme form 'Form/jquery.collection.html.twig' %}
 
@@ -44,8 +44,7 @@
                                             {{ form_errors(form.title) }}
                                         </div>
                                 </div>
-                                    <h4> 1- Project Identification</h4>
-                                    {#<h4>{{ 'project.identification'|trans }}</h4>#}
+                                {% trans %}<h4> 1- Project Identification</h4>{% endtrans %}
                                 <div  class="formSep form-group">
                                     <label class="col-sm-3 control-label" ><span class="label label-primary">Project Name</span></label>
                                         <div class="col-sm-7">
@@ -79,14 +78,14 @@
                                             {{ form_errors(form.client) }}
                                         </div>
                                 </div>
-                                <h4> 2- Project Description</h4>
+                                {% trans %}<h4> 2- Project Description</h4>{% endtrans %}
                                 <div  class="formSep form-group">
                                     <label class="col-sm-3 control-label" ><span class="label label-primary"> Project Description</span></label>
                                         <div class="col-sm-7">
                                             {{ charter.projectDescription }}
                                         </div>
                                 </div><br>
-                                <h4> 3- Project repository</h4>
+                                {% trans %}<h4> 3- Project repository</h4>{% endtrans %}
                                 <div  class="form-group">
                                     <label class="col-sm-3 control-label" ><span class="label label-primary"> Project Repository</span></label>
                                         <div class="col-sm-7">
@@ -162,7 +161,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <fieldset title="Project Budget 1">
                             <legend class="hide">....</legend>
-                                <h4> 1- Incomes (€)</h4>
+                                {% trans %}<h4> 1- Incomes (€)</h4>{% endtrans %}
                                 <div  class="formSep form-group">
                                     <label class="col-sm-3 control-label" ><span class="label label-primary">budget</span></label>
                                     <div class="col-sm-7">
@@ -177,7 +176,7 @@
                                         {{ form_errors(form.incomesManDayAffection) }}
                                     </div>
                                 </div>
-                                <h4> 2. Expenses (€)</h4>
+                                {% trans %}<h4> 2. Expenses (€)</h4>{% endtrans %}
                                 <div  class="formSep form-group">
                                     <label class="col-sm-3 control-label" ><span class="label label-primary">agreedWageExpenses </span></label>
                                     <div class="col-sm-7">
@@ -246,7 +245,7 @@
                     {{ form_end(form) }}<br>
 
                     {% if charter.id is not null %}
-                        <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> Go to charter</a><br><br>
+                        <a class="btn btn-info" href="{{ path('charter_show', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i>{% trans %} Go to charter{% endtrans %}</a><br><br>
                     {% endif %}
             </div>
         </div>

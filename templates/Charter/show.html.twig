@@ -9,33 +9,33 @@
                     <div class="row">
                         <div class="tac col-lg-12">
                             <h1>{{ charter.title }}</h1><br>
-                            <a class="btn btn-primary " href="{{ path('charter_edit', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit charter</a>
+                            <a class="btn btn-primary " href="{{ path('charter_edit', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i>{{ 'edit charter'|trans|raw }}</a>
                         </div>
                     </div>
 
-                    <h2 class="heading">Project and Product Overview</h2><br>
+                    {% trans %}<h2 class="heading">Project and Product Overview</h2>{% endtrans %}<br>
 
                     <div class="row">
                         <div class="col-sm-6 col-md-6">
 
-                    <h3> 1- Project Identification</h3>
+                            {% trans %}<h3> 1- Project Identification</h3>{% endtrans %}
 
-                            <p><strong class="text-muted">Project Name :</strong> {{ charter.projectName }}</p>
-                            <p><strong class="text-muted">Project Manager:</strong> {{ charter.projectManager }}</p>
-                            <p><strong class="text-muted">Project Internal References :</strong> {{ charter.projectInternalRefrances }}</p>
-                            <p><strong class="text-muted">Final Client :</strong> {{ charter.finalClient }}</p>
-                            <p><strong class="text-muted">Client :</strong> {{ charter.client }}</p>
+                            <p><strong class="text-muted">{% trans %}Project Name :{% endtrans %}</strong> {{ charter.projectName }}</p>
+                            <p><strong class="text-muted">{% trans %}Project Manager:{% endtrans %}</strong> {{ charter.projectManager }}</p>
+                            <p><strong class="text-muted">{% trans %}Project Internal References :{% endtrans %}</strong> {{ charter.projectInternalRefrances }}</p>
+                            <p><strong class="text-muted">{% trans %}Final Client :{% endtrans %}</strong> {{ charter.finalClient }}</p>
+                            <p><strong class="text-muted">{% trans %}Client :{% endtrans %}</strong> {{ charter.client }}</p>
                         </div>
                         <div class="col-sm-6 col-md-6">
 
-                        <h3> 2- Project Description</h3> <p>{{ charter.projectDescription }}</p>
+                            {% trans %}<h3> 2- Project Description</h3>{% endtrans %} <p>{{ charter.projectDescription }}</p>
 
-                    <h3> 3- Project repository</h3> <p>{{ charter.projectRepository }}</p><br>
+                            {% trans %} <h3> 3- Project repository</h3>{% endtrans %} <p>{{ charter.projectRepository }}</p><br>
                         </div>
                     </div>
                     <ul class="pager">
                         <li class="next">
-                            <a href="{{ path('charter_show2', {'id': charter.id}) }}">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
+                            <a href="{{ path('charter_show2', {'id': charter.id}) }}">{{ 'Next'|trans|raw }}Next <i class="glyphicon glyphicon-chevron-right"></i></a>
                         </li>
                     </ul>
                 </div>

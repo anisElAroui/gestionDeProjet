@@ -32,4 +32,60 @@ class Mailer
         ;
         $this->mailer->send($message);
     }
+
+    public function sendComplete($subject,$fromEmail,$toEmail,$charter)
+    {
+        $message = (new \Swift_Message($subject))
+            ->setFrom($fromEmail)
+            ->setTo($toEmail)
+            ->setBody(
+                $this->templating->render(
+                    'Emails/completeCharter.html.twig', array('charter'=>$charter)
+                ),'text/html'
+            )
+        ;
+        $this->mailer->send($message);
+    }
+
+    public function sendNegotiation($subject,$fromEmail,$toEmail,$charter)
+    {
+        $message = (new \Swift_Message($subject))
+            ->setFrom($fromEmail)
+            ->setTo($toEmail)
+            ->setBody(
+                $this->templating->render(
+                    'Emails/negotiation.html.twig', array('charter'=>$charter)
+                ),'text/html'
+            )
+        ;
+        $this->mailer->send($message);
+    }
+
+    public function sendDecision($subject,$fromEmail,$toEmail,$charter)
+    {
+        $message = (new \Swift_Message($subject))
+            ->setFrom($fromEmail)
+            ->setTo($toEmail)
+            ->setBody(
+                $this->templating->render(
+                    'Emails/decision.html.twig', array('charter'=>$charter)
+                ),'text/html'
+            )
+        ;
+        $this->mailer->send($message);
+    }
+
+    public function sendValidation($subject,$fromEmail,$toEmail,$charter)
+    {
+        $message = (new \Swift_Message($subject))
+            ->setFrom($fromEmail)
+            ->setTo($toEmail)
+            ->setBody(
+                $this->templating->render(
+                    'Emails/validateProject.html.twig', array('charter'=>$charter)
+                ),'text/html'
+            )
+        ;
+        $this->mailer->send($message);
+    }
 }

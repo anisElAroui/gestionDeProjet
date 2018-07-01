@@ -10,43 +10,42 @@
                     <div class="row">
                         <div class="tac col-lg-12">
                             <h1>{{ charter.title }}</h1><br>
-
-                            <a class="btn btn-primary " href="{{ path('charter_edit', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit charter</a>
+                            <a class="btn btn-primary " href="{{ path('charter_edit', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> {% trans %} edit charter {% endtrans %}</a>
                         </div>
                     </div>
 
-                    <h2 class="heading">Project Budget</h2><br>
+                    {% trans %}<h2 class="heading">Project Budget</h2>{% endtrans %}<br>
 
                     <div class="row">
                         <div class="col-sm-6 col-md-6">
-                    <h3> 1- Incomes (€)</h3>
+                            {% trans %}<h3> 1- Incomes (€)</h3>{% endtrans %}
 
-                    <p><strong class="text-muted">Proxym-IT Budget : </strong>{{ charter.budget }}</p>
-                    <p><strong class="text-muted">Proxym-IT man/ day affectation : </strong>{{ charter.incomesManDayAffection }}</p>
+                            <p><strong class="text-muted">{% trans %}Proxym-IT Budget : {% endtrans %}</strong>{{ charter.budget }}</p>
+                            <p><strong class="text-muted">{% trans %}Proxym-IT man/ day affectation : {% endtrans %}</strong>{{ charter.incomesManDayAffection }}</p>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+
+                            {% trans %}<h3> 2. Expenses (€)</h3>{% endtrans %}
+
+                            <p><strong class="text-muted">{% trans %}PMO agreed Wage expenses : {% endtrans %}</strong>{{ charter.agreedWageExpenses }}</p>
+                            <p><strong class="text-muted">{% trans %}Planned expenses budget : {% endtrans %}</strong>{{ charter.plannedExpensesBudget }}</p>
+                            <p><strong class="text-muted">{% trans %}Target profitability : {% endtrans %}</strong>{{ charter.targetProfitability }}</p>
+                            <p><strong class="text-muted">{% trans %}Threshold profitability : {% endtrans %}</strong>{{ charter.thresholdProfitability }}</p>
+                            <p><strong class="text-muted">{% trans %}PMO man day affectation : {% endtrans %}</strong>{{ charter.expensesManDayAffection }}</p>
+
+                        </div>
                     </div>
-                    <div class="col-sm-6 col-md-6">
-
-                        <h3> 2. Expenses (€)</h3>
-
-                    <p><strong class="text-muted">PMO agreed Wage expenses : </strong>{{ charter.agreedWageExpenses }}</p>
-                    <p><strong class="text-muted">Planned expenses budget : </strong>{{ charter.plannedExpensesBudget }}</p>
-                    <p><strong class="text-muted">Target profitability : </strong>{{ charter.targetProfitability }}</p>
-                    <p><strong class="text-muted">Threshold profitability : </strong>{{ charter.thresholdProfitability }}</p>
-                    <p><strong class="text-muted">PMO man day affectation : </strong>{{ charter.expensesManDayAffection }}</p>
-
-                    </div>
-                    </div>
-                    <strong>incomes & expenses</strong><br><br>
+                    <strong>{% trans %}incomes & expenses{% endtrans %}</strong><br><br>
 
                     <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th> Profile </th>
-                                    <th> Estimated duration </th>
-                                    <th> Estimated Cost </th>
-                                    <th> Comments </th>
-                                    <th> Type </th>
+                                    <th> {% trans %}Profile{% endtrans %} </th>
+                                    <th> {% trans %}Estimated duration{% endtrans %} </th>
+                                    <th> {% trans %}Estimated Cost{% endtrans %} </th>
+                                    <th> {% trans %}Comments{% endtrans %} </th>
+                                    <th> {% trans %}Type{% endtrans %} </th>
 
                                 </tr>
                                 </thead>
@@ -68,18 +67,18 @@
                             </table>
                     </div>
 
-                    <h3> 3. Billing</h3>
+                    {% trans %}<h3> 3. Billing</h3>{% endtrans %}
 
-                    <p><strong class="text-muted"> Billing responsible : </strong> {{ charter.billingResponsible }}</p>
+                    <p><strong class="text-muted">{% trans %} Billing responsible : {% endtrans %}</strong> {{ charter.billingResponsible }}</p>
 
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th> description </th>
-                                <th> amount </th>
-                                <th> plannedDate </th>
-                                <th> deliveredDate </th>
+                                <th> {{ 'Description'|trans|raw }} </th>
+                                <th> {{ 'Amount'|trans|raw }} </th>
+                                <th> {{ 'Planned date'|trans|raw }} </th>
+                                <th> {{ 'Delivered date'|trans|raw }} </th>
 
                             </tr>
                             </thead>
@@ -98,7 +97,7 @@
 
                     <ul class="pager">
                         <li class="previous">
-                            <a href="{{ path('charter_show4', {'id': charter.id}) }}"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+                            <a href="{{ path('charter_show4', {'id': charter.id}) }}"><i class="glyphicon glyphicon-chevron-left"></i>{{ 'Previous'|trans|raw }}</a>
                         </li>
                     </ul>
 

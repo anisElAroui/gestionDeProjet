@@ -1,0 +1,101 @@
+'<h1>Projects</h1>': '<h1>Projects</h1>'
+'Add a new project': ' Add a new project'
+Id: Id
+'Project Name': 'Project Name'
+'Project Manager': 'Project Manager'
+Incomes: Incomes
+Budget: Budget
+Expenses: Expenses
+'Planned End Date': 'Planned End Date'
+'Real Start Date': 'Real Start Date'
+Done: Done
+'End Date': 'End Date'
+Actions: Actions
+show: Show
+'<h1>Project edit</h1>': '<h1>Project edit</h1>'
+'<h1>Project</h1>': '<h1>Project</h1>'
+Charter: Charter
+'Project and Product Overview': 'Project and Product Overview'
+'Project scope': 'Project scope'
+'Project Milestones & Waving': 'Project Milestones & Waving'
+'Assumptions, Constraints': 'Assumptions, Constraints'
+'Project Budget': 'Project Budget'
+Stakeholder: Stakeholder
+Risks: Risks
+Opportunities: Opportunities
+Finance: Finance
+'Project log': 'Project log'
+'Project report': 'Project report'
+'Back to the list': 'Back to the list'
+Edit: Edit
+'<h2 class="heading">Charter creation</h2>': '<h2 class="heading">Charter creation</h2>'
+'<h4> 1- Project Identification</h4>': '<h4> 1- Project Identification</h4>'
+'<h4> 2- Project Description</h4>': '<h4> 2- Project Description</h4>'
+'<h4> 3- Project repository</h4>': '<h4> 3- Project repository</h4>'
+'<h4> 1- Incomes (€)</h4>': '<h4> 1- Incomes (€)</h4>'
+'<h4> 2. Expenses (€)</h4>': '<h4> 2. Expenses (€)</h4>'
+'Go to charter': ' Go to charter'
+'edit charter': ' edit charter'
+'<h2 class="heading">Project and Product Overview</h2>': '<h2 class="heading">Project and Product Overview</h2>'
+'<h3> 1- Project Identification</h3>': '<h3> 1- Project Identification</h3>'
+'Project Name :': 'Project Name :'
+'Project Manager:': 'Project Manager:'
+'Project Internal References :': 'Project Internal References :'
+'Final Client :': 'Final Client :'
+'Client :': 'Client :'
+'<h3> 2- Project Description</h3>': '<h3> 2- Project Description</h3>'
+'<h3> 3- Project repository</h3>': '<h3> 3- Project repository</h3>'
+Next: Next
+'<h2 class="heading">Project scope</h2>': '<h2 class="heading">Project scope</h2>'
+'<h3>1- Objectives</h3>': '<h3>1- Objectives</h3>'
+'<h3>2- High Level Requirements</h3>': '<h3>2- High Level Requirements</h3>'
+'High Level Requirements': 'High Level Requirements'
+'<h3>3- Major Deliverables</h3>': '<h3>3- Major Deliverables</h3>'
+'Major Deliverables': 'Major Deliverables'
+'Deliverables Description': 'Deliverables Description'
+Previous: Previous
+'Executive Milestones': 'Executive Milestones'
+'Estimated duration': 'Estimated duration'
+'Estimated Completion Timeframe': 'Estimated Completion Timeframe'
+Comments: Comments
+'<h2 class="heading">Project Budget</h2>': '<h2 class="heading">Project Budget</h2>'
+'<h3> 1- Incomes (€)</h3>': '<h3> 1- Incomes (€)</h3>'
+'Proxym-IT Budget :': 'Proxym-IT Budget :'
+'Proxym-IT man/ day affectation :': 'Proxym-IT man/ day affectation :'
+'<h3> 2. Expenses (€)</h3>': '<h3> 2. Expenses (€)</h3>'
+'PMO agreed Wage expenses :': 'PMO agreed Wage expenses :'
+'Planned expenses budget :': 'Planned expenses budget :'
+'Target profitability :': 'Target profitability :'
+'Threshold profitability :': 'Threshold profitability :'
+'PMO man day affectation :': 'PMO man day affectation :'
+'incomes & expenses': 'incomes & expenses'
+Profile: Profile
+'Estimated Cost': 'Estimated Cost'
+Type: Type
+'<h3> 3. Billing</h3>': '<h3> 3. Billing</h3>'
+'Billing responsible :': 'Billing responsible :'
+Description: Description
+Amount: Amount
+'Planned date': 'Planned date'
+'Delivered date': 'Delivered date'
+'<h2 class="heading">Assumptions, Constraints</h2>': '<h2 class="heading">Assumptions, Constraints</h2>'
+Assumptions: Assumptions
+Constraints: Constraints
+'<h1>Action creation</h1>': '<h1>Action creation</h1>'
+Create: Create
+'<h1>Action</h1>': '<h1>Action</h1>'
+edit: edit
+'<h1>Action list</h1>': '<h1>Action list</h1>'
+'Action Type': 'Action Type'
+Priority: Priority
+'Initial Date': 'Initial Date'
+Author: Author
+Status: Status
+'Current Date': 'Current Date'
+'Real Date': 'Real Date'
+Identificator: Identificator
+Show: Show
+'Create a new entry': 'Create a new entry'
+'<h1>Action edit</h1>': '<h1>Action edit</h1>'
+'<h1 class="heading">Charts</h1>': '<h1 class="heading">Charts</h1>'
+

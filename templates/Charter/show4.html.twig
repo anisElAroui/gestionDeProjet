@@ -11,16 +11,16 @@
                         <div class="tac col-lg-12">
                             <h1>{{ charter.title }}</h1><br>
 
-                            <a class="btn btn-primary " href="{{ path('charter_edit', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit charter</a>
+                            <a class="btn btn-primary " href="{{ path('charter_edit', { 'id': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> {% trans %} edit charter {% endtrans %}</a>
                         </div>
                     </div>
-                    <h2 class="heading">Assumptions, Constraints</h2><br>
+                    {% trans %}<h2 class="heading">Assumptions, Constraints</h2>{% endtrans %}<br>
 
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th> Assumptions </th>
+                                <th> {{ 'Assumptions'|trans|raw }} </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -37,7 +37,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th> Constraints </th>
+                                <th> {{ 'Constraints'|trans|raw }} </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -52,10 +52,10 @@
 
                     <ul class="pager">
                         <li class="previous">
-                            <a href="{{ path('charter_show3', {'id': charter.id}) }}"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+                            <a href="{{ path('charter_show3', {'id': charter.id}) }}"><i class="glyphicon glyphicon-chevron-left"></i> {{ 'Previous'|trans|raw }}</a>
                         </li>
                         <li class="next">
-                            <a href="{{ path('charter_show5', {'id': charter.id}) }}">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
+                            <a href="{{ path('charter_show5', {'id': charter.id}) }}">{{ 'Next'|trans|raw }}<i class="glyphicon glyphicon-chevron-right"></i></a>
                         </li>
                     </ul>
                 </div>

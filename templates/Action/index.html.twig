@@ -6,23 +6,23 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
-                    <h1>Action list</h1>
+                    {% trans %}<h1>Action list</h1>{% endtrans %}
 
                     <div class="table-responsive">
                         {% if actions is defined and actions is not null  %}
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>  Id </th>
-                                    <th>  actionType</th>
-                                    <th>  priority </th>
-                                    <th>  initialDate</th>
-                                    <th>  Author </th>
-                                    <th>  status  </th>
-                                    <th>  currentDate</th>
-                                    <th>  realDate </th>
-                                    <th>  identificator  </th>
-                                    <th>  Actions </th>
+                                    <th> {{ 'Id'|trans|raw }}           </th>
+                                    <th> {{ 'Action Type'|trans|raw }}  </th>
+                                    <th> {{ 'Priority'|trans|raw }}     </th>
+                                    <th> {{ 'Initial Date'|trans|raw }} </th>
+                                    <th> {{ 'Author'|trans|raw }}       </th>
+                                    <th> {{ 'Status'|trans|raw }}       </th>
+                                    <th> {{ 'Current Date'|trans|raw }} </th>
+                                    <th> {{ 'Real Date'|trans|raw }}    </th>
+                                    <th> {{ 'Identificator'|trans|raw }}</th>
+                                    <th> {{ 'Actions'|trans|raw }}      </th>
 
                                 </tr>
                                 </thead>
@@ -41,8 +41,8 @@
                                         <td>{{ action.identificator}}</td>
 
                                         <td>
-                                            <a class="btn btn-info" href="{{ path('action_show', { 'id2': action.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i> show</a>
-                                            <a class="btn btn-primary" href="{{ path('action_edit', { 'id2': action.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i> edit</a>
+                                            <a class="btn btn-info" href="{{ path('action_show', { 'id2': action.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-eye-open"></i>{{ ' Show'|trans|raw }} </a>
+                                            <a class="btn btn-primary" href="{{ path('action_edit', { 'id2': action.id,'id1': charter.id }) }}"><i class="glyphicon glyphicon-edit"></i>{{ ' Edit'|trans|raw }} </a>
 
                                         </td>
                                     </tr>
@@ -54,7 +54,7 @@
                     </div>
 
                     <br>
-                    <a class="btn btn-success" href="{{ path('action_new',{ 'id':charter.id}) }}"><i class="glyphicon glyphicon-plus"></i> Create a new entry</a>
+                    <a class="btn btn-success" href="{{ path('action_new',{ 'id':charter.id}) }}"><i class="glyphicon glyphicon-plus"></i>{% trans %} Create a new entry {% endtrans %}</a>
 
                 </div>
             </div>

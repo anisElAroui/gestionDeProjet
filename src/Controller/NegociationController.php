@@ -32,6 +32,7 @@ class NegociationController extends Controller
             $receiver = "karimBorni"; // changer le receiver par PMO
             $notification = $this->sendNotification($charter, "budget decision", $receiver, "Negociation");
 
+            $this->sendDecision($charter);
             $negociation->setCharterId($charter);
             $dm->persist($notification);
             $dm->persist($negociation);
@@ -43,39 +44,6 @@ class NegociationController extends Controller
             'form' => $form->createView(),
             'negociation' => $negociation,
             'charter'=>$charter
-        ));
-    }
-
-    /**
-     * @Route("/project/{id}/charter/show5/negoction/show", name="negociation_show")
-     * @IsGranted({"ROLE_ADMIN"})
-     * @Method({"GET"})
-     */
-    public function showAction(Request $request,$id)
-    {
-        $dm = $this->get('doctrine_mongodb')->getManager();
-
-        $charter = $dm->getRepository("App\Document\Charter\Charter")->find($id);
-        $negociation = $dm->getRepository("App\Document\Negociation")->findOneBy(array('charterId'=>$charter));
-        $form = $this->createForm('App\Form\NegociationType', $negociation,array(
-            'action' => $this->generateUrl('negociation_show',['id'=>$id]),
-            'method' => 'GET',
-        ));
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // si PMO a valider le projet
-            $receiver = $charter->getProjectManager(); // PM
-            $notification = $this->sendNotification($charter, "project validated", $receiver, "Charter");
-
-            $dm->persist($notification);
-            $dm->flush();
-            return $this->redirectToRoute('charter_show', array('id' => $id));
-        }
-        return $this->render('Negociation/show.html.twig', array(
-            'negociation' => $negociation,
-            'charter'=>$charter,
-            'form' => $form->createView()
         ));
     }
 
@@ -95,16 +63,60 @@ class NegociationController extends Controller
         ));
         $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $receiver = "karimBorni"; // changer le receiver par PMO
-                $notification = $this->sendNotification($charter, "budget decision", $receiver, "Negociation");
-                $dm->persist($notification);
-                $dm->persist($negociation);
-                $dm->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $receiver = "karimBorni"; // changer le receiver par PMO
+            $notification = $this->sendNotification($charter, "budget decision", $receiver, "Negociation");
+            $this->sendDecision($charter);
+            $dm->persist($notification);
+            $dm->persist($negociation);
+            $dm->flush();
             return $this->redirectToRoute('charter_show5', array('id' => $id));
         }
         return $this->render('Negociation/edit.html.twig', array(
             'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/project/{id}/charter/show5/negoction/show", name="negociation_show")
+     * @IsGranted({"ROLE_ADMIN"})
+     * @Method({"GET"})
+     */
+    public function showAction(Request $request,$id,\Swift_Mailer $mailer)
+    {
+        $dm = $this->get('doctrine_mongodb')->getManager();
+
+        $charter = $dm->getRepository("App\Document\Charter\Charter")->find($id);
+        $project = $dm->getRepository("App\Document\Project")->findOneBy(array('charterId'=>$id));
+        $negociation = $dm->getRepository("App\Document\Negociation")->findOneBy(array('charterId'=>$charter));
+        $form = $this->createForm('App\Form\NegociationType', $negociation,array(
+            'action' => $this->generateUrl('negociation_show',['id'=>$id]),
+            'method' => 'GET',
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // si PMO a valider le projet
+            $receiver = $charter->getProjectManager(); // PM
+            $notification = $this->sendNotification($charter, "project validated", $receiver, "Charter");
+            $project->setValidated('true');
+            $mailer=$this->get('app.mailer');
+            // send to poleManager
+//            $mailer->sendValidation('project validated','proxym.gestion.projet@gmail.com','anisBenAbdallah@gmail.com',$charter);
+            //send to PM
+//            $mailer->sendValidation('project validated','proxym.gestion.projet@gmail.com',$receiver,$charter);
+            $mailer->sendValidation('project validated','proxym.gestion.projet@gmail.com','anis.el.aroui@gmail.com',$charter);
+
+
+            $dm->persist($notification);
+            $dm->persist($project);
+            $dm->flush();
+            return $this->redirectToRoute('charter_show', array('id' => $id));
+        }
+        return $this->render('Negociation/show.html.twig', array(
+            'negociation' => $negociation,
+            'charter'=>$charter,
+            'form' => $form->createView()
         ));
     }
 
@@ -113,7 +125,6 @@ class NegociationController extends Controller
         $dm = $this->get('doctrine_mongodb')->getManager();
 
         $notification = $dm->getRepository("App\Document\Notification")->findOneBy(array('charterId'=>$charter->getId()));
-        $notification->setFlag(true);
         $notification->setDescription($description);
         $notification->setCharterId($charter->getId());
         $notification->setCreatedAt(new \DateTime());
@@ -121,6 +132,11 @@ class NegociationController extends Controller
         $notification->setReceiver($receiver);
 
         return $notification;
+    }
+
+    public function sendDecision(Charter $charter){
+        $mailer=$this->get('app.mailer');
+        $mailer->sendDecision('budget decision','proxym.gestion.projet@gmail.com','anis.el.aroui@gmail.com',$charter);
     }
 
 }

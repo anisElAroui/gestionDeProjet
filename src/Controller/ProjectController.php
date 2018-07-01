@@ -69,7 +69,6 @@ class ProjectController extends Controller
         $notification->setReceiver($project->getProjectManager());
         $notification->setProjectName($project->getProjectName());
         $notification->setDescription($description);
-        $notification->setFlag(true);
         $notification->setType("Charter");
         $date = new \DateTime();
         $notification->setCreatedAt($date);

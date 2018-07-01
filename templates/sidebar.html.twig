@@ -7,17 +7,17 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-                                <i class="glyphicon glyphicon-file"></i> Charter
+                                <i class="glyphicon glyphicon-file"></i> {{ 'Charter'|trans|raw }}
                             </a>
                         </div>
                         <div class="accordion-body collapse in" id="collapseOne">
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="{{ path('charter_show', {'id': charter.id}) }}">Project and Product Overview</a></li>
-                                    <li><a href="{{ path('charter_show2', {'id': charter.id}) }}">Project scope</a></li>
-                                    <li><a href="{{ path('charter_show3', {'id': charter.id}) }}">Project Milestones & Waving</a></li>
-                                    <li><a href="{{ path('charter_show4', {'id': charter.id}) }}">Assumptions, Constraints</a></li>
-                                    <li><a href="{{ path('charter_show5', {'id': charter.id}) }}">Project Budget</a></li>
+                                    <li><a href="{{ path('charter_show', {'id': charter.id}) }}">{% trans %}Project and Product Overview{% endtrans %}</a></li>
+                                    <li><a href="{{ path('charter_show2', {'id': charter.id}) }}">{% trans %}Project scope{% endtrans %}</a></li>
+                                    <li><a href="{{ path('charter_show3', {'id': charter.id}) }}">{% trans %}Project Milestones & Waving{% endtrans %}</a></li>
+                                    <li><a href="{{ path('charter_show4', {'id': charter.id}) }}">{% trans %}Assumptions, Constraints{% endtrans %}</a></li>
+                                    <li><a href="{{ path('charter_show5', {'id': charter.id}) }}">{% trans %}Project Budget{% endtrans %}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -25,49 +25,49 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="{{ path('stakeholder_index', { 'id': charter.id }) }}" data-parent="#side_accordion"  style="display:block;padding:8px 15px">
-                                <i class="glyphicon glyphicon-user"></i> Stakeholder
+                                <i class="glyphicon glyphicon-user"></i> {{ 'Stakeholder'|trans|raw }}
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="{{ path('risks_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
-                                <i class="glyphicon glyphicon-warning-sign"></i> Risks
+                                <i class="glyphicon glyphicon-warning-sign"></i> {{ 'Risks'|trans|raw }}
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="{{ path('opportunities_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
-                                <i class="glyphicon glyphicon-heart"></i> Opportunities
+                                <i class="glyphicon glyphicon-heart"></i> {{ 'Opportunities'|trans|raw }}
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="{{ path('action_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
-                                <i class="glyphicon glyphicon-ok"></i> Actions
+                                <i class="glyphicon glyphicon-ok"></i> {{ 'Actions'|trans|raw }}
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="{{ path('finance_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
-                                <i class="glyphicon glyphicon-euro"></i> Finance
+                                <i class="glyphicon glyphicon-euro"></i> {{ 'Finance'|trans|raw }}
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="{{ path('log_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
-                                <i class="glyphicon glyphicon-list-alt"></i> Project log
+                                <i class="glyphicon glyphicon-list-alt"></i> {{ 'Project log'|trans|raw }}
                             </a>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <a href="{{ path('report_index', { 'id': charter.id }) }}" data-parent="#side_accordion" style="display:block;padding:8px 15px">
-                                <i class="glyphicon glyphicon-book"></i> Project report
+                                <i class="glyphicon glyphicon-book"></i> {{ 'Project report'|trans|raw }}
                             </a>
                         </div>
                     </div>

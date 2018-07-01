@@ -6,18 +6,20 @@
                 <ul class="nav navbar-nav user_menu pull-right">
                     <li class="divider-vertical hidden-sm hidden-xs"></li>
                     <li>
-                        <div class="nb_boxes clearfix label-danger">
                             <a data-toggle="modal" data-backdrop="static" href="#myNotification" data-placement="bottom" data-container="body" class="label bs_ttip" title="New messages">
                                 {% set count = 0 %}
                                 {% for notification in notifications %}
-                                    {% if notification.receiver == user and notification.flag == true and notification.type == "Charter"%}
+                                    {% if notification.receiver == user and notification.type == "Charter"%}
                                         {% set count = count + 1 %}
                                     {% endif %}
                                 {% endfor %}
-                                {{ count }}
                                 <i class="splashy-comment_alert"></i>
+                                {% if count == 0 %}
+                                    <span class="label">{{ count }}</span>
+                                {% else %}
+                                    <span class="label label-danger">{{ count }}</span>
+                                {% endif %}
                             </a>
-                        </div>
                     </li>
                     <li class="divider-vertical hidden-sm hidden-xs"></li>
                     <li>
@@ -25,7 +27,7 @@
                             <a data-toggle="modal" data-backdrop="static" href="#myNegociation" data-placement="bottom" data-container="body" class="label bs_ttip" title="New tasks">
                                 {% set count2 = 0 %}
                                 {% for notification in notifications %}
-                                    {% if notification.receiver == user and notification.flag == true and notification.type == "Negociation"%}
+                                    {% if notification.receiver == user and notification.type == "Negociation"%}
                                         {% set count2 = count2 + 1 %}
                                     {% endif %}
                                 {% endfor %}
@@ -70,7 +72,7 @@
                         {% if notifications is defined and notifications is not null  %}
                             {# affichage des notifications de ce user qui ont le type="Charter" et flag=True car si flag=false càd notif viewed#}
                             {% for notification in notifications %}
-                                {% if notification.receiver == user and notification.flag == true and notification.type == "Charter" %}
+                                {% if notification.receiver == user and notification.type == "Charter" %}
                                 <tr>
                                     <td>{{ notification.projectName }}</td>
                                     {# if PM #}
@@ -105,7 +107,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 class="modal-title">New Negociation</h3>
+                    <h3 class="modal-title">New Negotiation</h3>
                 </div>
                 <div class="modal-body">
                     <table class="table table-condensed table-striped" data-provides="rowlink">
@@ -120,7 +122,7 @@
                         {% if notifications is defined and notifications is not null  %}
                             {# affichage des negociation de ce user qui ont le type="Negoctiation" et flag=True car si flag=false càd notif viewed#}
                             {% for notification in notifications %}
-                                {% if notification.receiver == user and notification.flag == true and notification.type == "Negociation" %}
+                                {% if notification.receiver == user and notification.type == "Negociation" %}
                                     <tr>
                                         <td>{{ notification.projectName }}</td>
                                         {#{% if notification.description == "budget negociation" %}#}

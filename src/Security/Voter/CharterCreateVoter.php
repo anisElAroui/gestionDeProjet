@@ -25,7 +25,7 @@ class CharterCreateVoter extends Voter
     {
         $user = $token->getUser();
 
-        // ROLE_ADMIN can do anything! The power!
+        // ROLE_ADMIN can do anything
         if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
             return true;
         }
